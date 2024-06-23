@@ -15,7 +15,7 @@ const Wrapper: React.FC<{ children: React.ReactNode; style?: React.CSSProperties
   const slots = getSlot(props);
 
   return (
-    <Wrap style={props.style}>
+    <Wrap id='root' style={props.style}>
       {appStore.curDevice === 'phone' ? <TopBarMob /> : <TopBar />}
 
       <main>{slots.main}</main>

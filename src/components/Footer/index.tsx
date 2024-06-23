@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { styled } from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 const FooterWrap = styled.footer`
   .border-top-white {
@@ -15,13 +16,29 @@ const FooterWrap = styled.footer`
 `;
 
 const Footer = () => {
+  const router = useRouter();
+
   return (
     <FooterWrap className="app-footer flex-center relative">
       <section className="absolute bottom-0 z-11 w-full">
         <div className="flex items-center justify-between px-260">
           <div className="flex-center">
-            <div className="cursor-pointer">Product</div>
-            <div className="ml-59 cursor-pointer">About Us</div>
+            <div
+              className="cursor-pointer"
+              onClick={() => {
+                router.push('/product');
+              }}
+            >
+              Product
+            </div>
+            <div
+              onClick={() => {
+                router.push('/about');
+              }}
+              className="ml-59 cursor-pointer"
+            >
+              About Us
+            </div>
             <button className="start-btn ml-59">GetStarted</button>
           </div>
 

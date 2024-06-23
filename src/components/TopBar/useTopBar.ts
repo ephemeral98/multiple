@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-interface INav {
+export interface INav {
   text: string;
   path: string;
   active: boolean;

@@ -6,6 +6,7 @@ import '@arco-design/web-react/dist/css/arco.css';
 import React, { Suspense, useEffect, useState } from 'react';
 import Wrapper from '@/layouts';
 import Welcome from '@cps/Welcome';
+import 'animate.css';
 
 import { bpThrottle } from '@/hooks/useDeb';
 import initRem from '@/utils/initRem';

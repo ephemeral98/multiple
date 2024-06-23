@@ -3,13 +3,29 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import { flexPos } from '@/styled/mixin';
+import useAppStore from '@/store/appStore';
 
 const AboutWrap = styled.div`
   color: #fff;
 
+  .banner-wrap {
+    height: 600rem;
+
+    .banner-face {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
   .about-main {
     padding: 260rem 207rem 457rem;
     ${flexPos('center', 'flex-start')}
+
+    @media (max-width: 750px) {
+      /* 移动端高一点，留足空间给footer */
+      padding: 0 38rem 1150rem;
+    }
 
     .about-content {
       margin-right: 43rem;
@@ -20,6 +36,12 @@ const AboutWrap = styled.div`
       width: auto;
       max-width: 594rem;
       flex: 0 1 594rem;
+
+      @media (max-width: 750px) {
+        max-width: 396rem;
+        flex: auto;
+        margin: auto;
+      }
     }
 
     .main-text {
@@ -34,16 +56,26 @@ const AboutWrap = styled.div`
 `;
 
 const About = () => {
+  const appStore = useAppStore();
+
   return (
     <AboutWrap>
-      <Image className="w-full" src={require('@img/common/banner-about.png')} alt="" />
-      <div className='absolute top-23vw left-264 text-64 text-#fff font-bold'>ABOUT US</div>
+      <div className="banner-wrap">
+        {appStore.curDevice === 'phone' ? (
+          <Image className="banner-face" src={require('@img/common/banner-about-mob.png')} alt="" />
+        ) : (
+          <Image className="banner-face" src={require('@img/common/banner-about.png')} alt="" />
+        )}
+      </div>
+      <div className="absolute top-515 left-131 text-46 md:(text-64 left-264 top-23vw) text-#fff font-bold">
+        ABOUT US
+      </div>
 
-      <main className="about-main">
-        <div className="about-content">
-          <div className="text-64 text-#fff mb-20 text-up">our story</div>
+      <main className="about-main flex-col-reverse mt-146 md:(flex-row mt-0)">
+        <div className="about-content mt-115 md:mt-0">
+          <div className="text-46 md:text-64 font-bold text-#fff mb-20 text-up">our story</div>
 
-          <div className="main-text">
+          <div className="main-text text-27 md:text-14">
             <li>
               We are a team of ecosystem builders and network architects leveraging SD-WAN
               technology to build a network layer to enable high-powered transmission of digital

@@ -47,7 +47,8 @@ interface IProps {
 
 const Welcome = (props: IProps) => {
   // n秒后的时间戳
-  const [targetDate, setTargetDate] = useState<number>(Date.now() + 3000);
+  // const [targetDate, setTargetDate] = useState<number>(Date.now() + 3000);
+  const [targetDate, setTargetDate] = useState<number>(Date.now() + 10);
   const [countdown, formattedCountdown] = useCountDown({
     targetDate,
     onEnd() {
@@ -72,15 +73,15 @@ const Welcome = (props: IProps) => {
     const fakeLoaderInterval = window.setInterval(function () {
       const lp: any = document.querySelector('.loading-progress');
       progress = progress + getRandomArbitrary(8, 15);
-      lp.style.transform = `translateX(${progress}%)`;
+      lp && (lp.style.transform = `translateX(${progress}%)`);
       progress = progress > 100 ? 100 : progress;
       setLoadText(Math.floor(progress));
 
       if (progress >= 100) {
         window.clearInterval(fakeLoaderInterval);
-        lp.style.transform = 'translateX(100%)';
+        lp && (lp.style.transform = 'translateX(100%)');
         const load: any = document.querySelector('.loading');
-        setTimeout(() => (load.style.transform = 'translateY(calc(100% + 10px))'), 400);
+        load && setTimeout(() => (load.style.transform = 'translateY(calc(100% + 10px))'), 400);
       }
     }, getRandomArbitrary(100, 500));
   }, []);
