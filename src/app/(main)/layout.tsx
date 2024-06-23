@@ -13,12 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html style={{ fontSize: 1 }}>
       <body id="app" className={`${inter.className} app`}>
         <Wrapper>
           <div slot="left" className="h-full">
-            <Suspense>
-            </Suspense>
+            <Suspense></Suspense>
           </div>
           <div slot="main" className="h-full">
             {children}

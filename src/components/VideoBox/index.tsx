@@ -1,20 +1,40 @@
 'use client';
-import { useRef } from 'react';
+import { forwardRef, ReactNode, useImperativeHandle, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 // import videoSrc from '@/assets/video/video-1.mp4';
 
+interface IProps {
+  children: ReactNode;
+  src: string;
+  className?: string;
+}
+
 const VideoBoxWrap = styled.div`
+  line-height: 1;
+  position: relative;
+
   .home-video {
     width: 100%;
+    height: 100vh;
+    object-fit: cover;
   }
 `;
 
-const VideoBox = () => {
+const VideoBox = forwardRef((props: IProps, ref) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isEnd, setIsEnd] = useState<boolean>(false);
+
+  useImperativeHandle(ref, () => ({
+    videoRef: videoRef,
+    isEnd: isEnd,
+  }));
+
   /**
    * 点击了进入按钮,或者视频播放完
    */
-  const handleEnter = () => {};
+  const handleEnter = () => {
+    setIsEnd(true);
+  };
 
   const loaded = () => {
     console.log('video...', videoRef.current);
@@ -22,10 +42,10 @@ const VideoBox = () => {
 
   return (
     <VideoBoxWrap>
+      {props.children}
+
       <video
-        autoPlay
-        id="welcome-video"
-        className="home-video"
+        className={`home-video ${!!props.className ? props.className : ''}`}
         ref={videoRef}
         muted
         onEnded={handleEnter}
@@ -36,10 +56,10 @@ const VideoBox = () => {
         playsInline
         preload="auto"
       >
-        <source src="/video/video-1.mp4" type="video/mp4" />
+        <source src={props.src} type="video/mp4" />
       </video>
     </VideoBoxWrap>
   );
-};
+});
 
 export default VideoBox;

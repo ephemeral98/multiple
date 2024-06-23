@@ -14,6 +14,7 @@ export default defineConfig({
       lg: '1024px',
       xl: '1280px',
       pc: '1920px',
+      topbar: '1400px',
     },
 
     colors: {
@@ -31,6 +32,7 @@ export default defineConfig({
     [/^min-h-([\.\d]+)$/, ([_, num]) => ({ 'min-height': `${num}rem` })],
     [/^max-h-([\.\d]+)$/, ([_, num]) => ({ 'max-height': `${num}rem` })],
     [/^text-([\.\d]+)$/, ([_, num]) => ({ 'font-size': `${num}rem` })],
+    [/^font-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}rem` })],
 
     [/^p-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}rem` })],
     [/^pt-([\.\d]+)$/, ([_, num]) => ({ 'padding-top': `${num}rem` })],
@@ -67,5 +69,9 @@ export default defineConfig({
 
     ['flex-center', { display: 'flex', 'justify-content': 'center', 'align-items': 'center' }],
     ['disable', { filter: 'grayscale(98%)' }],
+    [
+      'abs-center',
+      { position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)' },
+    ],
   ],
 });

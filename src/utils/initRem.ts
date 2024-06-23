@@ -5,9 +5,11 @@ export default function () {
     recalc = function () {
       const clientWidth = docEl.clientWidth;
       if (!clientWidth) return;
-      if (clientWidth >= 750) {
+      if (clientWidth >= 1500) {
         // 如果超过手机设计稿，则按照 pc 固定基本 fontSize
         docEl.style.fontSize = '1px';
+      } else if (clientWidth >= 750) {
+        docEl.style.fontSize = clientWidth / 1500 + 'px';
       } else {
         docEl.style.fontSize = clientWidth / 750 + 'px';
       }
