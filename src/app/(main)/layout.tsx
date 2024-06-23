@@ -7,7 +7,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import Wrapper from '@/layouts';
 import Welcome from '@cps/Welcome';
 import 'animate.css';
-import { useScrollAnimate } from '@/hooks/useScrollAnimate';
+import { scrollAnimate } from '@/utils/scrollAnimate';
 import { isClient } from '@/utils';
 
 import { bpThrottle } from '@/hooks/useDeb';
@@ -21,8 +21,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const appStore = useAppStore();
-  // 延迟滚动
-  useScrollAnimate();
   const [welcomeEnd, setWelcomeEnd] = useState<boolean>(true);
 
   useEffect(() => {
@@ -31,6 +29,8 @@ export default function RootLayout({
     }
 
     initRem();
+    // 延迟滚动
+    scrollAnimate();
     appStore.setCurDevice();
     window.onresize = bpThrottle(() => {
       appStore.setCurDevice();

@@ -13,7 +13,6 @@
     "@studio-freight/lenis": "^1.0.42",
     "ahooks": "^3.7.10",
     "animate.css": "^4.1.1",
-    "axios": "^1.6.7",
     "file-loader": "^6.2.0",
     "immutability-helper": "^3.1.1",
     "localmemory": "^1.0.4",
@@ -21,6 +20,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-transition-group": "^4.4.5",
+    "sharp": "^0.33.4",
     "styled-components": "^6.1.8",
     "swr": "^2.2.5",
     "zustand": "^4.5.2"

@@ -1,6 +1,6 @@
 import Lenis from '@studio-freight/lenis';
 
-export const useScrollAnimate = () => {
+export const scrollAnimate = () => {
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(1 - t, 3)), // https://www.desmos.com/calculator/brs54l4xou
