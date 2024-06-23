@@ -2,10 +2,8 @@
 import { getSlot } from '@/utils';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import initRem from '@/utils/initRem';
 import TopBar from '@cps/TopBar';
 import TopBarMob from '@cps/TopBar/TopBarMob';
-import { bpThrottle } from '@/hooks/useDeb';
 import useAppStore from '@/store/appStore';
 import Footer from '@cps/Footer';
 import FooterMob from '@cps/Footer/FooterMob';
@@ -15,14 +13,6 @@ const Wrap = styled.div``;
 const Wrapper: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = (props) => {
   const appStore = useAppStore();
   const slots = getSlot(props);
-  useEffect(() => {
-    initRem();
-
-    appStore.setCurDevice();
-    window.onresize = bpThrottle(() => {
-      appStore.setCurDevice();
-    });
-  }, []);
 
   return (
     <Wrap style={props.style}>
