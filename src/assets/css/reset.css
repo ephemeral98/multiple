@@ -31,6 +31,7 @@ h5 {
 
 body {
   text-align: left;
+  background: #000;
 }
 
 table {
@@ -41,6 +42,7 @@ fieldset,
 img {
   border: 0 none;
   display: block;
+  height: auto;
 }
 
 fieldset {
@@ -179,4 +181,14 @@ button {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+.app-footer div {
+  color: #fff;
+}
+
+main,
+div,
+section {
+  color: #fff;
 }
