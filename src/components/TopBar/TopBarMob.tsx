@@ -1,0 +1,42 @@
+import { styled } from 'styled-components';
+import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
+import { useTopBar } from './useTopBar';
+import { flexPos } from '@/styled/mixin';
+
+const TopBarMobWrap = styled.header`
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9;
+  backdrop-filter: blur(3px);
+
+  height: 115rem;
+  padding: 0 20rem;
+  ${flexPos('space-between')}
+`;
+
+const TopBarMob = () => {
+  const { navList } = useTopBar();
+
+  const router = useRouter();
+  return (
+    <TopBarMobWrap>
+      <Image
+        className="w-262 cursor-pointer"
+        src={require('@img/common/icon-logo.png')}
+        alt=""
+        onClick={() => router.push('/')}
+      />
+
+      <Image
+        className="w-54 cursor-pointer"
+        src={require('@img/common/icon-menu.png')}
+        alt=""
+        onClick={() => router.push('/')}
+      />
+    </TopBarMobWrap>
+  );
+};
+
+export default TopBarMob;

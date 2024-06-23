@@ -3,14 +3,8 @@ import 'uno.css';
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import { flexPos } from '@/styled/mixin';
-import { useRouter, usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
-interface INav {
-  text: string;
-  path: string;
-  active: boolean;
-}
+import { useRouter } from 'next/navigation';
+import { useTopBar } from './useTopBar';
 
 const TopBarWrap = styled.header`
   position: absolute;
@@ -72,29 +66,7 @@ const TopBarWrap = styled.header`
 
 const TopBar = () => {
   const router = useRouter();
-  const pathname = usePathname();
-
-  const [navList, setNavList] = useState<INav[]>([
-    {
-      text: 'About Us',
-      path: '/about',
-      active: false,
-    },
-    {
-      text: 'Product',
-      path: '/product',
-      active: false,
-    },
-  ]);
-
-  useEffect(() => {
-    setNavList(
-      navList.map((it) => {
-        it.active = pathname === it.path;
-        return it;
-      })
-    );
-  }, [pathname]);
+  const { navList } = useTopBar();
 
   return (
     <TopBarWrap>
