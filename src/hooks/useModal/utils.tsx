@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Root, TShowProps } from './types';
 import WrapperComponent from './WrapperComponent';
 import { idCache, showCache, idArr, instanceCache } from './state';
+import { isClient } from '@/utils';
 
 /**
  * 获取唯一id
@@ -19,6 +20,9 @@ export const getUniqueId = (): string => {
  */
 export function getRoot(root: Root = '#root') {
   if (typeof root === 'string') {
+    if (!isClient()) {
+      return;
+    }
     return document.querySelector(root) as HTMLElement;
   } else if (root instanceof HTMLElement) {
     return root;
@@ -41,8 +45,11 @@ export function render<P>(
   root: Root,
   props: TShowProps<P> = noop,
   callback: () => void,
-  maskColor?: string,
+  maskColor?: string
 ) {
+  if (!isClient()) {
+    return;
+  }
 
   // 创建最外层包裹元素
   const target = document.createElement('div');
@@ -50,7 +57,7 @@ export function render<P>(
   target.id = modalId;
   target.className = 'animate__animated';
   target.style.display = 'none';
-  const rootDom = getRoot(root);
+  const rootDom: any = getRoot(root);
   rootDom.appendChild(target);
   const Component = ModalComponent as ComponentType<any>;
 
@@ -89,8 +96,11 @@ export const destroy = <P extends unknown>(
   root: Root,
   comp: ComponentType<P>
 ) => {
-  vComp.unmount?.();
-  const rootDom = getRoot(root);
+  if (!isClient()) {
+    return;
+  }
+  vComp!.unmount?.();
+  const rootDom: any = getRoot(root);
   const target = document.getElementById(id);
   target && rootDom.removeChild(target!);
   instanceCache.delete(id);

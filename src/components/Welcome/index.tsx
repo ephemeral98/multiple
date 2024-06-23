@@ -47,8 +47,8 @@ interface IProps {
 
 const Welcome = (props: IProps) => {
   // n秒后的时间戳
-  // const [targetDate, setTargetDate] = useState<number>(Date.now() + 3000);
-  const [targetDate, setTargetDate] = useState<number>(Date.now() + 10);
+  const [targetDate, setTargetDate] = useState<number>(Date.now() + 3000);
+  // const [targetDate, setTargetDate] = useState<number>(Date.now() + 10);
   const [countdown, formattedCountdown] = useCountDown({
     targetDate,
     onEnd() {

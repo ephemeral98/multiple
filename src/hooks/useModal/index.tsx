@@ -7,6 +7,7 @@ import { idCache, showCache, defaultRoot } from './state';
 import { IOption, TShowProps } from './types';
 import css from './index.module.css';
 import React from 'react';
+import { isClient } from '@/utils';
 
 /**
  * 用于控制弹窗显示隐藏的hook
@@ -74,6 +75,9 @@ export function useModal<P>(ModalComponent: ComponentType<P>, options: IOption<P
         }}
         onExited={() => {
           animationEnd();
+          if (!isClient()) {
+            return;
+          }
           const father = document.getElementById(modalId);
           father!.style.display = 'none';
         }}
@@ -97,6 +101,9 @@ export function useModal<P>(ModalComponent: ComponentType<P>, options: IOption<P
    */
   const showIfHasInstance = useCallback(
     (isOpen: boolean, config = noop) => {
+      if (!isClient()) {
+        return;
+      }
       const instance = getWrapperInstance(modalId);
       const father = document.getElementById(modalId);
       father!.style.display = 'block';
@@ -143,6 +150,9 @@ export function useModal<P>(ModalComponent: ComponentType<P>, options: IOption<P
    */
   const handleRenderShow = useCallback(
     (config: any = noop) => {
+      if (!isClient()) {
+        return;
+      }
       const hasRender = document.getElementById(modalId) !== null;
 
       if (!hasRender) {
@@ -163,6 +173,9 @@ export function useModal<P>(ModalComponent: ComponentType<P>, options: IOption<P
             modalId,
           },
           () => {
+            if (!isClient()) {
+              return;
+            }
             const instance = getWrapperInstance(modalId);
             const father = document.getElementById(modalId);
             father!.style.display = 'block';
@@ -195,6 +208,9 @@ export function useModal<P>(ModalComponent: ComponentType<P>, options: IOption<P
 
   // 首次渲染挂载
   useEffect(() => {
+    if (!isClient()) {
+      return;
+    }
     const hasRender = document.getElementById(modalId) !== null;
     if (hasRender) {
       return;

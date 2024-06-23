@@ -1,3 +1,4 @@
+import { isClient } from '@/utils';
 import { create } from 'zustand';
 
 type TDevice = 'phone' | 'pad' | 'pc';
@@ -11,6 +12,9 @@ const useTodoListStore = create<ITodoListStore>((set) => ({
   curDevice: 'pad', // 当前设备
   setCurDevice: () =>
     set(() => {
+      if (!isClient()) {
+        return { curDevice: 'pc' };
+      }
       const clientWidth = window.innerWidth;
       if (clientWidth <= 750) {
         return { curDevice: 'phone' };

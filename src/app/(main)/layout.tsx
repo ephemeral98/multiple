@@ -8,6 +8,7 @@ import Wrapper from '@/layouts';
 import Welcome from '@cps/Welcome';
 import 'animate.css';
 import { useScrollAnimate } from '@/hooks/useScrollAnimate';
+import { isClient } from '@/utils';
 
 import { bpThrottle } from '@/hooks/useDeb';
 import initRem from '@/utils/initRem';
@@ -25,8 +26,11 @@ export default function RootLayout({
   const [welcomeEnd, setWelcomeEnd] = useState<boolean>(true);
 
   useEffect(() => {
-    initRem();
+    if (!isClient()) {
+      return;
+    }
 
+    initRem();
     appStore.setCurDevice();
     window.onresize = bpThrottle(() => {
       appStore.setCurDevice();
@@ -35,6 +39,10 @@ export default function RootLayout({
 
   return (
     <html style={{ fontSize: '1px' }}>
+      <head>
+        <title>Multiple</title>
+        <link rel="icon" href="/logo.png" />
+      </head>
       <body id="app" className={`${inter.className} app`}>
         {welcomeEnd ? (
           <Welcome onEnd={() => setWelcomeEnd(false)} />
