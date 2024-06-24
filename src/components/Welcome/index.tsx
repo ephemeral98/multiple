@@ -8,9 +8,8 @@ const WelcomeWrap = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
-  top: 10px;
+  top: 11px;
   left: 0;
-  background: #000;
   transition: 0.75s;
   z-index: 9999999;
 
@@ -27,7 +26,7 @@ const WelcomeWrap = styled.div`
 
   .loading-progress {
     height: 11px;
-    background: #fff;
+    background-color: #000;
     top: -11px;
     bottom: 0;
     width: 100%;
@@ -37,7 +36,32 @@ const WelcomeWrap = styled.div`
 
   .loading-text {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 11px;
+  }
+
+  .loading-bg-bar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 11px;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: all 1s;
+
+    &.loading-end {
+      background-color: #000;
+    }
+  }
+
+  .loading-bg {
+    position: fixed;
+    left: 0;
+    top: 11px;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    /* z-index: -1; */
   }
 `;
 
@@ -47,6 +71,7 @@ interface IProps {
 
 const Welcome = (props: IProps) => {
   const [loadText, setLoadText] = useState(0);
+  const isProgressEnd = useRef(false);
   const isEnd = useRef(false);
 
   useEffect(() => {
@@ -68,14 +93,16 @@ const Welcome = (props: IProps) => {
       setLoadText(Math.floor(progress));
 
       if (progress >= 100) {
+        isProgressEnd.current = true;
         window.clearInterval(fakeLoaderInterval);
         lp && (lp.style.transform = 'translateX(100%)');
         const load: any = document.querySelector('.loading');
-        load &&
+        if (load) {
           setTimeout(() => {
             load.style.transform = 'translateY(calc(100% + 10px))';
             isEnd.current = true;
           }, 400);
+        }
       }
     }, getRandomArbitrary(100, 500));
   }, []);
@@ -89,8 +116,11 @@ const Welcome = (props: IProps) => {
         }
       }}
     >
+      <div className={`loading-bg-bar ${isProgressEnd.current ? 'loading-end' : ''}`}></div>
+      <div className="loading-bg">
+        <div className="loading-text">LOADING {loadText}%</div>
+      </div>
       <div className="loading-progress"></div>
-      <div className="loading-text">LOADING {loadText}%</div>
 
       <Ball />
 

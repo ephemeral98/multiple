@@ -33,6 +33,7 @@
     "@unocss/cli": "^0.58.5",
     "@unocss/preset-uno": "^0.58.5",
     "@unocss/webpack": "^0.58.5",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8.4.35",
