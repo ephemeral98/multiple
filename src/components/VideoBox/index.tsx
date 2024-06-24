@@ -17,6 +17,7 @@ const VideoBoxWrap = styled.div`
     width: 100%;
     height: 100vh;
     object-fit: cover;
+    opacity: 0.68;
   }
 `;
 

@@ -20,7 +20,7 @@ const Footer = () => {
 
   return (
     <FooterWrap className="app-footer flex-center relative">
-      <section className="absolute bottom-0 z-11 w-full">
+      <section className="w-full">
         <div className="flex items-center justify-between px-260">
           <div className="flex-center">
             <div

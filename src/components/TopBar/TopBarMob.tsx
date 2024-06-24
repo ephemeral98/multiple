@@ -20,7 +20,7 @@ const TopBarMobWrap = styled.header`
 
 const TopBarMob = () => {
   const { navList } = useTopBar();
-  const { toggle, isOpen } = useModal(Menu, {
+  const { toggle, isOpen, close } = useModal(Menu, {
     animate: {
       enterActive: 'animate__animated animate__fadeInRight',
       exitActive: 'animate__animated animate__fadeOutRight',
@@ -39,7 +39,12 @@ const TopBarMob = () => {
         className="w-262 cursor-pointer"
         src={require('@img/common/icon-logo.png')}
         alt=""
-        onClick={() => router.push('/')}
+        onClick={() => {
+          router.push('/');
+          if (isOpen) {
+            close();
+          }
+        }}
       />
 
       <Image

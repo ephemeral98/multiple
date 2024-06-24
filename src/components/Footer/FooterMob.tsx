@@ -20,7 +20,7 @@ const FooterMob = () => {
 
   return (
     <FooterWrap className="app-footer flex-center flex-col relative">
-      <section className="absolute bottom-0 z-11 w-full">
+      <section className="w-full">
         <div className="flex items-center justify-between flex-col">
           <div className="flex-center flex-col">
             <div
@@ -42,7 +42,7 @@ const FooterMob = () => {
             <button className="start-btn mt-62 text-27">GetStarted</button>
           </div>
 
-          <div className="flex-center mt-196">
+          <div className="flex-center mt-10vh">
             <Image
               className="w-75 h-75 cursor-pointer"
               src={require('@img/common/icon-discord.png')}

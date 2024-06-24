@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
-import { useCountDown } from 'ahooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { isClient } from '@/utils';
 import Image from 'next/image';
 import Ball from './components/Ball';
@@ -11,8 +10,9 @@ const WelcomeWrap = styled.div`
   width: 100%;
   top: 10px;
   left: 0;
-  /* background: pink; */
+  background: #000;
   transition: 0.75s;
+  z-index: 9999999;
 
   .loading-title {
     margin: 4.5rem 0 1rem;
@@ -46,18 +46,8 @@ interface IProps {
 }
 
 const Welcome = (props: IProps) => {
-  // n秒后的时间戳
-  const [targetDate, setTargetDate] = useState<number>(Date.now() + 3000);
-  // const [targetDate, setTargetDate] = useState<number>(Date.now() + 10);
-  const [countdown, formattedCountdown] = useCountDown({
-    targetDate,
-    onEnd() {
-      console.log('hello,...');
-      props.onEnd();
-    },
-  });
-
   const [loadText, setLoadText] = useState(0);
+  const isEnd = useRef(false);
 
   useEffect(() => {
     if (!isClient()) {
@@ -81,13 +71,24 @@ const Welcome = (props: IProps) => {
         window.clearInterval(fakeLoaderInterval);
         lp && (lp.style.transform = 'translateX(100%)');
         const load: any = document.querySelector('.loading');
-        load && setTimeout(() => (load.style.transform = 'translateY(calc(100% + 10px))'), 400);
+        load &&
+          setTimeout(() => {
+            load.style.transform = 'translateY(calc(100% + 10px))';
+            isEnd.current = true;
+          }, 400);
       }
     }, getRandomArbitrary(100, 500));
   }, []);
 
   return (
-    <WelcomeWrap className="loading">
+    <WelcomeWrap
+      className="loading"
+      onTransitionEnd={() => {
+        if (isEnd.current) {
+          props.onEnd();
+        }
+      }}
+    >
       <div className="loading-progress"></div>
       <div className="loading-text">LOADING {loadText}%</div>
 

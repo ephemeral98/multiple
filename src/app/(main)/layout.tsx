@@ -13,6 +13,7 @@ import { isClient } from '@/utils';
 import { bpThrottle } from '@/hooks/useDeb';
 import initRem from '@/utils/initRem';
 import useAppStore from '@/store/appStore';
+import { useCountDown } from 'ahooks';
 
 const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({
@@ -22,6 +23,15 @@ export default function RootLayout({
 }>) {
   const appStore = useAppStore();
   const [welcomeEnd, setWelcomeEnd] = useState<boolean>(true);
+  // 主app一开始不加载，让loading遮住的时候再加载并完成等一系列过程(做一个延迟)
+  const [showApp, setShowApp] = useState<boolean>(false);
+  const [targetDate, setTargetDate] = useState<number>(Date.now() + 100);
+  const [countdown, formattedCountdown] = useCountDown({
+    targetDate,
+    onEnd() {
+      setShowApp(true);
+    },
+  });
 
   useEffect(() => {
     if (!isClient()) {
@@ -41,12 +51,16 @@ export default function RootLayout({
     <html style={{ fontSize: '1px' }}>
       <head>
         <title>Multiple</title>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" type="image/svg+xml" href="/logo.png" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </head>
       <body id="app" className={`${inter.className} app`}>
-        {welcomeEnd ? (
-          <Welcome onEnd={() => setWelcomeEnd(false)} />
-        ) : (
+        {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />}
+
+        {showApp && (
           <Wrapper>
             <div slot="left" className="h-full">
               <Suspense></Suspense>

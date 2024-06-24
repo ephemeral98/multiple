@@ -56,7 +56,7 @@ const Home: React.FC = () => {
       </VideoBox>
       <VideoBox src="/video/video-2.mp4" ref={videoRef2}>
         <div ref={targetRef2} className="abs-center z-10 w-300 h-100"></div>
-        <section className="home-section bottom-131 right-40 md:(bottom-0 top-[13%] right-[8%]) text-right bg-mask">
+        <section className="home-section bottom-131 right-40 md:bottom-auto md:top-[13%] md:right-[8%] text-right bg-mask">
           <div className="section-title text-46 md:text-64">AI DATA</div>
           <div className="section-title text-46 md:text-64">TRANSMISSION</div>
           {appStore.curDevice === 'phone' ? (
@@ -79,7 +79,7 @@ const Home: React.FC = () => {
       </VideoBox>
       <VideoBox src="/video/video-3.mp4" ref={videoRef3}>
         <div ref={targetRef3} className="abs-center z-10 w-300 h-100"></div>
-        <section className="home-section top-548 left-35 md:(top-[37%] left-[13%]) bg-mask">
+        <section className="home-section top-548 left-35 md:top-[37%] md:left-[13%] bg-mask">
           {appStore.curDevice === 'phone' ? (
             <>
               <div className="section-title text-46 md:text-64">BESPOKE</div>
@@ -127,9 +127,9 @@ const Home: React.FC = () => {
         </section>
       </VideoBox>
 
-      <section className="h-100vh md:h-100vh flex justify-center relative pt-296">
+      <section className="flex justify-center relative pt-296 pb-160">
         <Image
-          className="w-319 h-219 md:(w-356 h-244 )"
+          className="w-319 h-219 md:w-356 md:h-244"
           src={require('@img/common/home-logo.png')}
           alt=""
         />

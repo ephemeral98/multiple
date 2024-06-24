@@ -19,12 +19,11 @@ const AboutWrap = styled.div`
   }
 
   .about-main {
-    padding: 260rem 207rem 457rem;
+    padding: 260rem 207rem 265rem;
     ${flexPos('center', 'flex-start')}
 
     @media (max-width: 750px) {
-      /* 移动端高一点，留足空间给footer */
-      padding: 0 38rem 1150rem;
+      padding: 0 38rem 271rem;
     }
 
     .about-content {
@@ -67,11 +66,11 @@ const About = () => {
           <Image className="banner-face" src={require('@img/common/banner-about.png')} alt="" />
         )}
       </div>
-      <div className="absolute top-515 left-131 text-46 md:(text-64 left-264 top-23vw) text-#fff font-bold">
+      <div className="absolute top-515 left-131 text-46 md:text-64 md:left-264 md:top-23vw text-#fff font-bold">
         ABOUT US
       </div>
 
-      <main className="about-main flex-col-reverse mt-146 md:(flex-row mt-0)">
+      <main className="about-main flex-col-reverse mt-146 md:flex-row md:mt-0">
         <div className="about-content mt-115 md:mt-0">
           <div className="text-46 md:text-64 font-bold text-#fff mb-20 text-up">our story</div>
 

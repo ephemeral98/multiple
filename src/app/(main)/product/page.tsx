@@ -43,6 +43,7 @@ const ProductWrap = styled.div`
       bottom: 0;
       transform: translate(-50%, 50%);
       white-space: nowrap;
+      color: #fff;
 
       @media (max-width: 750px) {
         padding: 37rem 52rem;
@@ -71,7 +72,7 @@ const Product = () => {
         <div className="product-title text-46 md:text-64">
           <div className="text-up">Plugging into Multiple's</div>
           <div className="mt-9 text-up">Network Layer</div>
-          <div className="text-24 mt-46 md:(mt-24) leading-[32rem]">
+          <div className="text-24 mt-46 md:mt-24 leading-[32rem]">
             <div className="px-120 md:px-0">
               Users: Supercharge your download speeds today! Free for the first 20GB.
             </div>
@@ -82,7 +83,7 @@ const Product = () => {
         <button className="download-btn text-27 md:text-14">Downloads coming soon</button>
       </section>
 
-      <main className="mt-216 pb-1100 md:pb-411">
+      <main className="mt-216 pb-192 md:pb-224">
         {appStore.curDevice !== 'phone' && (
           <div className="text-up text-64 font-bold text-center mb-79">Advantages</div>
         )}
@@ -93,7 +94,7 @@ const Product = () => {
               reverseBg={false}
               title="Flexible deployment"
               face={require('@img/product/product-1.png')}
-              className="w-full md:(w-638 mr-32)"
+              className="w-full md:w-638 md:mr-32"
             >
               <div className="mt-16 text-23 md:text-16">
                 Earn/pay as you go. No fixed-term commitments required.
@@ -104,7 +105,7 @@ const Product = () => {
               reverseBg
               title="Stability and Robustness"
               face={require('@img/product/product-2.png')}
-              className="w-full mt-46 md:(w-450 mt-0)"
+              className="w-full mt-46 md:w-450 md:mt-0"
             >
               <div className="mt-16 text-23 md:text-16 leading-[1.5]">
                 <div>With global peer node coverage,</div>
@@ -117,7 +118,7 @@ const Product = () => {
               reverseBg={false}
               title="Cost efficiency"
               face={require('@img/product/product-3.png')}
-              className="w-full md:(w-450 mr-32)"
+              className="w-full md:w-450 md:mr-32"
             >
               <div className="mt-16 text-23 md:text-16 leading-[1.5]">
                 <div>Priced at a fraction of traditional SD-WAN and</div>
@@ -129,7 +130,7 @@ const Product = () => {
               reverseBg
               title="Privacy through Decentralization"
               face={require('@img/product/product-4.png')}
-              className="w-full mt-46 md:(w-638 mt-0)"
+              className="w-full mt-46 md:w-638 md:mt-0"
             >
               <div className="mt-16 text-23 md:text-16 leading-[1.5]">
                 <div>All data is completely encrypted, ensuring that no centralized</div>
