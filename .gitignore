@@ -32,3 +32,4 @@ yarn.lock
 .next/*
 *.mp4
 video/*
+*.zip
