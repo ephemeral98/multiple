@@ -29,6 +29,9 @@ const TopBarMob = () => {
       pickTab(tab) {
         router.push(tab.path);
       },
+      toHome() {
+        router.push('/');
+      },
     },
   });
 

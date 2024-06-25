@@ -1,17 +1,11 @@
 import Image from 'next/image';
 import { styled } from 'styled-components';
 import { useRouter } from 'next/navigation';
+import Community, { GetStartBtn } from '../Community';
 
 const FooterWrap = styled.footer`
   .border-top-white {
     border-top: solid 1px #fff;
-  }
-
-  .start-btn {
-    padding: 16rem 24rem;
-    border-radius: 4rem;
-    border: solid 1px #fff;
-    color: #fff;
   }
 `;
 
@@ -39,21 +33,10 @@ const Footer = () => {
             >
               About Us
             </div>
-            <button className="start-btn ml-59">GetStarted</button>
+            <GetStartBtn className={'px-24! py-16! rounded-[4rem]! text-14! mt-0! ml-59!'} />
           </div>
 
-          <div className="flex-center">
-            <Image
-              className="w-51 h-51 cursor-pointer"
-              src={require('@img/common/icon-discord.png')}
-              alt=""
-            />
-            <Image
-              className="w-51 h-51 ml-24 cursor-pointer"
-              src={require('@img/common/icon-x.png')}
-              alt=""
-            />
-          </div>
+          <Community size={51} gap={24} />
         </div>
 
         <div className="flex items-center justify-between border-top-white mt-38 py-24 px-260">

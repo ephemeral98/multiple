@@ -9,6 +9,7 @@ import Welcome from '@cps/Welcome';
 import 'animate.css';
 import { scrollAnimate } from '@/utils/scrollAnimate';
 import { isClient } from '@/utils';
+import '@/assets/font/index.css';
 
 import { bpThrottle } from '@/hooks/useDeb';
 import initRem from '@/utils/initRem';

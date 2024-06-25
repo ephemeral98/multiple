@@ -2,10 +2,12 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { INav, useTopBar } from '../useTopBar';
 import { flexPos } from '@/styled/mixin';
+import Community, { GetStartBtn } from '@/components/Community';
 
 interface IProps {
   onClose: () => void;
   pickTab: (tab: INav) => void;
+  toHome: () => void;
 }
 
 const MenuWrap = styled.div`
@@ -29,15 +31,6 @@ const MenuWrap = styled.div`
     }
   }
 
-  .start-btn {
-    padding: 37rem 146rem;
-    border-radius: 19rem;
-    border: solid 1px #fff;
-    color: #fff;
-    font-size: 27rem;
-    margin-top: 62rem;
-  }
-
   .icon-close {
     width: 42rem;
     cursor: pointer;
@@ -53,6 +46,15 @@ const Menu = (props: IProps) => {
   return (
     <MenuWrap>
       <div>
+        <div
+          onClick={() => {
+            props.toHome();
+            props.onClose();
+          }}
+          className={`nav-item`}
+        >
+          Home
+        </div>
         {navList.map((item) => (
           <div
             key={item.text}
@@ -66,20 +68,9 @@ const Menu = (props: IProps) => {
           </div>
         ))}
 
-        <button className="start-btn">GetStarted</button>
+        <GetStartBtn />
 
-        <div className="flex-center mt-62">
-          <Image
-            className="w-75 h-75 cursor-pointer"
-            src={require('@img/common/icon-discord.png')}
-            alt=""
-          />
-          <Image
-            className="w-75 h-75 ml-24 cursor-pointer"
-            src={require('@img/common/icon-x.png')}
-            alt=""
-          />
-        </div>
+        <Community className="mt-62" size={75} gap={24} />
       </div>
 
       <Image

@@ -27,11 +27,13 @@ h4,
 h5 {
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat';
 }
 
 body {
   text-align: left;
   background: #000;
+  font-family: 'Montserrat';
 }
 
 table {
@@ -112,6 +114,7 @@ a {
   position: relative;
   -webkit-tap-highlight-color: transparent;
   /* 给移动端页面加上:active伪类,js中给body绑定touchstart事件，处理函数为空即可 */
+  font-family: 'Montserrat';
 }
 
 body,
@@ -162,6 +165,7 @@ select {
   outline: none;
   box-shadow: none;
   padding: 0;
+  font-family: 'Montserrat';
 }
 
 div,
@@ -171,6 +175,7 @@ main,
 section {
   box-sizing: border-box;
   color: #333;
+  font-family: 'Montserrat';
 }
 
 button {
@@ -179,6 +184,7 @@ button {
   cursor: pointer;
   outline: none;
   display: block;
+  font-family: 'Montserrat';
 }
 
 input::-webkit-outer-spin-button,
@@ -194,4 +200,9 @@ main,
 div,
 section {
   color: #fff;
+}
+
+
+.arco-message-wrapper {
+  z-index: 999999 !important;
 }

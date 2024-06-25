@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { isClient } from '@/utils';
 import Image from 'next/image';
 import Ball from './components/Ball';
+import { flexPos } from '@/styled/mixin';
 
 const WelcomeWrap = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
-  top: 11px;
   left: 0;
   transition: 0.75s;
   z-index: 9999999;
@@ -27,22 +27,17 @@ const WelcomeWrap = styled.div`
   .loading-progress {
     height: 11px;
     background-color: #000;
-    top: -11px;
+    bottom: -11px;
     bottom: 0;
     width: 100%;
     position: absolute;
     transition: 0.35s;
   }
 
-  .loading-text {
-    text-align: center;
-    margin-top: 11px;
-  }
-
   .loading-bg-bar {
     position: fixed;
     left: 0;
-    top: 0;
+    bottom: 0;
     width: 100%;
     height: 11px;
     border-radius: 10px;
@@ -57,11 +52,17 @@ const WelcomeWrap = styled.div`
   .loading-bg {
     position: fixed;
     left: 0;
-    top: 11px;
+    bottom: 11px;
     width: 100%;
     height: 100%;
     background-color: #000;
     /* z-index: -1; */
+    ${flexPos('center', 'flex-end')}
+  }
+
+  .loading-text {
+    text-align: center;
+    /* margin-top: 11px; */
   }
 `;
 
@@ -99,7 +100,7 @@ const Welcome = (props: IProps) => {
         const load: any = document.querySelector('.loading');
         if (load) {
           setTimeout(() => {
-            load.style.transform = 'translateY(calc(100% + 10px))';
+            load.style.transform = 'translateY(calc(-100% - 11px))';
             isEnd.current = true;
           }, 400);
         }

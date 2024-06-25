@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { flexPos } from '@/styled/mixin';
 import { useRouter } from 'next/navigation';
 import { useTopBar } from './useTopBar';
+import { GetStartBtn } from '../Community';
 
 const TopBarWrap = styled.header`
   position: absolute;
@@ -94,7 +95,7 @@ const TopBar = () => {
           </div>
         </div>
 
-        <button className="start-btn">GetStarted</button>
+        <GetStartBtn className={'px-24! py-16! rounded-[4rem]! text-14! mt-0!'} />
       </div>
     </TopBarWrap>
   );
