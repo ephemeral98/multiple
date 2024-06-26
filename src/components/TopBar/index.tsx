@@ -74,6 +74,7 @@ const TopBar = () => {
       <div className="topbar-content w-full px-20 md:px-50 topbar:(w-1400 px-0)">
         <div className="flex-center">
           <Image
+            priority
             className="logo cursor-pointer"
             src={require('@img/common/icon-logo.png')}
             alt=""

@@ -74,6 +74,7 @@ const Menu = (props: IProps) => {
       </div>
 
       <Image
+        priority
         onClick={() => {
           props.onClose();
         }}

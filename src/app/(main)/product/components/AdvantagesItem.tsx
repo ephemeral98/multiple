@@ -22,7 +22,8 @@ const AdvantagesItemWrap = styled.div<{ $reverseBg: boolean }>`
   border: 1px solid #3c3c3c;
   height: 299rem;
   @media (max-width: 750px) {
-    height: 390rem;
+    height: auto;
+    min-height: 390rem;
     padding: 46rem;
     line-height: 1.5;
   }

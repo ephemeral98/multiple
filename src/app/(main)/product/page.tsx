@@ -61,12 +61,18 @@ const Product = () => {
       <section className="product-banner">
         {appStore.curDevice === 'phone' ? (
           <Image
+            priority
             className="product-face"
             src={require('@img/product/banner-product-mob.png')}
             alt=""
           />
         ) : (
-          <Image className="product-face" src={require('@img/product/banner-product.png')} alt="" />
+          <Image
+            priority
+            className="product-face"
+            src={require('@img/product/banner-product.png')}
+            alt=""
+          />
         )}
 
         <div className="product-title text-46 md:text-64">
@@ -80,7 +86,7 @@ const Product = () => {
           </div>
         </div>
 
-        <button className="download-btn text-27 md:text-14">Downloads coming soon</button>
+        <button className="download-btn text-27 md:text-14">Download(mid-July)</button>
       </section>
 
       <main className="mt-216 pb-192 md:pb-224">
@@ -133,8 +139,10 @@ const Product = () => {
               className="w-full mt-46 md:w-638 md:mt-0"
             >
               <div className="mt-16 text-23 md:text-16 leading-[1.5]">
-                <div>All data is completely encrypted, ensuring that no centralized</div>
-                <div>storage provider is training on your proprietary data.</div>
+                <div>
+                  All data is completely encrypted, ensuring that no centralized storage provider is
+                  training on your proprietary data.
+                </div>
               </div>
             </AdvantagesItem>
           </div>

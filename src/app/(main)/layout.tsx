@@ -52,7 +52,7 @@ export default function RootLayout({
     <html style={{ fontSize: '1px' }}>
       <head>
         <title>Multiple</title>
-        <link rel="icon" type="image/svg+xml" href="/logo.png" />
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"

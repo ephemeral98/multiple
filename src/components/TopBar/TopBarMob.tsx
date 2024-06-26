@@ -39,6 +39,7 @@ const TopBarMob = () => {
   return (
     <TopBarMobWrap>
       <Image
+        priority
         className="w-262 cursor-pointer"
         src={require('@img/common/icon-logo.png')}
         alt=""
@@ -51,6 +52,7 @@ const TopBarMob = () => {
       />
 
       <Image
+        priority
         className="w-54 cursor-pointer"
         src={require('@img/common/icon-menu.png')}
         alt=""

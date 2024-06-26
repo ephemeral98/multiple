@@ -1,7 +1,7 @@
 'use client';
 import { forwardRef, ReactNode, useImperativeHandle, useRef, useState } from 'react';
 import { styled } from 'styled-components';
-// import videoSrc from '@/assets/video/video-1.mp4';
+import useHomeStore from '@/store/homeStore';
 
 interface IProps {
   children: ReactNode;
@@ -22,6 +22,8 @@ const VideoBoxWrap = styled.div`
 `;
 
 const VideoBox = forwardRef((props: IProps, ref) => {
+  const homeStore = useHomeStore();
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isEnd, setIsEnd] = useState<boolean>(false);
 
@@ -38,7 +40,11 @@ const VideoBox = forwardRef((props: IProps, ref) => {
   };
 
   const loaded = () => {
-    console.log('video...', videoRef.current);
+    homeStore.setVideoLoaded();
+  };
+
+  const onError = () => {
+    homeStore.setVideoLoaded();
   };
 
   return (
@@ -50,12 +56,13 @@ const VideoBox = forwardRef((props: IProps, ref) => {
         ref={videoRef}
         muted
         onEnded={handleEnter}
-        onLoad={loaded}
         x5-video-player-fullscreen="true"
         x5-playsinline="true"
         webkit-playsinline="true"
         playsInline
         preload="auto"
+        onLoadedData={loaded}
+        onError={onError}
       >
         <source src={props.src} type="video/mp4" />
       </video>

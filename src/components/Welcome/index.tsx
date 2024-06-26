@@ -4,6 +4,9 @@ import { isClient } from '@/utils';
 import Image from 'next/image';
 import Ball from './components/Ball';
 import { flexPos } from '@/styled/mixin';
+import useHomeStore from '@/store/homeStore';
+import { useUpdateEffect } from 'ahooks';
+import { usePathname } from 'next/navigation';
 
 const WelcomeWrap = styled.div`
   position: fixed;
@@ -70,10 +73,15 @@ interface IProps {
   onEnd: () => void;
 }
 
+const PROGRESSMAX = 99; // 进度条最大值
+
 const Welcome = (props: IProps) => {
+  const route = usePathname();
+  const homeStore = useHomeStore();
+
   const [loadText, setLoadText] = useState(0);
   const isProgressEnd = useRef(false);
-  const isEnd = useRef(false);
+  const allReady = useRef(false); // 视频也加载完了，loading也加载完了
 
   useEffect(() => {
     if (!isClient()) {
@@ -90,34 +98,47 @@ const Welcome = (props: IProps) => {
       const lp: any = document.querySelector('.loading-progress');
       progress = progress + getRandomArbitrary(8, 15);
       lp && (lp.style.transform = `translateX(${progress}%)`);
-      progress = progress > 100 ? 100 : progress;
+      progress = progress > PROGRESSMAX ? PROGRESSMAX : progress;
       setLoadText(Math.floor(progress));
 
-      if (progress >= 100) {
+      if (progress >= PROGRESSMAX) {
         isProgressEnd.current = true;
         window.clearInterval(fakeLoaderInterval);
-        lp && (lp.style.transform = 'translateX(100%)');
-        const load: any = document.querySelector('.loading');
-        if (load) {
-          setTimeout(() => {
-            load.style.transform = 'translateY(calc(-100% - 11px))';
-            isEnd.current = true;
-          }, 400);
-        }
       }
     }, getRandomArbitrary(100, 500));
   }, []);
+
+  useUpdateEffect(() => {
+    if (!isClient()) {
+      return;
+    }
+
+    const condiction =
+      route === '/' ? isProgressEnd.current && homeStore.videoLoaded : isProgressEnd.current;
+
+    if (condiction) {
+      const lp: any = document.querySelector('.loading-progress');
+      lp && (lp.style.transform = `translateX(${PROGRESSMAX}%)`);
+      const load: any = document.querySelector('.loading');
+      if (load) {
+        setTimeout(() => {
+          load.style.transform = 'translateY(calc(-100% - 11px))';
+          allReady.current = true;
+        }, 400);
+      }
+    }
+  }, [homeStore.videoLoaded, isProgressEnd.current]);
 
   return (
     <WelcomeWrap
       className="loading"
       onTransitionEnd={() => {
-        if (isEnd.current) {
+        if (allReady.current) {
           props.onEnd();
         }
       }}
     >
-      <div className={`loading-bg-bar ${isProgressEnd.current ? 'loading-end' : ''}`}></div>
+      <div className={`loading-bg-bar ${allReady.current ? 'loading-end' : ''}`}></div>
       <div className="loading-bg">
         <div className="loading-text">LOADING {loadText}%</div>
       </div>
@@ -126,7 +147,12 @@ const Welcome = (props: IProps) => {
       <Ball />
 
       <h1 className="loading-title flex-center">
-        <Image className="w-139 h-95" src={require('@img/common/welcome-logo.png')} alt="" />
+        <Image
+          priority
+          className="w-139 h-95"
+          src={require('@img/common/welcome-logo.png')}
+          alt=""
+        />
       </h1>
     </WelcomeWrap>
   );

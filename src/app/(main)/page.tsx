@@ -129,6 +129,7 @@ const Home: React.FC = () => {
 
       <section className="flex justify-center relative pt-296 pb-160">
         <Image
+          priority
           className="w-319 h-219 md:w-356 md:h-244"
           src={require('@img/common/home-logo.png')}
           alt=""

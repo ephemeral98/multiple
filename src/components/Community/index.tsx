@@ -14,15 +14,15 @@ interface IProps {
 /**
  * 社区
  */
-const CommunityWrap = styled.div<{ wh: number; gap: number }>`
+const CommunityWrap = styled.div<{ $wh: number; $gap: number }>`
   ${flexPos('center')}
 
   .icon-community {
-    width: ${(props) => props.wh}rem;
-    height: ${(props) => props.wh}rem;
+    width: ${(props) => props.$wh}rem;
+    height: ${(props) => props.$wh}rem;
 
     &:not(:first-child) {
-      margin-left: ${(props) => props.gap}rem;
+      margin-left: ${(props) => props.$gap}rem;
     }
   }
 `;
@@ -30,18 +30,20 @@ const CommunityWrap = styled.div<{ wh: number; gap: number }>`
 const Community = (props: IProps) => {
   return (
     <CommunityWrap
-      gap={props.gap || 35}
-      wh={props.size || 75}
+      $gap={props.gap || 35}
+      $wh={props.size || 75}
       className={props.className}
       style={props.style}
     >
       <Image
+        priority
         className="icon-community cursor-pointer"
         src={require('@img/common/icon-discord.png')}
         alt=""
         onClick={() => window.open('https://discord.gg/nzu4qrm9y7')}
       />
       <Image
+        priority
         className="icon-community cursor-pointer"
         src={require('@img/common/icon-x.png')}
         alt=""

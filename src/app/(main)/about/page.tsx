@@ -61,9 +61,19 @@ const About = () => {
     <AboutWrap>
       <div className="banner-wrap">
         {appStore.curDevice === 'phone' ? (
-          <Image className="banner-face" src={require('@img/common/banner-about-mob.png')} alt="" />
+          <Image
+            priority
+            className="banner-face"
+            src={require('@img/common/banner-about-mob.png')}
+            alt=""
+          />
         ) : (
-          <Image className="banner-face" src={require('@img/common/banner-about.png')} alt="" />
+          <Image
+            priority
+            className="banner-face"
+            src={require('@img/common/banner-about.png')}
+            alt=""
+          />
         )}
       </div>
       <div className="absolute top-515 left-131 text-46 md:text-64 md:left-264 md:top-23vw text-#fff font-bold">
@@ -92,7 +102,7 @@ const About = () => {
             </li>
           </div>
         </div>
-        <Image className="about-face" src={require('@img/common/logo-about.png')} alt="" />
+        <Image priority className="about-face" src={require('@img/common/logo-about.png')} alt="" />
       </main>
     </AboutWrap>
   );
