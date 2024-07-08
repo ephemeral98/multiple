@@ -4,6 +4,7 @@ import VideoBox from '@cps/VideoBox';
 import { useVideoPlay } from './hooks/useVideoPlay';
 import Image from 'next/image';
 import useAppStore from '@/store/appStore';
+import Banner from './product/components/Banner';
 
 const HomeWrap = styled.div`
   background-color: #00000087;
@@ -44,6 +45,7 @@ const Home: React.FC = () => {
 
   return (
     <HomeWrap>
+      <Banner />
       <VideoBox className="one" src="/video/video-1.mp4" ref={videoRef1}>
         <div ref={targetRef1} className="abs-center z-10 w-300 h-100"></div>
         <section className="home-section bottom-[10%] left-60 md:left-[13%]">
