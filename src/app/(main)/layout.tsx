@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import '@/assets/css/globals.css';
 import '@/assets/css/reset.css';
 import '@arco-design/web-react/dist/css/arco.css';
+
 import React, { Suspense, useEffect, useState } from 'react';
 import Wrapper from '@/layouts';
 import Welcome from '@cps/Welcome';

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { flexPos } from '@/styled/mixin';
 import AdvantagesItem from './components/AdvantagesItem';
 import useAppStore from '@/store/appStore';
+import RoadMap from './components/RoadMap/RoadMapPc';
+import RoadMapMob from './components/RoadMap/RoadMapMob';
 
 const ProductWrap = styled.div`
   line-height: 1;
@@ -86,7 +88,7 @@ const Product = () => {
           </div>
         </div>
 
-        <button className="download-btn text-27 md:text-14">Download(mid-July)</button>
+        <button className="download-btn text-27 md:text-14">Download (mid-July)</button>
       </section>
 
       <main className="mt-216 pb-192 md:pb-224">
@@ -148,6 +150,8 @@ const Product = () => {
           </div>
         </div>
       </main>
+
+      {appStore.curDevice === 'phone' ? <RoadMapMob /> : <RoadMap />}
     </ProductWrap>
   );
 };

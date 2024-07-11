@@ -79,7 +79,7 @@ export const GetStartBtn = (props: IPropsStartBtn) => {
         Message.normal('Coming Soon...');
       }}
     >
-      GetStarted
+      Get Started
     </StartBtnWrap>
   );
 };
