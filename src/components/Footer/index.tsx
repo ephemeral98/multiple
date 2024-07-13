@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { styled } from 'styled-components';
 import { useRouter } from 'next/navigation';
 import Community, { GetStartBtn } from '../Community';
+import { useLaunchTo } from '@/hooks/useLaunchTo';
 
 const FooterWrap = styled.footer`
   .border-top-white {
@@ -11,6 +12,7 @@ const FooterWrap = styled.footer`
 
 const Footer = () => {
   const router = useRouter();
+  const { PrivacyPolicy, TeamCondition, launchTo } = useLaunchTo();
 
   return (
     <FooterWrap className="app-footer flex-center relative">
@@ -42,8 +44,12 @@ const Footer = () => {
         <div className="flex items-center justify-between border-top-white mt-38 py-24 px-260">
           <div>Copyright © 2024. By Multiple All rights reserved.</div>
           <div className="flex-center">
-            <div className="cursor-pointer">Privacy Policy</div>
-            <div className="ml-43 cursor-pointer">Terms and Conditions</div>
+            <div onClick={() => launchTo(PrivacyPolicy.current)} className="cursor-pointer">
+              Privacy Policy
+            </div>
+            <div onClick={() => launchTo(TeamCondition.current)} className="ml-43 cursor-pointer">
+              Terms and Conditions
+            </div>
           </div>
         </div>
       </section>

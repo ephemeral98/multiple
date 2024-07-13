@@ -22,6 +22,12 @@ const RoadMapMobWrap = styled.div`
       font-size: 31rem;
       font-weight: 600;
       margin-bottom: 15rem;
+
+      > div {
+        &:not(:first-child) {
+          margin-left: 7rem;
+        }
+      }
     }
 
     .road-item-content {

@@ -9,7 +9,7 @@ const RoadMapWrap = styled.div`
 
   main.road-container {
     height: 480rem;
-    background-color: skyblue;
+    /* background-color: skyblue; */
     display: grid;
     grid-template-columns: repeat(5, auto);
     justify-content: space-between;
@@ -17,30 +17,43 @@ const RoadMapWrap = styled.div`
     position: relative;
     padding: 0 366rem 0 198rem;
     width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
 
     .bg-wrap {
-      /* width: 100%; */
       height: 200rem;
-      /* background-color: pink; */
       position: absolute;
       left: 0;
       top: 50%;
 
-      transform: translateY(-50%);
+      transform: translateY(-20%);
       .bg-roadmap {
         width: 100%;
-        height: 100%;
+        height: 55%;
       }
     }
 
     .road-item {
       position: absolute;
       width: 371rem;
+      transition: all 0.5s;
+
+      &.disable {
+        opacity: 0.3;
+      }
 
       .header {
         ${flexPos('flex-start')}
         font-size: 24rem;
         font-weight: 600;
+        white-space: nowrap;
+        margin-left: -20rem;
+
+        > div {
+          &:not(:first-child) {
+            margin-left: 7rem;
+          }
+        }
       }
 
       .road-item-content {
@@ -82,33 +95,7 @@ const RoadMapWrap = styled.div`
 `;
 
 const RoadMap = () => {
-  const { roadMapList, setRoadMapList } = useRoadMap();
-  /**
-   * 切换路线
-   * @param nextRoad
-   */
-  const switchRoad = (nextRoad: boolean) => {
-    const inx = roadMapList.findIndex((item) => item.active);
-    const newList = roadMapList.map((item) => {
-      item.active = false;
-      return item;
-    });
-
-    if (nextRoad) {
-      if (inx >= newList.length - 1) {
-        newList[0].active = true;
-      } else {
-        newList[inx + 1].active = true;
-      }
-    } else {
-      if (inx <= 0) {
-        newList[newList.length - 1].active = true;
-      } else {
-        newList[inx - 1].active = true;
-      }
-    }
-    setRoadMapList(newList);
-  };
+  const { roadMapList, setRoadMapList, changeRoadmap, showingRoads, curInx } = useRoadMap();
 
   return (
     <RoadMapWrap>
@@ -123,75 +110,93 @@ const RoadMap = () => {
         </div>
 
         {/* 路线信息 */}
-        <div className="road-item left-[11%] top-320">
+        <div className={`road-item left-[11%] top-320 ${curInx.current !== 0 ? 'disable' : ''}`}>
           <div className="header mb-8">
-            <div>{roadMapList[0].season}</div>
-            <div>{roadMapList[0].time}</div>
-            <div>[{roadMapList[0].title}]</div>
+            <div>{showingRoads[0].season}</div>
+            <div>{showingRoads[0].time}</div>
+            <div>[{showingRoads[0].title}]</div>
           </div>
           <div className="road-item-content">
-            {roadMapList[0].content.map((item, inx) => (
+            {showingRoads[0].content.map((item, inx) => (
               <li key={inx}>{item}</li>
             ))}
           </div>
         </div>
 
-        <div className="road-item left-[28%] top-60">
+        <div
+          className={`road-item left-[28%] ${curInx.current !== 1 ? 'disable' : ''}`}
+          style={{ top: showingRoads[1].yOffset ? showingRoads[1].yOffset : '40rem' }}
+        >
           <div className="road-item-content">
-            {roadMapList[0].content.map((item, inx) => (
+            {showingRoads[1].content.map((item, inx) => (
               <li key={inx}>{item}</li>
             ))}
           </div>
           <div className="header mt-8">
-            <div>{roadMapList[0].season}</div>
-            <div>{roadMapList[0].time}</div>
-            <div>[{roadMapList[0].title}]</div>
+            <div>{showingRoads[1].season}</div>
+            <div>{showingRoads[1].time}</div>
+            <div>[{showingRoads[1].title}]</div>
           </div>
         </div>
 
-        <div className="road-item left-[45%] top-320">
+        <div className={`road-item left-[45%] top-320 ${curInx.current !== 2 ? 'disable' : ''}`}>
           <div className="header mb-8">
-            <div>{roadMapList[1].season}</div>
-            <div>{roadMapList[1].time}</div>
-            <div>[{roadMapList[1].title}]</div>
+            <div>{showingRoads[2].season}</div>
+            <div>{showingRoads[2].time}</div>
+            <div>[{showingRoads[2].title}]</div>
           </div>
           <div className="road-item-content">
-            {roadMapList[1].content.map((item, inx) => (
+            {showingRoads[2].content.map((item, inx) => (
               <li key={inx}>{item}</li>
             ))}
           </div>
         </div>
 
-        <div className="road-item left-[62%] top-60">
+        <div
+          style={{ top: showingRoads[3].yOffset ? showingRoads[3].yOffset : '40rem' }}
+          className={`road-item left-[62%] top-60 ${curInx.current !== 3 ? 'disable' : ''}`}
+        >
           <div className="road-item-content">
-            {roadMapList[2].content.map((item, inx) => (
+            {showingRoads[3].content.map((item, inx) => (
               <li key={inx}>{item}</li>
             ))}
           </div>
           <div className="header mt-8">
-            <div>{roadMapList[2].season}</div>
-            <div>{roadMapList[2].time}</div>
-            <div>[{roadMapList[2].title}]</div>
+            <div>{showingRoads[3].season}</div>
+            <div>{showingRoads[3].time}</div>
+            <div>[{showingRoads[3].title}]</div>
           </div>
         </div>
 
-        <div className="road-item left-[78%] top-320">
+        <div
+          className={`road-item left-[76%] top-320 ${
+            showingRoads[4].title.length > 20 ? 'ml-[-30rem]' : ''
+          }
+          ${curInx.current < 4 ? 'disable' : ''}
+          `}
+        >
           <div className="header mb-8">
-            <div>{roadMapList[3].season}</div>
-            <div>{roadMapList[3].time}</div>
-            <div>[{roadMapList[3].title}]</div>
+            <div>{showingRoads[4].season}</div>
+            <div>{showingRoads[4].time}</div>
+            <div>[{showingRoads[4].title}]</div>
           </div>
           <div className="road-item-content">
-            {roadMapList[3].content.map((item, inx) => (
+            {showingRoads[4].content.map((item, inx) => (
               <li key={inx}>{item}</li>
             ))}
           </div>
         </div>
 
         {/* 节点 */}
-        {roadMapList.map((item, inx) => (
-          <Point active={item.active} key={inx} style={{ left: item.left, top: '52%' }} />
-        ))}
+        {roadMapList
+          .filter((item, inx) => inx < 5)
+          .map((item, inx) => (
+            <Point
+              active={curInx.current <= 4 ? inx === curInx.current : inx === 4}
+              key={item.id}
+              style={{ left: item.left, top: '52%' }}
+            />
+          ))}
       </main>
 
       <div className="arrow-wrap">
@@ -200,14 +205,14 @@ const RoadMap = () => {
           className="icon-arrow"
           src={require('@img/product/icon-arrow.svg')}
           alt=""
-          onClick={() => switchRoad(false)}
+          onClick={() => changeRoadmap(false)}
         />
         <Image
           priority
           className="icon-arrow ml-32 reverse"
           src={require('@img/product/icon-arrow.svg')}
           alt=""
-          onClick={() => switchRoad(true)}
+          onClick={() => changeRoadmap(true)}
         />
       </div>
     </RoadMapWrap>
