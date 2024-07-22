@@ -3,10 +3,20 @@ import { styled } from 'styled-components';
 import { useRouter } from 'next/navigation';
 import Community, { GetStartBtn } from '../Community';
 import { useLaunchTo } from '@/hooks/useLaunchTo';
+import { flexPos } from '@/styled/mixin';
+import Button from '../Buttons';
 
 const FooterWrap = styled.footer`
-  .border-top-white {
-    border-top: solid 1px #fff;
+  ${flexPos('center')}
+  /* background-color: #008c8c; */
+
+  .footer-main {
+    ${flexPos('space-between')}
+    width: 1200rem;
+    height: 139rem;
+    border: solid 1px #fff;
+    margin: 0 auto;
+    border-radius: 10rem;
   }
 `;
 
@@ -15,39 +25,54 @@ const Footer = () => {
   const { PrivacyPolicy, TeamCondition, launchTo } = useLaunchTo();
 
   return (
-    <FooterWrap className="app-footer flex-center relative">
-      <section className="w-full">
-        <div className="flex items-center justify-between px-260">
+    <FooterWrap className="app-footer relative">
+      <section className="w-full ">
+        <div className="footer-main px-45">
           <div className="flex-center">
-            <div
-              className="cursor-pointer"
-              onClick={() => {
-                router.push('/product');
-              }}
-            >
-              Product
-            </div>
-            <div
-              onClick={() => {
-                router.push('/about');
-              }}
-              className="ml-59 cursor-pointer"
-            >
-              About Us
-            </div>
-            <GetStartBtn className={'px-24! py-16! rounded-[4rem]! text-14! mt-0! ml-59!'} />
+            <Button className={'px-24! py-16! rounded-[4rem]! text-14!'}>Download</Button>
+            <Button className={'px-24! py-16! rounded-[4rem]! text-14! ml-31'}>
+              GetStarted
+            </Button>
           </div>
 
-          <Community size={51} gap={24} />
+          <div className="flex-center">
+            <div className="flex-center mr-59">
+              <a
+                className="cursor-pointer text-#fff"
+                onClick={() => {
+                  router.push('/product');
+                }}
+              >
+                Product
+              </a>
+              <a
+                onClick={() => {
+                  router.push('/about');
+                }}
+                className="ml-59 cursor-pointer text-#fff"
+              >
+                About Us
+              </a>
+              <a
+                onClick={() => {
+                  router.push('/about');
+                }}
+                className="ml-59 cursor-pointer text-#fff"
+              >
+                Blog
+              </a>
+            </div>
+            <Community size={51} gap={24} />
+          </div>
         </div>
 
-        <div className="flex items-center justify-between border-top-white mt-38 py-24 px-260">
-          <div>Copyright © 2024. By Multiple All rights reserved.</div>
+        <div className="w-1200 py-24 mx-auto flex justify-between items-center">
+          <div className='text-#585858FF!'>Copyright © 2024. By Multiple All rights reserved.</div>
           <div className="flex-center">
-            <div onClick={() => launchTo(PrivacyPolicy.current)} className="cursor-pointer">
+            <div onClick={() => launchTo(PrivacyPolicy.current)} className="cursor-pointer text-#585858FF!">
               Privacy Policy
             </div>
-            <div onClick={() => launchTo(TeamCondition.current)} className="ml-43 cursor-pointer">
+            <div onClick={() => launchTo(TeamCondition.current)} className="ml-43 cursor-pointer text-#585858FF!">
               Terms and Conditions
             </div>
           </div>

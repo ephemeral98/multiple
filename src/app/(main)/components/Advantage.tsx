@@ -1,9 +1,10 @@
 import { styled } from 'styled-components';
 import AdvantagesItem from './AdvantagesItem';
 import useAppStore from '@/store/appStore';
+import TitleWrap from '@cps/Title';
 
 const AdvantageWrap = styled.div`
-  background-color: pink;
+  /* background-color: pink; */
 `;
 
 const Advantage: React.FC = () => {
@@ -11,9 +12,7 @@ const Advantage: React.FC = () => {
 
   return (
     <AdvantageWrap className="pb-192 md:pb-224">
-      {appStore.curDevice !== 'phone' && (
-        <div className="text-up text-64 font-bold text-center mb-79">Advantages</div>
-      )}
+      <TitleWrap className='mb-80'>Advantages</TitleWrap>
 
       <div className="px-38 md:px-0">
         <div className="flex-center flex-col md:flex-row">

@@ -49,6 +49,20 @@ const Community = (props: IProps) => {
         alt=""
         onClick={() => window.open('https://x.com/multiple_global')}
       />
+      <Image
+        priority
+        className="icon-community cursor-pointer"
+        src={require('@img/common/icon-m.png')}
+        alt=""
+        onClick={() => window.open('https://x.com/multiple_global')}
+      />
+      <Image
+        priority
+        className="icon-community cursor-pointer"
+        src={require('@img/common/icon-tg.png')}
+        alt=""
+        onClick={() => window.open('https://x.com/multiple_global')}
+      />
     </CommunityWrap>
   );
 };

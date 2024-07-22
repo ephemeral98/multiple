@@ -10,6 +10,8 @@ import Computer from './components/Computer';
 import Advantage from './components/Advantage';
 import DataReport from './components/DataReport';
 import Feedback from './components/Feedback';
+import Blog from './components/Blog';
+import AboutDownload from './components/AboutDownload';
 
 const HomeWrap = styled.div`
   /* background-color: #00000087; */
@@ -32,6 +34,10 @@ const Home: React.FC = () => {
       <DataReport />
 
       <Feedback />
+
+      <Blog />
+
+      <AboutDownload />
     </HomeWrap>
   );
 };

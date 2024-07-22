@@ -1,17 +1,22 @@
 import { ReactNode } from 'react';
 import { styled } from 'styled-components';
+import TitleWrap from '@cps/Title';
+import CountUp from 'react-countup';
 
 const DataReportWrap = styled.div`
-  background-image: url('/static/bg-data-report.png');
-  background-size: 100% 100%;
-  height: 419rem;
   padding-top: 69rem;
   font-size: 16rem;
 
   .data-report-main {
-    width: 1200rem;
-    height: 100%;
-    margin: 0 auto;
+    background-image: url('/static/bg-data-report.png');
+    background-size: 100% 100%;
+    width: 100%;
+    height: 419rem;
+
+    .data-report-content {
+      width: 1200rem;
+      margin: 0 auto;
+    }
   }
 
   .linear-text-box {
@@ -34,26 +39,51 @@ const DataReportWrap = styled.div`
 const DataReport = () => {
   return (
     <DataReportWrap>
-      <main className="data-report-main">
-        <div>Multiple network bandwidth capacity</div>
-        <div>
-          <span className="linear-text linear-text-box">1,108,205,060.957</span>
-          <span className="linear-unit linear-text-box">Mbps</span>
-        </div>
+      <TitleWrap className="mb-80">Data Report</TitleWrap>
 
-        <div className="flex justify-between mt-58">
+      <main className="data-report-main">
+        <div className="data-report-content">
+          <div>Multiple network bandwidth capacity</div>
           <div>
-            <div>Multiple network nodes</div>
-            <div>
-              <span className="linear-text linear-text-box">1,108,205,060.957</span>
-            </div>
+            <CountUp
+              decimals={3}
+              className="linear-text linear-text-box"
+              start={0}
+              end={1108205060.957}
+              duration={5}
+              separator=","
+            />
+            <span className="linear-unit linear-text-box">Mbps</span>
           </div>
 
-          <div className="ml-100">
-            <div>Multiple network storage files</div>
+          <div className="flex justify-between mt-58">
             <div>
-              <span className="linear-text linear-text-box">1,108,205,060.957</span>
-              <span className="linear-unit linear-text-box">Gb</span>
+              <div>Multiple network nodes</div>
+              <div>
+                <CountUp
+                  decimals={3}
+                  className="linear-text linear-text-box"
+                  start={0}
+                  end={1108205060.957}
+                  duration={5}
+                  separator=","
+                />
+              </div>
+            </div>
+
+            <div className="ml-100">
+              <div>Multiple network storage files</div>
+              <div>
+                <CountUp
+                  decimals={3}
+                  className="linear-text linear-text-box"
+                  start={0}
+                  end={11108205060.957}
+                  duration={5}
+                  separator=","
+                />
+                <span className="linear-unit linear-text-box">Gb</span>
+              </div>
             </div>
           </div>
         </div>

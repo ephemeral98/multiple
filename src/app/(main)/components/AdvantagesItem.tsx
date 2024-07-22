@@ -14,10 +14,10 @@ interface IProps {
 const AdvantagesItemWrap = styled.div<{ $reverseBg: boolean }>`
   padding: 28rem 20rem 20rem 37rem;
   border-radius: 10rem;
-  background-image: ${(props) =>
-    props.$reverseBg
-      ? `linear-gradient(134deg, #000 30%, #303030 100%);`
-      : `linear-gradient(134deg, #303030 0%, #000 100%);`};
+  position: relative;
+  /* background-image: url('/static/bg-active-advantages.png');
+  background-size: cover; */
+  /* background-position: -10rem 0rem; */
 
   border: 1px solid #3c3c3c;
   height: 299rem;
@@ -26,6 +26,21 @@ const AdvantagesItemWrap = styled.div<{ $reverseBg: boolean }>`
     min-height: 390rem;
     padding: 46rem;
     line-height: 1.5;
+  }
+
+  .active-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  &:hover {
+    .active-mask {
+      opacity: 1;
+    }
   }
 `;
 
@@ -37,9 +52,11 @@ const AdvantagesItem = (props: IProps) => {
       $reverseBg={appStore.curDevice !== 'phone' && props.reverseBg}
       className={props.className}
     >
-      <div className="text-31 md:text-24 font-bold">{props.title}</div>
-      {props.children}
-      <div className="mt-21 md:mt-38 flex justify-end">
+      <Image className="active-mask" src={require('@img/home/bg-active-advantages.png')} alt="" />
+
+      <div className="text-31 md:text-24 font-bold relative z-9">{props.title}</div>
+      <div className="relative z-9">{props.children}</div>
+      <div className="mt-21 md:mt-38 flex justify-end relative z-9">
         <Image className="w-154 md:w-140" src={props.face} alt="" />
       </div>
     </AdvantagesItemWrap>

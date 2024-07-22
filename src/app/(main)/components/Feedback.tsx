@@ -6,6 +6,7 @@ import { useUpdateEffect } from 'ahooks';
 import { flexPos } from '@/styled/mixin';
 import Image from 'next/image';
 import { CSSTransition } from 'react-transition-group';
+import TitleWrap from '@cps/Title';
 
 const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
   position: absolute;
@@ -250,52 +251,55 @@ const Feedback: React.FC = () => {
   };
 
   return (
-    <FeedbackWrap>
-      <Image priority className="bg-line" src={require('@img/home/bg-feedbac-line.png')} alt="" />
+    <>
+      <TitleWrap className="mb-80 mt-320">Everyone's feedback</TitleWrap>
+      <FeedbackWrap>
+        <Image priority className="bg-line" src={require('@img/home/bg-feedbac-line.png')} alt="" />
 
-      {/* <div className="w-full h-[30%] absolute bottom-0 bg-#000 z-2"></div> */}
+        {/* <div className="w-full h-[30%] absolute bottom-0 bg-#000 z-2"></div> */}
 
-      <RoundSpinWrap $spinAngle={String(curDir.current)}>
-        {roundList.map((item, inx) => {
-          return (
-            <div className="round-content" style={{ transform: `rotate(${item.deg}deg)` }}>
-              <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
-                <Image priority className="w-76 rounded-[50%]" src={item.avatar} alt="" />
+        <RoundSpinWrap $spinAngle={String(curDir.current)}>
+          {roundList.map((item, inx) => {
+            return (
+              <div className="round-content" style={{ transform: `rotate(${item.deg}deg)` }}>
+                <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
+                  <Image priority className="w-76 rounded-[50%]" src={item.avatar} alt="" />
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </RoundSpinWrap>
+            );
+          })}
+        </RoundSpinWrap>
 
-      <main className="feedback-main">
-        <div className="h-200 mask"></div>
+        <main className="feedback-main">
+          <div className="h-200 mask"></div>
 
-        <div className="feedback-main-content">
-          <Image
-            onClick={() => doPrev()}
-            priority
-            className="w-34 transform rotate-180 translate-y-[50%] cursor-pointer"
-            src={require('@img/home/icon-arrow.svg')}
-            alt=""
-          />
+          <div className="feedback-main-content">
+            <Image
+              onClick={() => doPrev()}
+              priority
+              className="w-34 transform rotate-180 translate-y-[50%] cursor-pointer"
+              src={require('@img/home/icon-arrow.svg')}
+              alt=""
+            />
 
-          <section className="w-430 text-center mx-150">
-            <div className="text-24">
-              {roundList[curUpIndex.current].name} {roundList[curUpIndex.current].text}
-            </div>
-            <div className="text-16">{roundList[curUpIndex.current].content}</div>
-          </section>
+            <section className="w-430 text-center mx-150">
+              <div className="text-24">
+                {roundList[curUpIndex.current].name} {roundList[curUpIndex.current].text}
+              </div>
+              <div className="text-16">{roundList[curUpIndex.current].content}</div>
+            </section>
 
-          <Image
-            onClick={() => doNext()}
-            priority
-            className="w-34 cursor-pointer"
-            src={require('@img/home/icon-arrow.svg')}
-            alt=""
-          />
-        </div>
-      </main>
-    </FeedbackWrap>
+            <Image
+              onClick={() => doNext()}
+              priority
+              className="w-34 cursor-pointer"
+              src={require('@img/home/icon-arrow.svg')}
+              alt=""
+            />
+          </div>
+        </main>
+      </FeedbackWrap>
+    </>
   );
 };
 
