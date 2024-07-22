@@ -29,7 +29,12 @@ const MarqueeWrap = styled.div<{ calcwidth: string; trans: string; duration: str
   }
 `;
 
-const Marquee = (props: { duration?: number; children: ReactNode; infinity?: boolean }) => {
+const Marquee = (props: {
+  duration?: number;
+  children: ReactNode;
+  infinity?: boolean;
+  className?: string;
+}) => {
   const [marqueeWidth, setMarqueeWidth] = useState('');
   const MarqueeContentRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +70,7 @@ const Marquee = (props: { duration?: number; children: ReactNode; infinity?: boo
 
   return (
     <MarqueeWrap
-      className={duration === '0s' ? 'stick' : ''}
+      className={`${props.className} ${duration === '0s' ? 'stick' : ''}`}
       calcwidth={calcWidth}
       trans={trans}
       duration={duration}

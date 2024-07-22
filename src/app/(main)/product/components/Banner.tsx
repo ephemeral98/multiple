@@ -2,17 +2,20 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import Marquee from '@/components/Marquee';
 import useAppStore from '@/store/appStore';
+import LaxScale from '@/components/Lax/LaxScale';
+import VideoBox from '@/components/VideoBox';
+import { useVideoPlay } from '../../hooks/useVideoPlay';
+import { flexPos } from '@/styled/mixin';
 
 const BannerWrap = styled.div`
-  width: 1400rem;
+  width: 100%;
   height: 100vh;
-  padding: 156rem 0 56rem;
+  /* padding: 156rem 0 56rem; */
   margin: 0 auto;
-  display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
   position: relative;
+  /* background-color: pink; */
+  ${flexPos('center')}
 
   @media (max-width: 750px) {
     width: 100%;
@@ -20,11 +23,15 @@ const BannerWrap = styled.div`
   }
 
   > .banner-content {
-    display: flex;
+    ${flexPos('center')}
+    flex-direction: column;
     line-height: 1;
+    position: relative;
+    z-index: 9;
+    text-align: center;
 
     @media (max-width: 1024px) {
-      padding: 37rem;
+      /* padding: 37rem; */
       flex-direction: column;
       align-items: flex-end;
     }
@@ -41,6 +48,16 @@ const BannerWrap = styled.div`
           display: inline;
         }
       }
+    }
+
+    .access-btn {
+      height: 64rem;
+      background: linear-gradient(134deg, #303030 0%, #000000 100%);
+      border-radius: 4rem;
+      border: 0rem solid #585858;
+      padding: 0 79rem;
+      margin-top: 66rem;
+      font-size: 20rem;
     }
 
     .banner-face {
@@ -85,9 +102,16 @@ const BannerWrap = styled.div`
 
 const Banner = () => {
   const appStore = useAppStore();
+  const { targetRef: targetRef1, videoRef: videoRef1 } = useVideoPlay();
 
   return (
     <BannerWrap>
+      <LaxScale>
+        <VideoBox className="one" src="/video/video-1.mp4" ref={videoRef1}>
+          <div ref={targetRef1} className="abs-center z-10 w-300 h-100"></div>
+        </VideoBox>
+      </LaxScale>
+
       <main className="banner-content">
         <div className="banner-text">
           <div className="text-46 md:text-64 text-up">
@@ -102,12 +126,14 @@ const Banner = () => {
           </div>
         </div>
 
-        <div className="banner-face">
-          <Image src={require('@img/common/home-logo.png')} alt="" className="w-full" />
-        </div>
+        <button className="access-btn">Get access</button>
       </main>
 
-      <Marquee duration={0.01} infinity={appStore.curDevice === 'phone'}>
+      <Marquee
+        className="z-9 absolute bottom-[53rem]"
+        duration={0.01}
+        infinity={appStore.curDevice === 'phone'}
+      >
         <div className="icon-partner">
           <Image src={require('@img/common/icon-okx.png')} alt="" className="w-full" />
           <Image src={require('@img/common/icon-ngc.png')} alt="" className="w-full" />

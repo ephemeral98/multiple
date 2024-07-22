@@ -36,3 +36,26 @@ export const sleep = (time: number) => {
 export const getRandom = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+/**
+ * 将数组的某一项移动到最后
+ * @param queue
+ * @param inx
+ * @returns
+ */
+export const turnToLastQueue = <T>(queue: T[], inx: number): T[] => {
+  const arr = [...queue];
+  const item = arr.splice(inx, 1)[0];
+  arr.push(item);
+  return arr;
+};
+
+// 将数组的两个索引互换位置
+export const swapQueue = <T>(queue: T[], inx1: number, inx2: number): T[] => {
+  const arr = [...queue];
+  const item1 = arr[inx1];
+  const item2 = arr[inx2];
+  arr[inx1] = item2;
+  arr[inx2] = item1;
+  return arr;
+};
