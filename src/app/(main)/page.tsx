@@ -13,7 +13,7 @@ import Feedback from './components/Feedback';
 
 const HomeWrap = styled.div`
   /* background-color: #00000087; */
-  background-color: #008c8c;
+  /* background-color: #008c8c; */
   /* height: 280vh; */
   /* ${flexPos('center', 'flex-start')} */
 `;

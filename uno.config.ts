@@ -32,7 +32,6 @@ export default defineConfig({
     [/^min-h-([\.\d]+)$/, ([_, num]) => ({ 'min-height': `${num}rem` })],
     [/^max-h-([\.\d]+)$/, ([_, num]) => ({ 'max-height': `${num}rem` })],
     [/^text-([\.\d]+)$/, ([_, num]) => ({ 'font-size': `${num}rem` })],
-    [/^font-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}rem` })],
 
     [/^p-([\.\d]+)$/, ([_, num]) => ({ padding: `${num}rem` })],
     [/^pt-([\.\d]+)$/, ([_, num]) => ({ 'padding-top': `${num}rem` })],
@@ -53,6 +52,8 @@ export default defineConfig({
     [/^ml-([\.\d]+)$/, ([_, num]) => ({ 'margin-left': `${num}rem` })],
     [/^mr-([\.\d]+)$/, ([_, num]) => ({ 'margin-right': `${num}rem` })],
     [/^mb-([\.\d]+)$/, ([_, num]) => ({ 'margin-bottom': `${num}rem` })],
+    [/^mx-([\.\d]+)$/, ([_, num]) => ({ 'margin-left': `${num}rem`, 'margin-right': `${num}rem` })],
+    [/^my-([\.\d]+)$/, ([_, num]) => ({ 'margin-top': `${num}rem`, 'margin-bottom': `${num}rem` })],
 
     [/^top-([\.\d]+)$/, ([_, num]) => ({ top: `${num}rem` })],
     [/^left-([\.\d]+)$/, ([_, num]) => ({ left: `${num}rem` })],
@@ -68,11 +69,7 @@ export default defineConfig({
     [/^rounded-([\.\d]+)$/, ([_, num]) => ({ 'border-radius': `${num}rem` })],
 
     ['flex-center', { display: 'flex', 'justify-content': 'center', 'align-items': 'center' }],
-    ['disable', { filter: 'grayscale(98%)' }],
-    [
-      'abs-center',
-      { position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)' },
-    ],
-    ['text-up', { 'text-transform': 'uppercase' }],
+    ['disable', { filter: 'grayscale(98%)', opacity: '0.25' }],
+    [/^font-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}` })],
   ],
 });

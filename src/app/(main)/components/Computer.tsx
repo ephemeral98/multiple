@@ -8,7 +8,7 @@ const ComputerWrap = styled.div`
   height: 180vh;
   ${flexPos('center')}
   flex-direction: column;
-  background-color: #008c8c;
+  /* background-color: #008c8c; */
   position: relative;
   padding-top: 50rem;
 
