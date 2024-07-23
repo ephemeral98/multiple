@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { $height, phoneSize } from '@/styled/mediaSize';
 
 interface IProps {
   face: string;
@@ -16,8 +17,12 @@ const BlogItemWrap = styled.div`
   border-radius: 10rem;
   cursor: pointer;
 
+  @media (max-width: ${phoneSize}) {
+      padding: 38rem;
+  }
+
   .face-wrap {
-    height: 272rem;
+    ${$height('332rem', '272rem', '272rem')}
 
     .face-content {
       width: 100%;
@@ -41,17 +46,19 @@ const BlogItem = (props: any) => {
         <Image src={require('@img/common/temp-blog.png')} alt="" className="face-content" />
       </div>
 
-      <div className="my-24 text-24 font-bold">
+      <div className="my-29 md:my-24 text-31 md:text-24 font-bold">
         Decentralized AI: The Future of Scalable AI Applications
       </div>
-      <main className="text-#585858 text-16">
+      <main className="text-#585858 text-23 md:text-16">
         De-WAN integrates advanced Web 3.0 technologies inclusive of blockchain, SD-WAN, P2P, and
         encryption.
       </main>
 
       <footer className="mt-57 flex justify-between items-center">
-        <div className="text-16">Jul 18.2024</div>
-        <div className="h-36 px-28 rounded-[31rem] bg-[#191919] flex-center">News</div>
+        <div className="text-23 md:text-16">Jul 18.2024</div>
+        <div className="h-44 md:h-36 px-28 rounded-[31rem] bg-[#191919] flex-center text-23 md:text-16">
+          News
+        </div>
       </footer>
     </BlogItemWrap>
   );

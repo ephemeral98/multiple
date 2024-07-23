@@ -6,6 +6,7 @@ import LaxScale from '@/components/Lax/LaxScale';
 import VideoBox from '@/components/VideoBox';
 import { useVideoPlay } from '../../hooks/useVideoPlay';
 import { flexPos } from '@/styled/mixin';
+import { $borderRadius, $fontSize, $height, $width, phoneSize } from '@/styled/mediaSize';
 
 const BannerWrap = styled.div`
   width: 100%;
@@ -30,9 +31,12 @@ const BannerWrap = styled.div`
     z-index: 9;
     text-align: center;
 
+    @media (max-width: ${phoneSize}) {
+      margin: auto;
+    }
+
     .banner-text {
       flex: auto;
-      /* background-color: skyblue; */
       @media (min-width: 750px) {
         white-space: nowrap;
       }
@@ -45,13 +49,14 @@ const BannerWrap = styled.div`
     }
 
     .access-btn {
-      height: 64rem;
       background: linear-gradient(134deg, #303030 0%, #000000 100%);
-      border-radius: 10rem;
       padding: 0 79rem;
       margin-top: 66rem;
-      font-size: 20rem;
       border: 1px solid #585858;
+      ${$fontSize('27rem', '20rem', '20rem')}
+      ${$height('106rem', '64rem', '64rem')}
+      ${$borderRadius('19rem', '10rem', '10rem')}
+      ${$width('483rem', 'auto', 'auto')}
     }
 
     .banner-face {
@@ -113,7 +118,7 @@ const Banner = () => {
             <div> internet connection.</div>
             <div> Join and earn.</div>
           </div>
-          <div className="content mt-33 text-23 md:text-20 leading-[1.4]">
+          <div className="content px-30 md:px-0 mt-33 text-23 md:text-20 leading-[1.4]">
             <div>Our AI-powered network layer revolutionises the way data is transmitted by</div>
             <div>allowing multiple simultaneous channels through your current bandwidth and</div>
             <div>intelligently selects the best private nodes for point to point navigation.</div>

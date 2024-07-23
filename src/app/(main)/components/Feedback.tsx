@@ -7,23 +7,25 @@ import { flexPos } from '@/styled/mixin';
 import Image from 'next/image';
 import { CSSTransition } from 'react-transition-group';
 import TitleWrap from '@cps/Title';
+import { $height, $width } from '@/styled/mediaSize';
 
 const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
   position: absolute;
   /* width: 100%; */
   /* height: 100%; */
   /* margin: 0 auto; */
-  width: 300rem;
-  height: 300rem;
+  
+  ${$width('400rem', '300rem', '300rem')}
+  ${$height('400rem', '300rem', '300rem')}
 
   .round-content {
     position: absolute;
     /* transform: translate(50%, 50%); */
     /* left: 50%;
     top: 50%; */
-    width: 300rem;
-    height: 300rem;
-    /* background-color: skyblue; */
+    ${$width('400rem', '300rem', '300rem')}
+    ${$height('400rem', '300rem', '300rem')}
+
     border-radius: 50%;
     font-size: 30rem;
     /* border: solid 2px red; */
@@ -53,7 +55,7 @@ const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
 const FeedbackWrap = styled.div`
   background-image: url('/static/bg-feedback.png');
   background-size: 100% 100%;
-  height: 419rem;
+  height: 619rem;
   /* padding-top: 69rem; */
   font-size: 16rem;
   position: relative;
@@ -280,7 +282,7 @@ const Feedback: React.FC = () => {
                 style={{ transform: `rotate(${item.deg}deg)` }}
               >
                 <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
-                  <Image priority className="w-76 rounded-[50%]" src={item.avatar} alt="" />
+                  <Image priority className="w-181 md:w-76 rounded-[50%]" src={item.avatar} alt="" />
                 </div>
               </div>
             );
@@ -290,7 +292,7 @@ const Feedback: React.FC = () => {
         <main className="feedback-main">
           <div className="h-200 mask"></div>
 
-          <div className="feedback-main-content">
+          <div className="feedback-main-content pt-80 md:pt-0 mt-20 md:mt-0">
             <Image
               onClick={() => doPrev()}
               priority
@@ -299,7 +301,7 @@ const Feedback: React.FC = () => {
               alt=""
             />
 
-            <section className="w-430 text-center mx-150">
+            <section className="w-430 text-center mx-50 md:mx-150">
               <div className="text-24">{roundList[curUpIndex.current].name}</div>
               <div className="text-16">{roundList[curUpIndex.current].content}</div>
             </section>

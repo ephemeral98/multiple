@@ -1,3 +1,4 @@
+import { $fontSize } from '@/styled/mediaSize';
 import { flexPos } from '@/styled/mixin';
 import { styled } from 'styled-components';
 
@@ -12,7 +13,7 @@ const TitleWrap = styled.div`
   .title-content {
     font-family: Montserrat, Montserrat;
     font-weight: 400;
-    font-size: 64rem;
+    ${$fontSize('46rem', '64rem', '64rem')}
     text-transform: uppercase;
     background: linear-gradient(to right, #3a3a3a, #fff, #3a3a3a);
     -webkit-background-clip: text;

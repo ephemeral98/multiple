@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { styled } from 'styled-components';
 import TitleWrap from '@cps/Title';
 import CountUp from 'react-countup';
+import { $fontSize, $width } from '@/styled/mediaSize';
 
 const DataReportWrap = styled.div`
   padding-top: 69rem;
@@ -14,7 +15,7 @@ const DataReportWrap = styled.div`
     height: 419rem;
 
     .data-report-content {
-      width: 1200rem;
+      ${$width('100%', '1200rem', '1200rem')}
       margin: 0 auto;
     }
   }
@@ -26,12 +27,13 @@ const DataReportWrap = styled.div`
   }
 
   .linear-text {
-    font-size: 64rem;
+    ${$fontSize('46rem', '64rem', '64rem')}
     background-image: linear-gradient(180deg, #ffffff 59%, #1d1e30 100%);
   }
 
   .linear-unit {
-    font-size: 24rem;
+    margin-left: 14rem;
+    ${$fontSize('22rem', '24rem', '24rem')}
     background-image: linear-gradient(180deg, #ffffff 0%, #161515 100%);
   }
 `;
@@ -42,8 +44,8 @@ const DataReport = () => {
       <TitleWrap className="mb-80">Data Report</TitleWrap>
 
       <main className="data-report-main">
-        <div className="data-report-content">
-          <div>Multiple network bandwidth capacity</div>
+        <div className="data-report-content px-40 md:px-0">
+          <div className="text-23 md:text-16">Multiple network bandwidth capacity</div>
           <div>
             <CountUp
               decimals={3}
@@ -56,9 +58,9 @@ const DataReport = () => {
             <span className="linear-unit linear-text-box">Mbps</span>
           </div>
 
-          <div className="flex justify-between mt-58">
+          <div className="flex justify-start md:justify-between flex-col md:flex-row mt-58">
             <div>
-              <div>Multiple network nodes</div>
+              <div className="text-23 md:text-16">Multiple network nodes</div>
               <div>
                 <CountUp
                   decimals={3}
@@ -71,7 +73,7 @@ const DataReport = () => {
               </div>
             </div>
 
-            <div className="ml-100">
+            <div className="mt-58 md:mt-0 md:ml-100">
               <div>Multiple network storage files</div>
               <div>
                 <CountUp

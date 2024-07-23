@@ -1,6 +1,7 @@
 import { flexPos } from '@/styled/mixin';
 import { styled } from 'styled-components';
 import Image from 'next/image';
+import { $height, $width } from '@/styled/mediaSize';
 
 const ringDuration = '45s';
 
@@ -39,24 +40,20 @@ const ComputerWrap = styled.div`
       position: absolute;
 
       &.bg-ring-1 {
-        width: 700rem;
-        height: 700rem;
-        /* background-color: pink; */
-
+        ${$width('500rem', '700rem', '700rem')}
+        ${$height('500rem', '700rem', '700rem')}
         animation: ringMove ${ringDuration} linear infinite;
       }
 
       &.bg-ring-2 {
-        width: 600rem;
-        height: 600rem;
-        /* background-color: skyblue; */
+        ${$width('500rem', '600rem', '600rem')}
+        ${$height('500rem', '600rem', '600rem')}
         animation: ringMoveReverse ${ringDuration} linear infinite;
       }
 
       &.bg-ring-3 {
-        width: 500rem;
-        height: 500rem;
-        /* background-color: plum; */
+        ${$width('400rem', '500rem', '500rem')}
+        ${$height('400rem', '500rem', '500rem')}
         animation: ringMove ${ringDuration} linear infinite;
       }
     }
@@ -74,9 +71,9 @@ const Computer: React.FC = () => {
       </div>
       {/* 圈圈--end */}
 
-      <Image src={require('@img/home/face-computer.png')} alt="" className="w-709 z-9" />
+      <Image src={require('@img/home/face-computer.png')} alt="" className="w-600 md:w-709 z-9" />
 
-      <div className="text-24 text-center mt-50">
+      <div className="px-23 md:px-0 text-27 md:text-24 text-center mt-50">
         <div>Providing data storage and data transmission services to billions of users</div>
         <div>around the world through DSD-WAN technology architecture</div>
       </div>
