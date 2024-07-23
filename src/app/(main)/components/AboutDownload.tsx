@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import BlogItem from './BlogItem';
 import { flexPos } from '@/styled/mixin';
 import Image from 'next/image';
 
@@ -55,7 +54,7 @@ const Blog = () => {
 
         <div className='flex-center mt-69'>
           <button className='btn'>Download</button>
-          <button className='btn ml-31'>GetStarted</button>
+          <button className='btn ml-31'>Get Started</button>
         </div>
       </main>
     </AboutDownload>

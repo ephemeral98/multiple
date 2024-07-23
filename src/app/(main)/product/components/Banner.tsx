@@ -30,12 +30,6 @@ const BannerWrap = styled.div`
     z-index: 9;
     text-align: center;
 
-    @media (max-width: 1024px) {
-      /* padding: 37rem; */
-      flex-direction: column;
-      align-items: flex-end;
-    }
-
     .banner-text {
       flex: auto;
       /* background-color: skyblue; */
@@ -53,11 +47,11 @@ const BannerWrap = styled.div`
     .access-btn {
       height: 64rem;
       background: linear-gradient(134deg, #303030 0%, #000000 100%);
-      border-radius: 4rem;
-      border: 0rem solid #585858;
+      border-radius: 10rem;
       padding: 0 79rem;
       margin-top: 66rem;
       font-size: 20rem;
+      border: 1px solid #585858;
     }
 
     .banner-face {

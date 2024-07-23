@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import BlogItem from './BlogItem';
+import BlogItem from '@cps/BlogComp/BlogItem';
 import { flexPos } from '@/styled/mixin';
 import TitleWrap from '@cps/Title';
 

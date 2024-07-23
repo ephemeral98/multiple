@@ -6,6 +6,7 @@ import { flexPos } from '@/styled/mixin';
 import { useRouter } from 'next/navigation';
 import { useTopBar } from './useTopBar';
 import { GetStartBtn } from '../Community';
+import Button from '../Buttons';
 
 const TopBarWrap = styled.header`
   position: absolute;
@@ -96,7 +97,10 @@ const TopBar = () => {
           </div>
         </div>
 
-        <GetStartBtn className={'px-24! py-16! rounded-[4rem]! text-14! mt-0!'} />
+        <div className="flex-center">
+          <Button>Download</Button>
+          <Button className={'ml-31'}>Get Started</Button>
+        </div>
       </div>
     </TopBarWrap>
   );

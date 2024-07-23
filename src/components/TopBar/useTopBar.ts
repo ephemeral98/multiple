@@ -21,6 +21,11 @@ export const useTopBar = () => {
       path: '/product',
       active: false,
     },
+    {
+      text: 'Blog',
+      path: '/blog',
+      active: false,
+    },
   ]);
 
   useEffect(() => {

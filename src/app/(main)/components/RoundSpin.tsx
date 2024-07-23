@@ -25,7 +25,6 @@ const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
     left: 50%;
     top: 0;
     transform: translateX(-50%);
-    background-color: pink;
   }
 
   .round-down {
@@ -33,7 +32,6 @@ const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    background-color: pink;
   }
 `;
 

@@ -29,10 +29,8 @@ const Footer = () => {
       <section className="w-full ">
         <div className="footer-main px-45">
           <div className="flex-center">
-            <Button className={'px-24! py-16! rounded-[4rem]! text-14!'}>Download</Button>
-            <Button className={'px-24! py-16! rounded-[4rem]! text-14! ml-31'}>
-              GetStarted
-            </Button>
+            <Button>Download</Button>
+            <Button className={'ml-31'}>Get Started</Button>
           </div>
 
           <div className="flex-center">
@@ -67,12 +65,18 @@ const Footer = () => {
         </div>
 
         <div className="w-1200 py-24 mx-auto flex justify-between items-center">
-          <div className='text-#585858FF!'>Copyright © 2024. By Multiple All rights reserved.</div>
+          <div className="text-#585858FF!">Copyright © 2024. By Multiple All rights reserved.</div>
           <div className="flex-center">
-            <div onClick={() => launchTo(PrivacyPolicy.current)} className="cursor-pointer text-#585858FF!">
+            <div
+              onClick={() => launchTo(PrivacyPolicy.current)}
+              className="cursor-pointer text-#585858FF!"
+            >
               Privacy Policy
             </div>
-            <div onClick={() => launchTo(TeamCondition.current)} className="ml-43 cursor-pointer text-#585858FF!">
+            <div
+              onClick={() => launchTo(TeamCondition.current)}
+              className="ml-43 cursor-pointer text-#585858FF!"
+            >
               Terms and Conditions
             </div>
           </div>

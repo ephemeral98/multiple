@@ -15,7 +15,6 @@ const LaxScaleWrap = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: pink;
 `;
 
 const LaxScale = ({ children }: IProps) => {
@@ -23,6 +22,7 @@ const LaxScale = ({ children }: IProps) => {
     if (!isClient()) {
       return;
     }
+
     lax.init(); // 初始化 Lax.js
     lax.addDriver('scrollY', () => window.scrollY); // 添加滚动驱动
 
@@ -41,6 +41,7 @@ const LaxScale = ({ children }: IProps) => {
 
     // 组件卸载时移除驱动
     return () => {
+      lax.removeElements('.lax-scale');
       lax.removeDriver('scrollY');
     };
   }, []);

@@ -34,7 +34,7 @@ const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
       left: 50%;
       top: 0;
       transform: translateX(-50%);
-      background-color: pink;
+      /* background-color: pink; */
     }
 
     .round-down {
@@ -122,10 +122,10 @@ const Feedback: React.FC = () => {
       readyRun: false,
       back: false,
       readyBack: false,
-      avatar: require('@img/home/avatar1.png'),
-      name: 'Emma Sullivan',
+      avatar: require('@img/home/avatar2.png'),
+      name: 'Liam Carter',
       content: [
-        `Multiple Network is a game-changer that lets me share my internet resources and benefit from it. It’s a win-win for everyone involved.`,
+        `I highly recommend Multiple Network for anyone looking to earn extra income, cut down on internet bills, or support a decentralized cause. It’s the future of networking!`,
       ],
       deg: 0,
     },
@@ -135,10 +135,10 @@ const Feedback: React.FC = () => {
       readyRun: false,
       back: false,
       readyBack: false,
-      avatar: require('@img/home/avatar1.png'),
-      name: 'Emma Sullivan',
+      avatar: require('@img/home/avatar3.png'),
+      name: 'Crypto Voyager',
       content: [
-        `Multiple Network is a game-changer that lets me share my internet resources and benefit from it. It’s a win-win for everyone involved.`,
+        `Getting started is easy: I just download the Multiple Network app on Windows, create an account, and keep it running. I can then earn rewards passively with minimal effort.`,
       ],
       deg: 0,
     },
@@ -148,10 +148,23 @@ const Feedback: React.FC = () => {
       readyRun: false,
       back: false,
       readyBack: false,
-      avatar: require('@img/home/avatar1.png'),
-      name: 'Emma Sullivan',
+      avatar: require('@img/home/avatar4.png'),
+      name: 'Node Ninja',
       content: [
-        `Multiple Network is a game-changer that lets me share my internet resources and benefit from it. It’s a win-win for everyone involved.`,
+        `I was lucky to get whitelist access to participate in Multiple Network's testnet. The process has been smooth and rewarding, allowing me to share resources effortlessly while earning rewards. It’s exciting to be part of this innovative platform and see its potential firsthand.`,
+      ],
+      deg: 0,
+    },
+    {
+      text: '5',
+      active: false,
+      readyRun: false,
+      back: false,
+      readyBack: false,
+      avatar: require('@img/home/avatar5.png'),
+      name: 'Ethan Brooks',
+      content: [
+        `Decentralized WAN is changing how we connect and share resources. Multiple Network uses this cool tech to make things more efficient, secure, and affordable. With decentralized control, it boosts privacy, cuts costs, and keeps connections reliable. It’s a big step forward for networking!`,
       ],
       deg: 0,
     },
@@ -261,7 +274,11 @@ const Feedback: React.FC = () => {
         <RoundSpinWrap $spinAngle={String(curDir.current)}>
           {roundList.map((item, inx) => {
             return (
-              <div key={inx} className="round-content" style={{ transform: `rotate(${item.deg}deg)` }}>
+              <div
+                key={inx}
+                className="round-content"
+                style={{ transform: `rotate(${item.deg}deg)` }}
+              >
                 <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
                   <Image priority className="w-76 rounded-[50%]" src={item.avatar} alt="" />
                 </div>
@@ -283,9 +300,7 @@ const Feedback: React.FC = () => {
             />
 
             <section className="w-430 text-center mx-150">
-              <div className="text-24">
-                {roundList[curUpIndex.current].name} {roundList[curUpIndex.current].text}
-              </div>
+              <div className="text-24">{roundList[curUpIndex.current].name}</div>
               <div className="text-16">{roundList[curUpIndex.current].content}</div>
             </section>
 

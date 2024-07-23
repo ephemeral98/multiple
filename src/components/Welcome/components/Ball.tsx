@@ -11,8 +11,8 @@ const BallWrap = styled.div`
     }
   }
 
-  width: 240px;
-  height: 240px;
+  width: 515rem;
+  height: 515rem;
   background-color: #000;
   /* background-color: #fff; */
   border-radius: 50%;

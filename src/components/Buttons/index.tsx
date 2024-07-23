@@ -9,13 +9,18 @@ interface IPropsStartBtn {
   onClick?: () => void;
 }
 
-
 const ButtonWrap = styled.button`
-  padding: 37rem 146rem;
-  border-radius: 19rem;
+  border-radius: 4rem;
   border: solid 1px #fff;
   color: #fff;
-  font-size: 27rem;
+  font-size: 14rem;
+  padding: 16rem 24rem;
+  transition: all 0.4s;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
 `;
 const Button = (props: IPropsStartBtn) => {
   return (
