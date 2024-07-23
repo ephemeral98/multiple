@@ -261,7 +261,7 @@ const Feedback: React.FC = () => {
         <RoundSpinWrap $spinAngle={String(curDir.current)}>
           {roundList.map((item, inx) => {
             return (
-              <div className="round-content" style={{ transform: `rotate(${item.deg}deg)` }}>
+              <div key={inx} className="round-content" style={{ transform: `rotate(${item.deg}deg)` }}>
                 <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
                   <Image priority className="w-76 rounded-[50%]" src={item.avatar} alt="" />
                 </div>

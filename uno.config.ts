@@ -71,5 +71,6 @@ export default defineConfig({
     ['flex-center', { display: 'flex', 'justify-content': 'center', 'align-items': 'center' }],
     ['disable', { filter: 'grayscale(98%)', opacity: '0.25' }],
     [/^font-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}` })],
+    ['text-up', { 'text-transform': 'uppercase' }],
   ],
 });

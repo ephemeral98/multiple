@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { flexPos } from '@/styled/mixin';
 import useAppStore from '@/store/appStore';
+import Team from './components/Team';
 
 const AboutWrap = styled.div`
   color: #fff;
@@ -104,6 +105,8 @@ const About = () => {
         </div>
         <Image priority className="about-face" src={require('@img/common/logo-about.png')} alt="" />
       </main>
+
+      <Team />
     </AboutWrap>
   );
 };
