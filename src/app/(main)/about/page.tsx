@@ -29,13 +29,13 @@ const AboutWrap = styled.div`
 
     .about-content {
       margin-right: 43rem;
-      flex: 1 0 702rem;
+      flex: 1 0 600rem;
     }
 
     .about-face {
       width: auto;
-      max-width: 594rem;
-      flex: 0 1 594rem;
+      max-width: 480rem;
+      flex: 0 1 480rem;
 
       @media (max-width: 750px) {
         max-width: 396rem;

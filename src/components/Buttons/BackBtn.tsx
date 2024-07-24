@@ -2,16 +2,17 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { FC } from 'react';
 import { useRouter } from 'next/navigation';
+import { $fontSize, $width } from '@/styled/mediaSize';
 
 const BackBtnWrap = styled.a`
   display: flex;
   align-items: center;
-  font-size: 16rem;
+  ${$fontSize('23rem', '16rem', '16rem')}
   color: #fff;
   user-select: none;
 
   .icon-back {
-    width: 14rem;
+    ${$width('18rem', '14rem', '14rem')}
     transform: rotate(180deg);
     margin-right: 8rem;
   }

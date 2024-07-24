@@ -3,6 +3,7 @@ import BlogItem from '@cps/BlogComp/BlogItem';
 import { flexPos } from '@/styled/mixin';
 import TitleWrap from '@cps/Title';
 import { phoneSize } from '@/styled/mediaSize';
+import { useRouter } from 'next/navigation';
 
 const BlogWrap = styled.div`
   margin-top: 296rem;
@@ -17,6 +18,8 @@ const BlogWrap = styled.div`
 `;
 
 const Blog = () => {
+  const router = useRouter();
+
   return (
     <BlogWrap>
       <TitleWrap className="mb-80">Explore our blog</TitleWrap>
@@ -27,7 +30,14 @@ const Blog = () => {
       </main>
 
       <div className="flex-center mt-72">
-        <button className="text-32 md:text-24">See more</button>
+        <button
+          className="text-32 md:text-24"
+          onClick={() => {
+            router.push('/blog');
+          }}
+        >
+          See more
+        </button>
       </div>
     </BlogWrap>
   );

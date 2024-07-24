@@ -7,7 +7,9 @@ import AdvantagesItem from './components/AdvantagesItem';
 import useAppStore from '@/store/appStore';
 import RoadMap from './components/RoadMap/RoadMapPc';
 import RoadMapMob from './components/RoadMap/RoadMapMob';
-import { StepItem, StepItemMini } from './components/StepItem';
+import { ProductHeader } from './components/Header';
+import Step from './components/StepComp';
+import StepMob from './components/StepComp/StepMob';
 
 const ProductWrap = styled.div`
   line-height: 1;
@@ -93,42 +95,12 @@ const Product = () => {
       </section>
 
       <main className="mt-216 pb-192 md:pb-224">
-        {appStore.curDevice !== 'phone' && (
-          <div className="text-up text-64 font-bold text-center mb-79">How to use Multiple</div>
-        )}
+        <ProductHeader>How to use Multiple</ProductHeader>
 
-        <section className="flex-center">
-          <StepItem
-            title="step 1"
-            content="Connect wallet to create account"
-            logo={require('@img/product/icon-step-1.png')}
-          />
-
-          <Image priority className="mx-14" src={require('@img/home/icon-arrow.svg')} alt="" />
-
-          <StepItem
-            title="step 2"
-            content="Download and run the Multiple Node client"
-            logo={require('@img/product/icon-step-2.png')}
-          />
-
-          <Image priority className="mx-14" src={require('@img/home/icon-arrow.svg')} alt="" />
-
-          <div>
-            <StepItemMini
-              content="Contribute bandwidth resources to start mining"
-              logo={require('@img/product/icon-step-3.png')}
-            />
-
-            <StepItemMini
-              className="mt-108"
-              content="Using file storage and file transfer services"
-              logo={require('@img/product/icon-step-4.png')}
-            />
-          </div>
-        </section>
+        {appStore.curDevice === 'phone' ? <StepMob /> : <Step />}
       </main>
 
+      <ProductHeader>roadmap</ProductHeader>
       {appStore.curDevice === 'phone' ? <RoadMapMob /> : <RoadMap />}
     </ProductWrap>
   );

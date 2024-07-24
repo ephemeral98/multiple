@@ -6,6 +6,7 @@ import { flexPos } from '@/styled/mixin';
 import useAppStore from '@/store/appStore';
 import { Banner } from '@cps/Banner';
 import BlogItem from '@cps/BlogComp/BlogItem';
+import { phoneSize } from '@/styled/mediaSize';
 
 const BlogWrap = styled.div`
   padding-bottom: 503rem;
@@ -17,6 +18,12 @@ const BlogWrap = styled.div`
     place-items: center;
     gap: 32rem;
     margin-top: 182rem;
+
+    @media (max-width: ${phoneSize}) {
+      grid-template-columns: repeat(1, auto);
+      gap: 62rem;
+      padding: 0 38rem;
+    }
   }
 `;
 
@@ -32,10 +39,10 @@ const Blog = () => {
       ></Banner>
 
       <main className="blog-main">
-        <BlogItem className="w-551"></BlogItem>
-        <BlogItem className="w-551"></BlogItem>
-        <BlogItem className="w-551"></BlogItem>
-        <BlogItem className="w-551"></BlogItem>
+        <BlogItem className="w-full md:w-551"></BlogItem>
+        <BlogItem className="w-full md:w-551"></BlogItem>
+        <BlogItem className="w-full md:w-551"></BlogItem>
+        <BlogItem className="w-full md:w-551"></BlogItem>
       </main>
     </BlogWrap>
   );

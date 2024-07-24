@@ -3,6 +3,7 @@ import Point from './Point';
 import { useRoadMap } from './useRoadMap';
 import Image from 'next/image';
 import { flexPos } from '@/styled/mixin';
+import { ProductHeader } from '../Header';
 
 const RoadMapWrap = styled.div`
   padding-bottom: 103rem;
