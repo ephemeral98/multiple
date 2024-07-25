@@ -7,6 +7,9 @@ import useAppStore from '@/store/appStore';
 import { Banner } from '@cps/Banner';
 import BlogItem from '@cps/BlogComp/BlogItem';
 import { phoneSize } from '@/styled/mediaSize';
+import { useGetArticleList } from '@/service/useArticle';
+import { useEffect } from 'react';
+import { useParams } from 'next/navigation';
 
 const BlogWrap = styled.div`
   padding-bottom: 503rem;
@@ -29,6 +32,15 @@ const BlogWrap = styled.div`
 
 const Blog = () => {
   const appStore = useAppStore();
+  const params = useParams();
+  const { article, getArticle, loading } = useGetArticleList();
+  useEffect(() => {
+    getArticle();
+  }, []);
+
+  useEffect(() => {
+    console.log('params...', params);
+  }, [params])
 
   return (
     <BlogWrap>
@@ -39,10 +51,19 @@ const Blog = () => {
       ></Banner>
 
       <main className="blog-main">
-        <BlogItem className="w-full md:w-551"></BlogItem>
-        <BlogItem className="w-full md:w-551"></BlogItem>
-        <BlogItem className="w-full md:w-551"></BlogItem>
-        <BlogItem className="w-full md:w-551"></BlogItem>
+        {article.map((item) => {
+          return (
+            <BlogItem
+              face={item.cover}
+              title={item.title}
+              content={item.summary}
+              date={item.createTime}
+              type={item.categoryName}
+              id={item.id}
+              key={item.id}
+            />
+          );
+        })}
       </main>
     </BlogWrap>
   );

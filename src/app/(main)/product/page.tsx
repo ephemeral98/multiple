@@ -10,9 +10,14 @@ import RoadMapMob from './components/RoadMap/RoadMapMob';
 import { ProductHeader } from './components/Header';
 import Step from './components/StepComp';
 import StepMob from './components/StepComp/StepMob';
+import { useState } from 'react';
 
-const ProductWrap = styled.div`
+const ProductWrap = styled.div<{ $end: boolean }>`
   line-height: 1;
+
+  .arco-affix {
+    position: ${(props) => (props.$end ? 'static' : 'fixed')} !important;
+  }
 
   .product-banner {
     height: 740rem;
@@ -60,9 +65,10 @@ const ProductWrap = styled.div`
 
 const Product = () => {
   const appStore = useAppStore();
+  const [roadMapEnd, setRoadMapEnd] = useState(false);
 
   return (
-    <ProductWrap>
+    <ProductWrap $end={roadMapEnd}>
       <section className="product-banner">
         {appStore.curDevice === 'phone' ? (
           <Image
@@ -101,7 +107,16 @@ const Product = () => {
       </main>
 
       <ProductHeader>roadmap</ProductHeader>
-      {appStore.curDevice === 'phone' ? <RoadMapMob /> : <RoadMap />}
+      {appStore.curDevice === 'phone' ? (
+        <RoadMapMob
+          onEnd={() => {
+            console.log('end...');
+            setRoadMapEnd(true);
+          }}
+        />
+      ) : (
+        <RoadMap />
+      )}
     </ProductWrap>
   );
 };

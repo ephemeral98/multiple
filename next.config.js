@@ -31,6 +31,27 @@ const nextConfig = {
 
     return config;
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '47.121.205.210',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/api/:path*', // 本地 API 路径
+        destination: 'http://47.121.205.210:8081/:path*', // 目标 API 路径
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

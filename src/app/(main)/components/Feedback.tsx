@@ -14,7 +14,7 @@ const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
   /* width: 100%; */
   /* height: 100%; */
   /* margin: 0 auto; */
-  
+
   ${$width('400rem', '300rem', '300rem')}
   ${$height('400rem', '300rem', '300rem')}
 
@@ -55,7 +55,7 @@ const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
 const FeedbackWrap = styled.div`
   background-image: url('/static/bg-feedback.png');
   background-size: 100% 100%;
-  height: 619rem;
+  ${$height('619rem', '419rem', '419rem')}
   /* padding-top: 69rem; */
   font-size: 16rem;
   position: relative;
@@ -282,7 +282,12 @@ const Feedback: React.FC = () => {
                 style={{ transform: `rotate(${item.deg}deg)` }}
               >
                 <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
-                  <Image priority className="w-181 md:w-76 rounded-[50%]" src={item.avatar} alt="" />
+                  <Image
+                    priority
+                    className="w-181 md:w-76 rounded-[50%]"
+                    src={item.avatar}
+                    alt=""
+                  />
                 </div>
               </div>
             );

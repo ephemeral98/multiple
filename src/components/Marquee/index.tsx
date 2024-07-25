@@ -1,3 +1,4 @@
+import { $width } from '@/styled/mediaSize';
 import { isClient } from '@/utils';
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { styled } from 'styled-components';
@@ -16,10 +17,10 @@ const MarqueeWrap = styled.div<{ calcwidth: string; trans: string; duration: str
   overflow: hidden;
 
   display: flex;
-  width: 100%;
+  ${$width('80%', '80%', '80%')}
 
   &.stick {
-    width: 100%;
+    ${$width('80%', '80%', '80%')}
     text-align: center;
   }
 

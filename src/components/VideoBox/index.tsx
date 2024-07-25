@@ -52,6 +52,7 @@ const VideoBox = forwardRef((props: IProps, ref) => {
       {props.children}
 
       <video
+        loop
         className={`home-video ${!!props.className ? props.className : ''}`}
         ref={videoRef}
         muted

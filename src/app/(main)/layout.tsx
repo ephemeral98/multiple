@@ -60,7 +60,7 @@ export default function RootLayout({
         />
       </head>
       <body id="app" className={`${inter.className} app`}>
-        {/* {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />} */}
+        {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />}
 
         {showApp && (
           <Wrapper>

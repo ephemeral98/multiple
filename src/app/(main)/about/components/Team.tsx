@@ -68,7 +68,7 @@ const TeamWrap = styled.div`
 const Team = () => {
   return (
     <TeamWrap>
-      <div className="text-46 md:text-64 text-#fff font-bold mb-110 text-left">ABOUT US</div>
+      <div className="text-46 md:text-64 text-#fff font-bold mb-110 text-left">TEAM</div>
 
       <main className="team-main">
         <Member
