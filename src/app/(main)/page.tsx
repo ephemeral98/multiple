@@ -12,6 +12,7 @@ import DataReport from './components/DataReport';
 import Feedback from './components/Feedback';
 import Blog from './components/Blog';
 import AboutDownload from './components/AboutDownload';
+import { useLax } from '@/hooks/useLax';
 
 const HomeWrap = styled.div`
   /* background-color: #00000087; */
@@ -22,7 +23,7 @@ const HomeWrap = styled.div`
 
 const Home: React.FC = () => {
   const appStore = useAppStore();
-
+  useLax();
   return (
     <HomeWrap>
       <Banner />
@@ -31,13 +32,15 @@ const Home: React.FC = () => {
 
       <Advantage />
 
-      <DataReport />
+      {/* <DataReport /> */}
 
       <Feedback />
 
       <Blog />
 
-      <AboutDownload />
+      <div className='h-200vh'>
+        <AboutDownload />
+      </div>
     </HomeWrap>
   );
 };

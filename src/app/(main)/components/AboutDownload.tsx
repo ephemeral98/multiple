@@ -2,16 +2,20 @@ import { styled } from 'styled-components';
 import { flexPos } from '@/styled/mixin';
 import Image from 'next/image';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
+import Sticky from '@cps/Lax/Sticky';
 
 const AboutDownload = styled.div`
   margin-top: 346rem;
-  position: relative;
+  position: sticky;
+  top: 0;
   height: 100vh;
+  margin-bottom: 500rem;
 
   .face {
     position: absolute;
-    ${$width('100%', '1200rem', '1200rem')}
-    ${$height('676rem', '676rem', '676rem')}
+    /* ${$width('100%', '1200rem', '1200rem')} */
+    width: 100%;
+    /* ${$height('676rem', '676rem', '676rem')} */
 
     margin: 0 auto;
     left: 0;
@@ -23,7 +27,8 @@ const AboutDownload = styled.div`
 
     margin: auto;
     /* background-color: pink; */
-    ${$height('676rem', '676rem', '676rem')}
+    /* ${$height('676rem', '676rem', '676rem')} */
+    height: 100vh;
     position: relative;
     z-index: 9;
 
@@ -45,7 +50,7 @@ const AboutDownload = styled.div`
 
 const Blog = () => {
   return (
-    <AboutDownload>
+    <AboutDownload className='lax-bigger'>
       <Image src={require('@img/home/temp-about-download.png')} alt="" className="face" />
 
       <main className="about-download-main">
