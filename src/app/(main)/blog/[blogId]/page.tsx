@@ -75,7 +75,7 @@ const Blog: FC<BlogDetailProps> = ({ params }) => {
         <BackBtn />
         <div className="face-wrap">
           <Image
-            src={require('@img/about/avatar-efrain.png')}
+            src={blog.cover}
             width={300}
             height={300}
             alt=""

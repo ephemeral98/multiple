@@ -107,7 +107,7 @@ const Banner = () => {
   return (
     <BannerWrap>
       <LaxScale>
-        <VideoBox className="one" src="/video/banner-home.mp4" ref={videoRef1}></VideoBox>
+        <VideoBox className="one" src="/video/video-1.mp4" ref={videoRef1}></VideoBox>
       </LaxScale>
 
       <main className="banner-content">

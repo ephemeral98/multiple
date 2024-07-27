@@ -40,4 +40,4 @@ RUN yarn global add pm2
 EXPOSE 3000
 
 # 使用 PM2 运行 Next.js 应用程序
-CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+CMD ["pm2", "start", "ecosystem.config.js"]

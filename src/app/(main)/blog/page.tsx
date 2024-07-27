@@ -30,7 +30,13 @@ const BlogWrap = styled.div`
 
     > div {
       ${$width('100%', '551rem', '551rem')}
-      ${$height('680rem', '557rem', '557rem')}
+
+      @media (max-width: ${phoneSize}) {
+        min-height: 680rem;
+      }
+      @media (min-width: ${phoneSize}) {
+        height: 557rem;
+      }
     }
   }
 `;

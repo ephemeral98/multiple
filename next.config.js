@@ -36,19 +36,19 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '47.121.205.210',
+        hostname: '8.219.186.167',
         port: '',
         pathname: '/**',
       },
     ],
-    domains: ['47.121.205.210'],
+    domains: ['8.219.186.167'],
   },
 
   async redirects() {
     return [
       {
         source: '/api/:path*', // 本地 API 路径
-        destination: 'http://47.121.205.210:8081/:path*', // 目标 API 路径
+        destination: 'http://8.219.186.167:8081/:path*', // 目标 API 路径
         permanent: false,
       },
     ];

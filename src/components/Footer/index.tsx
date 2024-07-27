@@ -59,6 +59,14 @@ const Footer = () => {
               >
                 Blog
               </a>
+              <a
+                onClick={() => {
+                  window.open('https://multiple-network.gitbook.io/multiple-network-gitbook/');
+                }}
+                className="ml-59 cursor-pointer text-#fff"
+              >
+                Docs
+              </a>
             </div>
             <Community size={51} gap={24} />
           </div>
