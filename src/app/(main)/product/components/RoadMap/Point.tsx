@@ -9,6 +9,7 @@ const PointWrap = styled.div<{ $active: boolean }>`
   ${flexPos('center')}
   transition: all 0.5s;
   position: absolute;
+  z-index: 999;
 
   .point-face {
     width: 30rem;
