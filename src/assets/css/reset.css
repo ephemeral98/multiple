@@ -185,6 +185,7 @@ button {
   outline: none;
   display: block;
   font-family: 'Montserrat';
+  color: #fff;
 }
 
 input::-webkit-outer-spin-button,

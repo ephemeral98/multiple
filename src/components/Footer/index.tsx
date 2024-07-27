@@ -29,7 +29,7 @@ const Footer = () => {
       <section className="w-full ">
         <div className="footer-main px-45">
           <div className="flex-center">
-            <Button>Download</Button>
+            <Button onClick={() => router.push('/product')}>Download</Button>
             <Button className={'ml-31'}>Get Started</Button>
           </div>
 
@@ -53,7 +53,7 @@ const Footer = () => {
               </a>
               <a
                 onClick={() => {
-                  router.push('/about');
+                  router.push('/blog');
                 }}
                 className="ml-59 cursor-pointer text-#fff"
               >

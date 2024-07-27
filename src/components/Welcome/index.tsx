@@ -149,7 +149,7 @@ const Welcome = (props: IProps) => {
       <h1 className="loading-title flex-center">
         <Image
           priority
-          className="w-414"
+          className="w-350"
           src={require('@img/common/welcome-logo.png')}
           alt=""
         />

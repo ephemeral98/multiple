@@ -4,6 +4,7 @@ import { useRoadMapList } from './useRoadMap';
 import Point from './Point';
 import { FC, useRef, useState } from 'react';
 import { useUpdateRef, useEleScrollWay } from '@/hooks';
+import { ProductHeader } from '../Header';
 
 const RoadMapMobWrap = styled.div`
   /* height: 100vh; */
@@ -84,6 +85,8 @@ const RoadMapMob: FC<{
         {/* <div className="mask"></div> */}
 
         <div className="roadmap-container">
+          <ProductHeader>roadmap</ProductHeader>
+
           {roadMapList.map((item, index) => (
             <div className="road-item" key={index}>
               <Point

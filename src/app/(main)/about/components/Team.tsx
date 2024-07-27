@@ -48,7 +48,7 @@ const Member: FC<{
 };
 
 const TeamWrap = styled.div`
-  padding: 260rem 207rem 265rem;
+  padding: 0 207rem 265rem;
   margin: auto;
   @media (max-width: ${phoneSize}) {
     padding: 0 0 265rem 38rem !important;

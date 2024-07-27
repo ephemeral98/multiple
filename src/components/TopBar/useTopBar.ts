@@ -5,6 +5,7 @@ export interface INav {
   text: string;
   path: string;
   active: boolean;
+  link?: string;
 }
 
 export const useTopBar = () => {
@@ -24,6 +25,12 @@ export const useTopBar = () => {
     {
       text: 'Blog',
       path: '/blog',
+      active: false,
+    },
+    {
+      text: 'Docs',
+      path: '',
+      link: 'https://multiple-network.gitbook.io/multiple-network-gitbook/',
       active: false,
     },
   ]);

@@ -27,6 +27,10 @@ const TopBarMob = () => {
     },
     props: {
       pickTab(tab) {
+        if (tab.link) {
+          window.open(tab.link);
+          return;
+        }
         router.push(tab.path);
       },
       toHome() {

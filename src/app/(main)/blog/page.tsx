@@ -6,7 +6,7 @@ import { flexPos } from '@/styled/mixin';
 import useAppStore from '@/store/appStore';
 import { Banner } from '@cps/Banner';
 import BlogItem from '@cps/BlogComp/BlogItem';
-import { $width, phoneSize } from '@/styled/mediaSize';
+import { $height, $width, phoneSize } from '@/styled/mediaSize';
 import { useGetArticleList } from '@/service/useArticle';
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
@@ -29,7 +29,8 @@ const BlogWrap = styled.div`
     }
 
     > div {
-      width: 100%;
+      ${$width('100%', '551rem', '551rem')}
+      ${$height('680rem', '557rem', '557rem')}
     }
   }
 `;

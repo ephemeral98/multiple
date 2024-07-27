@@ -1,17 +1,21 @@
 import { flexPos } from '@/styled/mixin';
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import { $height, $width } from '@/styled/mediaSize';
+import { $height, $width, phoneSize } from '@/styled/mediaSize';
 
 const ringDuration = '45s';
 
 const ComputerWrap = styled.div`
-  height: 180vh;
+  ${$height('150vh', '180vh', '180vh')}
   ${flexPos('center')}
   flex-direction: column;
   /* background-color: #008c8c; */
   position: relative;
   padding-top: 50rem;
+
+  @media (max-width: ${phoneSize}) {
+    padding-top: 150rem;
+  }
 
   @keyframes ringMove {
     0% {
@@ -62,7 +66,7 @@ const ComputerWrap = styled.div`
 
 const Computer: React.FC = () => {
   return (
-    <ComputerWrap>
+    <ComputerWrap className="rise-target animate__animated">
       {/* 圈圈--start */}
       <div className="ring-wrap">
         <Image src={require('@img/home/ring-1.svg')} alt="" className="bg-ring bg-ring-1" />

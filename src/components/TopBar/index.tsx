@@ -87,6 +87,10 @@ const TopBar = () => {
               <div
                 key={item.text}
                 onClick={() => {
+                  if (item.link) {
+                    window.open(item.link);
+                    return;
+                  }
                   router.push(item.path);
                 }}
                 className={`nav-item ${item.active ? 'active' : ''}`}
@@ -98,7 +102,7 @@ const TopBar = () => {
         </div>
 
         <div className="flex-center">
-          <Button>Download</Button>
+          <Button onClick={() => router.push('/product')}>Download</Button>
           <Button className={'ml-31'}>Get Started</Button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { $fontSize, $height, $width } from '@/styled/mediaSize';
 import Sticky from '@cps/Lax/Sticky';
 import VideoBox from '@/components/VideoBox';
 import { useVideoPlay } from '../hooks/useVideoPlay';
+import { useRouter } from 'next/navigation';
 
 const AboutDownload = styled.div`
   margin-top: 346rem;
@@ -52,6 +53,7 @@ const AboutDownload = styled.div`
 
 const Blog = () => {
   const { targetRef: targetRef1, videoRef: videoRef4 } = useVideoPlay();
+  const router = useRouter();
 
   return (
     <AboutDownload className="lax-bigger" data-lax-anchor="self">
@@ -67,7 +69,9 @@ const Blog = () => {
         </div>
 
         <div className="flex-center flex-col md:flex-row mt-69 text-23 md:text-16s">
-          <button className="btn">Download</button>
+          <button className="btn" onClick={() => router.push('/product')}>
+            Download
+          </button>
           <button className="btn mt-46 md:mt-0 md:ml-31">Get Started</button>
         </div>
       </main>

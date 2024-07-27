@@ -46,3 +46,16 @@ export const flashPoint = (c1: string, c2: string, c3: string) => css`
   animation-iteration-count: 5;
   animation-timing-function: ease-in-out;
 `;
+
+/**
+ * 多行溢出打点
+ * 参数：行数，n行，默认2行
+ * eg：@include overDots(3);
+ */
+export const overDots = (n: number = 2) => css`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: ${n}; //行数
+  -webkit-box-orient: vertical;
+`;

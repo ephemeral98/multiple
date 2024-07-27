@@ -267,7 +267,7 @@ const Feedback: React.FC = () => {
 
   return (
     <>
-      <TitleWrap className="mb-80 mt-320">Everyone's feedback</TitleWrap>
+      <TitleWrap className="mb-80 mt-320 rise-target animate__animated">Everyone's feedback</TitleWrap>
       <FeedbackWrap>
         <Image priority className="bg-line" src={require('@img/home/bg-feedbac-line.png')} alt="" />
 
@@ -284,7 +284,7 @@ const Feedback: React.FC = () => {
                 <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
                   <Image
                     priority
-                    className="w-181 md:w-76 rounded-[50%]"
+                    className="w-160 md:w-76 rounded-[50%]"
                     src={item.avatar}
                     alt=""
                   />
@@ -301,14 +301,14 @@ const Feedback: React.FC = () => {
             <Image
               onClick={() => doPrev()}
               priority
-              className="w-34 transform rotate-180 translate-y-[50%] cursor-pointer"
+              className="w-38 transform rotate-180 translate-y-[50%] cursor-pointer"
               src={require('@img/home/icon-arrow.svg')}
               alt=""
             />
 
             <section className="w-430 text-center mx-50 md:mx-150">
-              <div className="text-24">{roundList[curUpIndex.current].name}</div>
-              <div className="text-16">{roundList[curUpIndex.current].content}</div>
+              <div className="text-31 md:text-24">{roundList[curUpIndex.current].name}</div>
+              <div className="text-20 md:text-16">{roundList[curUpIndex.current].content}</div>
             </section>
 
             <Image

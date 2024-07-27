@@ -11,7 +11,7 @@ const Advantage: React.FC = () => {
   const appStore = useAppStore();
 
   return (
-    <AdvantageWrap className="pb-192 md:pb-224">
+    <AdvantageWrap className="pb-192 md:pb-224 rise-target animate__animated">
       <TitleWrap className='mb-80'>Advantages</TitleWrap>
 
       <div className="px-38 md:px-0">

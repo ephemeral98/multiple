@@ -20,7 +20,7 @@ const AboutWrap = styled.div`
   }
 
   .about-main {
-    padding: 260rem 207rem 265rem;
+    padding: 260rem 207rem 146rem;
     ${flexPos('center', 'flex-start')}
 
     @media (max-width: 750px) {

@@ -24,7 +24,9 @@ const BlogDetail = styled.div`
     color: #5c5c5cff;
 
     img {
-      max-width: 100%;
+      /* max-width: 100%; */
+      height: 240rem;
+      margin: 24rem auto;
     }
   }
 
@@ -40,6 +42,17 @@ const BlogDetail = styled.div`
       grid-template-columns: repeat(1, auto);
       padding: 0 38rem;
       gap: 62rem;
+    }
+  }
+
+  .face-wrap {
+    width: 100%;
+    height: 394rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 `;
@@ -60,7 +73,15 @@ const Blog: FC<BlogDetailProps> = ({ params }) => {
       {/* <div>{params.blogId}</div> */}
       <main className="px-38 px-0">
         <BackBtn />
-        <Image src={blog.cover} width={300} height={300} alt="" className="w-full mt-33 mb-54" />
+        <div className="face-wrap">
+          <Image
+            src={require('@img/about/avatar-efrain.png')}
+            width={300}
+            height={300}
+            alt=""
+            className="h-394 mx-auto mt-33 mb-54"
+          />
+        </div>
 
         <section className="mt-57 flex items-center">
           <div className="text-23 md:text-16 mr-32">{blog.createTime}</div>

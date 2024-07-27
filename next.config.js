@@ -41,6 +41,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    domains: ['47.121.205.210'],
   },
 
   async redirects() {

@@ -56,7 +56,7 @@ const AdvantagesItem = (props: IProps) => {
 
       <div className="text-31 md:text-24 font-bold relative z-9">{props.title}</div>
       <div className="relative z-9">{props.children}</div>
-      <div className="mt-21 md:mt-38 flex justify-end relative z-9">
+      <div className="absolute right-18 bottom-10">
         <Image className="w-154 md:w-140" src={props.face} alt="" />
       </div>
     </AdvantagesItemWrap>

@@ -77,7 +77,7 @@ const BannerWrap = styled.div`
     place-content: center;
     place-items: center;
     grid-gap: 85rem;
-    margin-top: 175rem;
+    margin-top: 145rem;
     /* position: absolute; */
     /* bottom: 0; */
     z-index: 999;
@@ -105,7 +105,7 @@ const Banner = () => {
   const { targetRef: targetRef1, videoRef: videoRef1 } = useVideoPlay();
 
   return (
-    <BannerWrap className="left-target animate__animated">
+    <BannerWrap>
       <LaxScale>
         <VideoBox className="one" src="/video/banner-home.mp4" ref={videoRef1}></VideoBox>
       </LaxScale>
@@ -128,7 +128,7 @@ const Banner = () => {
       </main>
 
       <Marquee
-        className="z-9 absolute bottom-[53rem]"
+        className="z-9 absolute bottom-[280rem] md:bottom-[53rem]"
         duration={0.01}
         infinity={appStore.curDevice === 'phone'}
       >

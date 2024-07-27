@@ -1,6 +1,17 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useUpdateRef, usePrevRef, useSyncCallback } from '@/hooks';
 
+export interface IRoadMapItem {
+  id: number;
+  season: string;
+  time: string;
+  title: string;
+  left: string;
+  yOffset?: string;
+  active: boolean;
+  content: string[];
+}
+
 export const useRoadMapList = () => {
   const [roadMapList, setRoadMapList] = useState([
     {
@@ -146,7 +157,7 @@ export const useRoadMap = () => {
   const [curRound, prevRound] = usePrevRef(1);
   const curInx = useRef(0); // 展示的最后一项(游标)
 
-  const [showingRoads, setShowingRoads] = useState<any[]>([]);
+  const [showingRoads, setShowingRoads] = useState<IRoadMapItem[]>([]);
 
   useEffect(() => {
     setShowingRoads(

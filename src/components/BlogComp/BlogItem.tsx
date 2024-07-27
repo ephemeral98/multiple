@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { $height, $width, phoneSize } from '@/styled/mediaSize';
+import { overDots } from '@/styled/mixin';
 
 interface IProps {
   id: string;
@@ -18,13 +19,13 @@ const BlogItemWrap = styled.div`
   border: solid 1px #585858;
   border-radius: 10rem;
   cursor: pointer;
+  word-break: break-all;
 
   @media (max-width: ${phoneSize}) {
     padding: 38rem;
   }
 
   .face-wrap {
-
     ${$width('100%', '487rem', '487rem')}
     ${$height('332rem', '272rem', '272rem')}
 
@@ -34,6 +35,10 @@ const BlogItemWrap = styled.div`
       object-fit: cover;
       border-radius: 10rem;
     }
+  }
+
+  .over-dot {
+    ${overDots(2)}
   }
 `;
 
@@ -47,11 +52,13 @@ const BlogItem = (props: IProps) => {
       }}
     >
       <div className="face-wrap">
-        <Image src={props.face} width={300} height={300} alt="" className="face-content" />
+        {!!props?.face && (
+          <Image src={props?.face || ''} width={300} height={300} alt="" className="face-content" />
+        )}
       </div>
 
       <div className="my-29 md:my-24 text-31 md:text-24 font-bold">{props?.title}</div>
-      <main className="text-#585858 text-23 md:text-16">{props?.content}</main>
+      <main className="over-dot text-#585858 text-23 md:text-16">{props?.content}</main>
 
       <footer className="mt-57 flex justify-between items-center">
         <div className="text-23 md:text-16">{props?.date}</div>

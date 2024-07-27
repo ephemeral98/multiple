@@ -106,7 +106,6 @@ const Product = () => {
         {appStore.curDevice === 'phone' ? <StepMob /> : <Step />}
       </main>
 
-      <ProductHeader>roadmap</ProductHeader>
       {appStore.curDevice === 'phone' ? (
         <RoadMapMob
           onEnd={() => {

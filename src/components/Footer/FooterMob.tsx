@@ -35,6 +35,22 @@ const FooterMob = () => {
             >
               About Us
             </div>
+            <div
+              onClick={() => {
+                router.push('/blog');
+              }}
+              className="cursor-pointer text-27 mt-62"
+            >
+              Blog
+            </div>
+            <div
+              onClick={() => {
+                window.open('https://multiple-network.gitbook.io/multiple-network-gitbook/');
+              }}
+              className="cursor-pointer text-27 mt-62"
+            >
+              Docs
+            </div>
             <GetStartBtn className={'px-24! py-16! rounded-[4rem]!'} />
           </div>
 

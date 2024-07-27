@@ -85,7 +85,7 @@ const RoadMapWrap = styled.div`
     ${flexPos('flex-end')}
 
     .icon-arrow {
-      width: 100rem;
+      width: 80rem;
       cursor: pointer;
     }
 
@@ -100,6 +100,8 @@ const RoadMap = () => {
 
   return (
     <RoadMapWrap>
+      <ProductHeader>roadmap</ProductHeader>
+
       <main className="road-container">
         <div className="bg-wrap">
           <Image
