@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import useHomeStore from '@/store/homeStore';
 
 interface IProps {
-  children: ReactNode;
+  children?: ReactNode;
   src: string;
   className?: string;
 }

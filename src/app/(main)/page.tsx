@@ -13,6 +13,7 @@ import Feedback from './components/Feedback';
 import Blog from './components/Blog';
 import AboutDownload from './components/AboutDownload';
 import { useLax } from '@/hooks/useLax';
+import { useAnimate } from '@/hooks/useAnimate';
 
 const HomeWrap = styled.div`
   /* background-color: #00000087; */
@@ -22,6 +23,8 @@ const HomeWrap = styled.div`
 `;
 
 const Home: React.FC = () => {
+  useAnimate();
+
   const appStore = useAppStore();
   useLax();
   return (
@@ -38,7 +41,7 @@ const Home: React.FC = () => {
 
       <Blog />
 
-      <div className='h-200vh'>
+      <div className="h-200vh">
         <AboutDownload />
       </div>
     </HomeWrap>

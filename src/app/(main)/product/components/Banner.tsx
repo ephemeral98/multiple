@@ -7,6 +7,7 @@ import VideoBox from '@/components/VideoBox';
 import { useVideoPlay } from '../../hooks/useVideoPlay';
 import { flexPos } from '@/styled/mixin';
 import { $borderRadius, $fontSize, $height, $width, phoneSize } from '@/styled/mediaSize';
+import { useEffect } from 'react';
 
 const BannerWrap = styled.div`
   width: 100%;
@@ -104,11 +105,9 @@ const Banner = () => {
   const { targetRef: targetRef1, videoRef: videoRef1 } = useVideoPlay();
 
   return (
-    <BannerWrap>
+    <BannerWrap className="left-target animate__animated">
       <LaxScale>
-        <VideoBox className="one" src="/video/banner-home.mp4" ref={videoRef1}>
-          <div ref={targetRef1} className="abs-center z-10 w-300 h-100"></div>
-        </VideoBox>
+        <VideoBox className="one" src="/video/banner-home.mp4" ref={videoRef1}></VideoBox>
       </LaxScale>
 
       <main className="banner-content">

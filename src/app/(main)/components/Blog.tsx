@@ -39,7 +39,7 @@ const Blog = () => {
     getArticle();
   }, []);
   return (
-    <BlogWrap>
+    <BlogWrap className='rise-target animate__animated'>
       <TitleWrap className="mb-80">Explore our blog</TitleWrap>
 
       <main className="blog-content">

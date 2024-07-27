@@ -3,6 +3,8 @@ import { flexPos } from '@/styled/mixin';
 import Image from 'next/image';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
 import Sticky from '@cps/Lax/Sticky';
+import VideoBox from '@/components/VideoBox';
+import { useVideoPlay } from '../hooks/useVideoPlay';
 
 const AboutDownload = styled.div`
   margin-top: 346rem;
@@ -49,9 +51,12 @@ const AboutDownload = styled.div`
 `;
 
 const Blog = () => {
+  const { targetRef: targetRef1, videoRef: videoRef4 } = useVideoPlay();
+
   return (
-    <AboutDownload className='lax-bigger'>
-      <Image src={require('@img/home/temp-about-download.png')} alt="" className="face" />
+    <AboutDownload className="lax-bigger" data-lax-anchor="self">
+      {/* <Image src={require('@img/home/temp-about-download.png')} alt="" className="face" /> */}
+      <VideoBox className="two face" src="/video/video-4.mp4" ref={videoRef4}></VideoBox>
 
       <main className="about-download-main">
         <div className="text-31 md:text-24 mb-24 font-bold">

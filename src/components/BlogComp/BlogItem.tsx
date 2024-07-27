@@ -25,7 +25,7 @@ const BlogItemWrap = styled.div`
 
   .face-wrap {
 
-    ${$width('332rem', '487rem', '487rem')}
+    ${$width('100%', '487rem', '487rem')}
     ${$height('332rem', '272rem', '272rem')}
 
     .face-content {

@@ -6,7 +6,7 @@ import { flexPos } from '@/styled/mixin';
 import useAppStore from '@/store/appStore';
 import { Banner } from '@cps/Banner';
 import BlogItem from '@cps/BlogComp/BlogItem';
-import { phoneSize } from '@/styled/mediaSize';
+import { $width, phoneSize } from '@/styled/mediaSize';
 import { useGetArticleList } from '@/service/useArticle';
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
@@ -26,6 +26,10 @@ const BlogWrap = styled.div`
       grid-template-columns: repeat(1, auto);
       gap: 62rem;
       padding: 0 38rem;
+    }
+
+    > div {
+      width: 100%;
     }
   }
 `;
