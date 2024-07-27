@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import { flexPos } from '@/styled/mixin';
-import { useRoadMap } from './useRoadMap';
+import { useRoadMapList } from './useRoadMap';
 import Point from './Point';
 import { Affix } from '@arco-design/web-react';
 import { FC, useRef, useState } from 'react';
@@ -54,7 +54,7 @@ const RoadMapMobWrap = styled.div`
 const RoadMapMob: FC<{
   onEnd?: () => void;
 }> = (props) => {
-  const { roadMapList, setRoadMapList } = useRoadMap();
+  const { roadMapList, setRoadMapList } = useRoadMapList();
   const deb = useDebounce();
 
   const isLocked = useRef(true);

@@ -43,11 +43,22 @@ export const useSyncCallback = (callback: () => void) => {
 };
 
 /**
- * 立即更新状态 
+ * 立即更新状态
  */
 export const useUpdateRef = <T>(val: T): [MutableRefObject<T>, DispatchWithoutAction] => {
   const valState = useRef(val);
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
   return [valState, forceUpdate];
+};
+
+export const usePrevRef = <T>(val: T): [MutableRefObject<T>, MutableRefObject<T>] => {
+  const valState = useRef(val);
+  const oldState = useRef(val);
+
+  useEffect(() => {
+    oldState.current = valState.current;
+  }, [valState]);
+
+  return [valState, oldState];
 };

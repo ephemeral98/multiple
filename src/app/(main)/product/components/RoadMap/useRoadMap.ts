@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import { useUpdateRef } from '@/hooks';
+import { useUpdateRef, usePrevRef, useSyncCallback } from '@/hooks';
 
-export const useRoadMap = () => {
+export const useRoadMapList = () => {
   const [roadMapList, setRoadMapList] = useState([
     {
       id: 1,
@@ -133,42 +133,87 @@ export const useRoadMap = () => {
     },
   ]);
 
-  const [curInx, updateCurInx] = useUpdateRef(0);
+  return {
+    roadMapList,
+    setRoadMapList,
+  };
+};
 
-  // const curInx = useRef(0);
-  const lastInx = useRef(4); // 展示的最后一项(游标)
+export const useRoadMap = () => {
+  const { roadMapList, setRoadMapList } = useRoadMapList();
 
+  const [curShowInx, updateCurShowInx] = useUpdateRef(0);
+  const [curRound, prevRound] = usePrevRef(1);
+  const curInx = useRef(0); // 展示的最后一项(游标)
+
+  const [showingRoads, setShowingRoads] = useState<any[]>([]);
+
+  useEffect(() => {
+    setShowingRoads(
+      roadMapList.filter((item, inx) => {
+        return inx <= 4;
+      })
+    );
+  }, []);
+
+  const updateRound = useSyncCallback(() => {
+    curRound.current++;
+    curShowInx.current = 0;
+    updateCurShowInx();
+  });
+
+  const downdateRound = useSyncCallback(() => {
+    curRound.current--;
+    curShowInx.current = lastInx.current - 1;
+    updateCurShowInx();
+  });
+
+  const lastInx = useRef(5); // 展示的最后一项(游标)
   const changeRoadmap = (nextRoad: boolean) => {
     if (nextRoad && curInx.current < roadMapList.length - 1) {
+      // 右边走
       curInx.current++;
-      updateCurInx();
+      curShowInx.current++;
+
+      if (curInx.current >= lastInx.current * curRound.current) {
+        // 新一轮
+
+        const temp = roadMapList.filter((item, inx) => {
+          return (
+            item.id > lastInx.current * curRound.current &&
+            item.id <= lastInx.current * (curRound.current + 1)
+          );
+        });
+
+        setShowingRoads(temp);
+        updateRound();
+      }
     } else if (!nextRoad && curInx.current > 0) {
-      curInx.current--;
-      updateCurInx();
+      // 新一轮
+      if (curShowInx.current === 0 && curRound.current > 1) {
+        downdateRound();
+
+        const temp = roadMapList.filter((item, inx) => {
+          return (
+            item.id > lastInx.current * (curRound.current - 2) &&
+            item.id <= lastInx.current * (curRound.current - 1)
+          );
+        });
+        setShowingRoads(temp);
+
+        curInx.current--;
+      } else {
+        curInx.current--;
+        curShowInx.current--;
+      }
     }
+
+    updateCurShowInx();
   };
-
-  const showingRoads = useMemo(() => {
-    console.log('cur...', curInx.current, lastInx.current, roadMapList);
-    if (curInx.current > lastInx.current) {
-      const diff = curInx.current - lastInx.current;
-      const temp = roadMapList.filter((item, inx) => {
-        if (inx > diff - 1 && inx < curInx.current + 1) {
-          return item;
-        }
-      });
-
-      console.log('temp2...', temp);
-      return temp;
-    }
-
-    return roadMapList.filter((item, inx) => {
-      return inx <= 4;
-    });
-  }, [curInx.current]);
 
   return {
     curInx,
+    curShowInx,
     roadMapList,
     showingRoads,
     changeRoadmap,

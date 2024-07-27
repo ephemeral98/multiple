@@ -32,15 +32,10 @@ const BlogWrap = styled.div`
 
 const Blog = () => {
   const appStore = useAppStore();
-  const params = useParams();
   const { article, getArticle, loading } = useGetArticleList();
   useEffect(() => {
     getArticle();
   }, []);
-
-  useEffect(() => {
-    console.log('params...', params);
-  }, [params])
 
   return (
     <BlogWrap>

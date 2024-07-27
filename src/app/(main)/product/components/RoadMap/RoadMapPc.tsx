@@ -96,7 +96,7 @@ const RoadMapWrap = styled.div`
 `;
 
 const RoadMap = () => {
-  const { roadMapList, setRoadMapList, changeRoadmap, showingRoads, curInx } = useRoadMap();
+  const { roadMapList, setRoadMapList, changeRoadmap, showingRoads, curShowInx } = useRoadMap();
 
   return (
     <RoadMapWrap>
@@ -111,89 +111,103 @@ const RoadMap = () => {
         </div>
 
         {/* 路线信息 */}
-        <div className={`road-item left-[11%] top-320 ${curInx.current !== 0 ? 'disable' : ''}`}>
-          <div className="header mb-8">
-            <div>{showingRoads[0].season}</div>
-            <div>{showingRoads[0].time}</div>
-            <div>[{showingRoads[0].title}]</div>
+        {!!showingRoads?.[0] && (
+          <div
+            className={`road-item left-[11%] top-320 ${curShowInx.current !== 0 ? 'disable' : ''}`}
+          >
+            <div className="header mb-8">
+              <div>{showingRoads?.[0]?.season}</div>
+              <div>{showingRoads?.[0]?.time}</div>
+              <div>[{showingRoads?.[0]?.title}]</div>
+            </div>
+            <div className="road-item-content">
+              {showingRoads?.[0]?.content.map((item, inx) => (
+                <li key={inx}>{item}</li>
+              ))}
+            </div>
           </div>
-          <div className="road-item-content">
-            {showingRoads[0].content.map((item, inx) => (
-              <li key={inx}>{item}</li>
-            ))}
-          </div>
-        </div>
+        )}
 
-        <div
-          className={`road-item left-[28%] ${curInx.current !== 1 ? 'disable' : ''}`}
-          style={{ top: showingRoads[1].yOffset ? showingRoads[1].yOffset : '40rem' }}
-        >
-          <div className="road-item-content">
-            {showingRoads[1].content.map((item, inx) => (
-              <li key={inx}>{item}</li>
-            ))}
+        {!!showingRoads?.[1] && (
+          <div
+            className={`road-item left-[28%] ${curShowInx.current !== 1 ? 'disable' : ''}`}
+            style={{ top: showingRoads?.[1]?.yOffset ? showingRoads?.[1]?.yOffset : '40rem' }}
+          >
+            <div className="road-item-content">
+              {showingRoads?.[1]?.content.map((item, inx) => (
+                <li key={inx}>{item}</li>
+              ))}
+            </div>
+            <div className="header mt-8">
+              <div>{showingRoads?.[1]?.season}</div>
+              <div>{showingRoads?.[1]?.time}</div>
+              <div>[{showingRoads?.[1]?.title}]</div>
+            </div>
           </div>
-          <div className="header mt-8">
-            <div>{showingRoads[1].season}</div>
-            <div>{showingRoads[1].time}</div>
-            <div>[{showingRoads[1].title}]</div>
-          </div>
-        </div>
+        )}
 
-        <div className={`road-item left-[45%] top-320 ${curInx.current !== 2 ? 'disable' : ''}`}>
-          <div className="header mb-8">
-            <div>{showingRoads[2].season}</div>
-            <div>{showingRoads[2].time}</div>
-            <div>[{showingRoads[2].title}]</div>
+        {!!showingRoads?.[2] && (
+          <div
+            className={`road-item left-[45%] top-320 ${curShowInx.current !== 2 ? 'disable' : ''}`}
+          >
+            <div className="header mb-8">
+              <div>{showingRoads?.[2]?.season}</div>
+              <div>{showingRoads?.[2]?.time}</div>
+              <div>[{showingRoads?.[2]?.title}]</div>
+            </div>
+            <div className="road-item-content">
+              {showingRoads?.[2]?.content.map((item, inx) => (
+                <li key={inx}>{item}</li>
+              ))}
+            </div>
           </div>
-          <div className="road-item-content">
-            {showingRoads[2].content.map((item, inx) => (
-              <li key={inx}>{item}</li>
-            ))}
-          </div>
-        </div>
+        )}
 
-        <div
-          style={{ top: showingRoads[3].yOffset ? showingRoads[3].yOffset : '40rem' }}
-          className={`road-item left-[62%] top-60 ${curInx.current !== 3 ? 'disable' : ''}`}
-        >
-          <div className="road-item-content">
-            {showingRoads[3].content.map((item, inx) => (
-              <li key={inx}>{item}</li>
-            ))}
+        {!!showingRoads?.[3] && (
+          <div
+            style={{ top: showingRoads?.[3]?.yOffset ? showingRoads?.[3]?.yOffset : '40rem' }}
+            className={`road-item left-[62%] top-60 ${curShowInx.current !== 3 ? 'disable' : ''}`}
+          >
+            <div className="road-item-content">
+              {showingRoads?.[3]?.content.map((item, inx) => (
+                <li key={inx}>{item}</li>
+              ))}
+            </div>
+            <div className="header mt-8">
+              <div>{showingRoads?.[3]?.season}</div>
+              <div>{showingRoads?.[3]?.time}</div>
+              <div>[{showingRoads?.[3]?.title}]</div>
+            </div>
           </div>
-          <div className="header mt-8">
-            <div>{showingRoads[3].season}</div>
-            <div>{showingRoads[3].time}</div>
-            <div>[{showingRoads[3].title}]</div>
-          </div>
-        </div>
+        )}
 
-        <div
-          className={`road-item left-[76%] top-320 ${
-            showingRoads[4].title.length > 20 ? 'ml-[-30rem]' : ''
-          }
-          ${curInx.current < 4 ? 'disable' : ''}
+        {!!showingRoads?.[4] && (
+          <div
+            className={`road-item left-[76%] top-320 ${
+              showingRoads?.[4]?.title.length > 20 ? 'ml-[-30rem]' : ''
+            }
+          ${curShowInx.current < 4 ? 'disable' : ''}
           `}
-        >
-          <div className="header mb-8">
-            <div>{showingRoads[4].season}</div>
-            <div>{showingRoads[4].time}</div>
-            <div>[{showingRoads[4].title}]</div>
+          >
+            <div className="header mb-8">
+              <div>{showingRoads?.[4]?.season}</div>
+              <div>{showingRoads?.[4]?.time}</div>
+              <div>[{showingRoads?.[4]?.title}]</div>
+            </div>
+            <div className="road-item-content">
+              {showingRoads?.[4]?.content.map((item, inx) => (
+                <li key={inx}>{item}</li>
+              ))}
+            </div>
           </div>
-          <div className="road-item-content">
-            {showingRoads[4].content.map((item, inx) => (
-              <li key={inx}>{item}</li>
-            ))}
-          </div>
-        </div>
+        )}
 
         {/* 节点 */}
         {roadMapList
           .filter((item, inx) => inx < 5)
           .map((item, inx) => (
             <Point
-              active={curInx.current <= 4 ? inx === curInx.current : inx === 4}
+              active={inx === curShowInx.current}
               key={item.id}
               style={{ left: item.left, top: '52%' }}
             />
