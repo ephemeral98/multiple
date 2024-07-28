@@ -6,6 +6,7 @@ import Sticky from '@cps/Lax/Sticky';
 import VideoBox from '@/components/VideoBox';
 import { useVideoPlay } from '../hooks/useVideoPlay';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/Buttons';
 
 const AboutDownload = styled.div`
   margin-top: 346rem;
@@ -68,11 +69,11 @@ const Blog = () => {
           Ensure data privacy All data is encrypted during storage and transmission
         </div>
 
-        <div className="flex-center flex-col md:flex-row mt-69 text-23 md:text-16s">
-          <button className="btn" onClick={() => router.push('/product')}>
+        <div className="flex-center flex-col md:flex-row mt-69 text-23 md:text-16">
+          <Button className="btn" onClick={() => router.push('/product')}>
             Download
-          </button>
-          <button className="btn mt-46 md:mt-0 md:ml-31">Get Started</button>
+          </Button>
+          <Button className="btn mt-46 md:mt-0 md:ml-31">Get Started</Button>
         </div>
       </main>
     </AboutDownload>

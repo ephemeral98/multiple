@@ -1,13 +1,9 @@
 import { styled } from 'styled-components';
-import RoundSpin from './RoundSpin';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { swapQueue, turnToLastQueue } from '@/utils';
-import { useUpdateEffect } from 'ahooks';
 import { flexPos } from '@/styled/mixin';
 import Image from 'next/image';
-import { CSSTransition } from 'react-transition-group';
 import TitleWrap from '@cps/Title';
-import { $height, $width } from '@/styled/mediaSize';
+import { $height, $paddingTop, $width } from '@/styled/mediaSize';
 
 const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
   position: absolute;
@@ -17,6 +13,7 @@ const RoundSpinWrap = styled.div<{ $spinAngle: string }>`
 
   ${$width('400rem', '300rem', '300rem')}
   ${$height('400rem', '300rem', '300rem')}
+  ${$paddingTop('0', '30rem', '30rem')}
 
   .round-content {
     position: absolute;
@@ -94,14 +91,8 @@ const FeedbackWrap = styled.div`
 `;
 
 const Feedback: React.FC = () => {
-  const roundSpinRef = useRef<any>(null);
   const [curAngle, setCurAngle] = useState<number>(0);
-  const [readyInx, setReadyInx] = useState<number>(1); // 第一项(准备项)
-  const [curUpInx, setCurUpInx] = useState<number>(0);
-  const [curDownInx, setCurDownInx] = useState<number>(1);
   const curDir = useRef(true);
-  const [curShowInx, setCurShowInx] = useState<number>(0);
-  const [curReadyInx, setCurReadyInx] = useState<number>(1);
   const curUpIndex = useRef(0);
 
   const [roundList, setRoundList] = useState([
@@ -172,6 +163,10 @@ const Feedback: React.FC = () => {
     },
   ]);
 
+  /**
+   * 控制旋转
+   * @param dir 方向
+   */
   const handleSpin = (dir: boolean) => {
     if (dir) {
       curDir.current = true;
@@ -184,33 +179,10 @@ const Feedback: React.FC = () => {
     }
   };
 
-  useUpdateEffect(() => {
-    if (curDir.current) {
-      console.log('readyInx...', readyInx);
-      if (readyInx % 2 === 0) {
-        // 上面准备
-        setCurUpInx(readyInx);
-      } else {
-        // 下面准备
-        setCurDownInx(readyInx);
-      }
-    } else {
-      console.log('反向');
-      if (readyInx % 1 === 0) {
-        // 上面准备
-        setCurUpInx(readyInx);
-      } else {
-        // 下面准备
-        setCurDownInx(readyInx);
-      }
-    }
-  }, [readyInx, curDir]);
-
   const doPrev = () => {
     handleSpin(false);
 
     const newList = roundList.map((item, i) => {
-      console.log('item...', i, item.deg);
       if (i === curUpIndex.current) {
         item.deg -= 180;
       } else if (i === curUpIndex.current - 1) {
@@ -224,25 +196,16 @@ const Feedback: React.FC = () => {
     });
     setRoundList(newList);
     if (curUpIndex.current <= 0) {
-      console.log('111');
       curUpIndex.current = roundList.length - 1;
     } else {
-      console.log('2322');
-
       curUpIndex.current--;
     }
   };
 
   const doNext = () => {
     handleSpin(true);
-    // setCurShowInx(curShowInx + 1);
-
-    const inx = roundList.findIndex((item) => item.active);
-
-    console.log('curUpIndex.current...', curUpIndex.current);
 
     const newList = roundList.map((item, i) => {
-      console.log('item...', i, item.deg);
       if (i === curUpIndex.current) {
         item.deg += 180;
       } else if (i === curUpIndex.current + 1) {
@@ -256,23 +219,23 @@ const Feedback: React.FC = () => {
     });
     setRoundList(newList);
     if (curUpIndex.current >= roundList.length - 1) {
-      console.log('111');
       curUpIndex.current = 0;
     } else {
-      console.log('2322');
-
       curUpIndex.current++;
     }
   };
 
   return (
     <>
-      <TitleWrap className="mb-80 mt-320 rise-target animate__animated">Everyone's feedback</TitleWrap>
+      <TitleWrap className="mb-80 mt-320 rise-target animate__animated">
+        Everyone's feedback
+      </TitleWrap>
       <FeedbackWrap>
         <Image priority className="bg-line" src={require('@img/home/bg-feedbac-line.png')} alt="" />
 
         {/* <div className="w-full h-[30%] absolute bottom-0 bg-#000 z-2"></div> */}
 
+        {/* 头像 */}
         <RoundSpinWrap $spinAngle={String(curDir.current)}>
           {roundList.map((item, inx) => {
             return (
@@ -284,7 +247,7 @@ const Feedback: React.FC = () => {
                 <div className={`round-down ${(item.deg / 180) % 2 !== 0 ? 'up-down' : ''}`}>
                   <Image
                     priority
-                    className="w-160 md:w-76 rounded-[50%]"
+                    className="w-104 md:w-76 rounded-[50%]"
                     src={item.avatar}
                     alt=""
                   />
@@ -294,10 +257,11 @@ const Feedback: React.FC = () => {
           })}
         </RoundSpinWrap>
 
+        {/* 文案描述部分 */}
         <main className="feedback-main">
           <div className="h-200 mask"></div>
 
-          <div className="feedback-main-content pt-80 md:pt-0 mt-20 md:mt-0">
+          <div className="feedback-main-content pt-20 md:pt-0 mt-20 md:mt-0">
             <Image
               onClick={() => doPrev()}
               priority
@@ -307,8 +271,8 @@ const Feedback: React.FC = () => {
             />
 
             <section className="w-430 text-center mx-50 md:mx-150">
-              <div className="text-31 md:text-24">{roundList[curUpIndex.current].name}</div>
-              <div className="text-20 md:text-16">{roundList[curUpIndex.current].content}</div>
+              <div className="text-31 md:text-24 mb-15 font-bold">{roundList[curUpIndex.current].name}</div>
+              <div className="text-23 md:text-16 text-#5C5C5CFF">{roundList[curUpIndex.current].content}</div>
             </section>
 
             <Image

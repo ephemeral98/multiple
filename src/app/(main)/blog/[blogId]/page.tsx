@@ -2,10 +2,8 @@
 
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import useAppStore from '@/store/appStore';
 import { FC, useEffect } from 'react';
 import BackBtn from '@cps/Buttons/BackBtn';
-import BlogItem from '@cps/BlogComp/BlogItem';
 import { $fontSize, $width, phoneSize } from '@/styled/mediaSize';
 import { useGetBlog } from '@/service/useArticle';
 import Marked from 'marked-react';
@@ -58,7 +56,6 @@ const BlogDetail = styled.div`
 `;
 
 const Blog: FC<BlogDetailProps> = ({ params }) => {
-  const appStore = useAppStore();
   const { getBlog, loading, blog } = useGetBlog();
 
   useEffect(() => {

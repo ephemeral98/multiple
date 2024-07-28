@@ -1,15 +1,12 @@
 'use client';
 
 import { styled } from 'styled-components';
-import Image from 'next/image';
-import { flexPos } from '@/styled/mixin';
 import useAppStore from '@/store/appStore';
 import { Banner } from '@cps/Banner';
 import BlogItem from '@cps/BlogComp/BlogItem';
 import { $height, $width, phoneSize } from '@/styled/mediaSize';
 import { useGetArticleList } from '@/service/useArticle';
 import { useEffect } from 'react';
-import { useParams } from 'next/navigation';
 
 const BlogWrap = styled.div`
   padding-bottom: 503rem;
@@ -31,7 +28,6 @@ const BlogWrap = styled.div`
 `;
 
 const Blog = () => {
-  const appStore = useAppStore();
   const { article, getArticle, loading } = useGetArticleList();
   useEffect(() => {
     getArticle();
