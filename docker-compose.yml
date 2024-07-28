@@ -11,7 +11,8 @@ services:
       - "3000:3000"
     environment:
       NODE_ENV: production
-    command: pm2 yarn start
+    command: pm2-runtime ecosystem.config.js
     volumes:
-      - .:/app
+      - ./public:/app/public  # 将宿主机的 public 目录绑定到容器内的 /app/public 目录
+      - ./next:/app/.next  # 将宿主机的 .next 目录绑定到容器内的 /app/.next 目录
     restart: always

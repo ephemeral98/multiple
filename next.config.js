@@ -4,9 +4,7 @@ const presetUno = require('@unocss/preset-uno').default;
 const nextConfig = {
   compiler: {
     styledComponents: true,
-    // removeConsole: {
-    //   exclude: ['error'],
-    // },
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
   reactStrictMode: false,
   webpack: (config, context) => {
