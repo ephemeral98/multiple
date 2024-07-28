@@ -55,8 +55,15 @@ export const useGetBlog = () => {
       loading.current = false;
     });
     if (resp.success) {
-      setBlogInfo(resp.data!);
-      return resp.data || {};
+      // 将ip和协议去掉，只留下相对路径，不然https下访问http会协议混淆报错
+      const replaceContent = resp.data?.content.replace(/https?:\/\/[^\/]+/g, '');
+      const result = {
+        ...resp.data,
+        content: replaceContent,
+      };
+
+      setBlogInfo(result as any);
+      return result || {};
     }
   };
 

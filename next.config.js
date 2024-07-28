@@ -51,6 +51,11 @@ const nextConfig = {
         destination: 'http://8.219.186.167:8081/:path*', // 目标 API 路径
         permanent: false,
       },
+      {
+        source: '/image/:path*', // 本地 API 路径
+        destination: 'http://8.219.186.167:8080/image/:path*', // 目标 API 路径
+        permanent: false,
+      },
     ];
   },
 };
