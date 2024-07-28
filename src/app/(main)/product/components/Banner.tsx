@@ -124,7 +124,7 @@ const Banner = () => {
           </div>
         </div>
 
-        <button className="access-btn">Get access</button>
+        {/* <button className="access-btn">Get access</button> */}
       </main>
 
       <Marquee

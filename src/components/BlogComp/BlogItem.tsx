@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { $height, $width, phoneSize } from '@/styled/mediaSize';
-import { overDots } from '@/styled/mixin';
+import { flexPos, overDots } from '@/styled/mixin';
 
 interface IProps {
   id: string;
@@ -20,6 +20,8 @@ const BlogItemWrap = styled.div`
   border-radius: 10rem;
   cursor: pointer;
   word-break: break-all;
+  ${flexPos('space-between')}
+  flex-direction: column;
 
   @media (max-width: ${phoneSize}) {
     padding: 38rem;
@@ -40,6 +42,15 @@ const BlogItemWrap = styled.div`
   .over-dot {
     ${overDots(2)}
   }
+
+  ${$width('100%', '551rem', '551rem')}
+
+  @media (max-width: ${phoneSize}) {
+    min-height: 680rem;
+  }
+  @media (min-width: ${phoneSize}) {
+    height: 580rem;
+  }
 `;
 
 const BlogItem = (props: IProps) => {
@@ -51,16 +62,24 @@ const BlogItem = (props: IProps) => {
         router.push(`/blog/${props.id}`);
       }}
     >
-      <div className="face-wrap">
-        {!!props?.face && (
-          <Image src={props?.face || ''} width={300} height={300} alt="" className="face-content" />
-        )}
+      <div>
+        <div className="face-wrap">
+          {!!props?.face && (
+            <Image
+              src={props?.face || ''}
+              width={300}
+              height={300}
+              alt=""
+              className="face-content"
+            />
+          )}
+        </div>
+
+        <div className="over-dot my-29 md:my-24 text-31 md:text-24 font-bold">{props?.title}</div>
+        <main className="over-dot text-#585858 text-23 md:text-16">{props?.content}</main>
       </div>
 
-      <div className="my-29 md:my-24 text-31 md:text-24 font-bold">{props?.title}</div>
-      <main className="over-dot text-#585858 text-23 md:text-16">{props?.content}</main>
-
-      <footer className="mt-57 flex justify-between items-center">
+      <footer className="w-full mt-57 md:mt-0 flex justify-between items-center">
         <div className="text-23 md:text-16">{props?.date}</div>
         <div className="h-44 md:h-36 px-28 rounded-[31rem] bg-[#191919] flex-center text-23 md:text-16">
           {props?.type}

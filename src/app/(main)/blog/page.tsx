@@ -27,17 +27,6 @@ const BlogWrap = styled.div`
       gap: 62rem;
       padding: 0 38rem;
     }
-
-    > div {
-      ${$width('100%', '551rem', '551rem')}
-
-      @media (max-width: ${phoneSize}) {
-        min-height: 680rem;
-      }
-      @media (min-width: ${phoneSize}) {
-        height: 557rem;
-      }
-    }
   }
 `;
 
