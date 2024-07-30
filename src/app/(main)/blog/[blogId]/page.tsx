@@ -6,7 +6,10 @@ import { FC, useEffect } from 'react';
 import BackBtn from '@cps/Buttons/BackBtn';
 import { $fontSize, $width, phoneSize } from '@/styled/mediaSize';
 import { useGetBlog } from '@/service/useArticle';
-import Marked from 'marked-react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkBreaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 
 interface BlogDetailProps {
   params: { blogId: string };
@@ -90,7 +93,15 @@ const Blog: FC<BlogDetailProps> = ({ params }) => {
         <div className="mt-32 mb-24 font-bold text-31 md:text-24">{blog.title}</div>
 
         <div className="blog-detail-content">
-          <Marked>{blog.content}</Marked>
+          <ReactMarkdown
+            remarkPlugins={[remarkBreaks, remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+            children={blog.content
+              .replace(/hljs-center\s*(.*?)\s*\n:::/g, '<center>$1</center>')
+              .replace(/:::/g, '&nbsp;')
+              .replace(/\n\n/gi, '\n&nbsp;\n')
+              .replace(/\+\+(.*?)\+\+/g, '<u>$1</u>')}
+          />
         </div>
       </main>
 

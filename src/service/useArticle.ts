@@ -1,6 +1,4 @@
-import { sleep } from '@/utils';
 import useSWRMutation from 'swr/mutation';
-import { Message } from '@arco-design/web-react';
 import { $GET } from './request';
 import { useState } from 'react';
 import { useUpdateRef } from '@/hooks';
@@ -56,7 +54,10 @@ export const useGetBlog = () => {
     });
     if (resp.success) {
       // 将ip和协议去掉，只留下相对路径，不然https下访问http会协议混淆报错
-      const replaceContent = resp.data?.content.replace(/https?:\/\/[^\/]+/g, '');
+      const content = resp.data?.content || '';
+      let replaceContent = content.replace(/https?:\/\/[^\/]+/g, '');
+      // replaceContent = content.replace(/\n/g, '\n &nbsp \n');
+      
       const result = {
         ...resp.data,
         content: replaceContent,

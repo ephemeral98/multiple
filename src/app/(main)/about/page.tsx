@@ -45,7 +45,7 @@ const AboutWrap = styled.div`
     }
 
     .main-text {
-      > li {
+      > div {
         color: #fff;
         &:not(:first-child) {
           margin-top: 30rem;
@@ -86,21 +86,21 @@ const About = () => {
           <div className="text-46 md:text-64 font-bold text-#fff mb-20 text-up">our story</div>
 
           <div className="main-text text-27 md:text-14">
-            <li>
+            <div>
               We are a team of ecosystem builders and network architects leveraging SD-WAN
               technology to build a network layer to enable high-powered transmission of digital
               assts and data possible.
-            </li>
-            <li>
+            </div>
+            <div>
               By creating multiple parallel channels to optimise bandwidth, our solution beautifully
               meets the constant need to feed sophisticated AI models with proprietary data,
               ensuring that it is sent with speed, privacy and cost-efficiency through our
               decentralised flotilla of bandwidth providers.
-            </li>
-            <li>
+            </div>
+            <div>
               Critically, it also enables remote teams and individuals to work and share across
               borders without hiccups in connectivity.
-            </li>
+            </div>
           </div>
         </div>
         <Image priority className="about-face" src={require('@img/common/logo-about.png')} alt="" />

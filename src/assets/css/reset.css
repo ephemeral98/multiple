@@ -1,19 +1,6 @@
 /* 重置样式 */
 body,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-pre,
-form,
-fieldset,
-input,
-p,
-blockquote,
-th,
-td {
+input {
   font-weight: 400;
   margin: 0;
   padding: 0;
@@ -40,38 +27,10 @@ table {
   border-collapse: collapse;
 }
 
-fieldset,
 img {
   border: 0 none;
   display: block;
   height: auto;
-}
-
-fieldset {
-  margin: 0;
-  padding: 0;
-}
-
-fieldset p {
-  margin: 0;
-  padding: 0 0 0 8px;
-}
-
-legend {
-  display: none;
-}
-
-address,
-caption,
-em,
-th,
-i {
-  font-style: normal;
-  font-weight: 400;
-}
-
-table caption {
-  margin-left: -1px;
 }
 
 hr {
@@ -82,26 +41,6 @@ hr {
   height: 2px;
   margin: 5px 0;
   overflow: hidden;
-}
-
-ol,
-ul,
-li {
-  list-style-image: none;
-  list-style-position: outside;
-  list-style-type: none;
-}
-
-caption,
-th {
-  text-align: left;
-}
-
-q:before,
-q:after,
-blockquote:before,
-blockquote:after {
-  content: '';
 }
 
 a {
@@ -117,19 +56,7 @@ a {
   font-family: 'Montserrat';
 }
 
-body,
-dl,
-dd,
-ul,
-ol,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-form,
-p {
+body {
   -webkit-tap-highlight-color: transparent;
 }
 

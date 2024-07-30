@@ -1,0 +1,38 @@
+# 忽略 node_modules 目录
+node_modules
+
+# 忽略日志文件
+*.log
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 忽略临时文件和目录
+*.swp
+*.swo
+*~
+.tmp
+.cache
+
+# 忽略构建输出
+dist
+build
+coverage
+
+# 忽略环境变量文件（视情况而定）
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# 忽略编辑器配置文件
+.idea
+.vscode
+*.iml
+
+# 忽略 Dockerfile 之外的其他 Docker 配置文件（视情况而定）
+Dockerfile.*
+
+# 忽略 .next 目录（除非

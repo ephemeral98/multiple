@@ -105,7 +105,7 @@ const RoadMapMob: FC<{
               </div>
               <div className="road-item-content">
                 {item.content.map((item, inx) => (
-                  <li key={inx}>{item}</li>
+                  <div key={inx}>{item}</div>
                 ))}
               </div>
             </div>

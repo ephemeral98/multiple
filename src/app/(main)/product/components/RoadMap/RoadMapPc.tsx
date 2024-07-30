@@ -61,7 +61,7 @@ const RoadMapWrap = styled.div`
         font-size: 20rem;
         line-height: 1.2;
 
-        > li {
+        > div {
           position: relative;
           &::before {
             content: '';
@@ -124,7 +124,7 @@ const RoadMap = () => {
             </div>
             <div className="road-item-content">
               {showingRoads?.[0]?.content.map((item, inx) => (
-                <li key={inx}>{item}</li>
+                <div key={inx}>{item}</div>
               ))}
             </div>
           </div>
@@ -137,7 +137,7 @@ const RoadMap = () => {
           >
             <div className="road-item-content">
               {showingRoads?.[1]?.content.map((item, inx) => (
-                <li key={inx}>{item}</li>
+                <div key={inx}>{item}</div>
               ))}
             </div>
             <div className="header mt-8">
@@ -159,7 +159,7 @@ const RoadMap = () => {
             </div>
             <div className="road-item-content">
               {showingRoads?.[2]?.content.map((item, inx) => (
-                <li key={inx}>{item}</li>
+                <div key={inx}>{item}</div>
               ))}
             </div>
           </div>
@@ -172,7 +172,7 @@ const RoadMap = () => {
           >
             <div className="road-item-content">
               {showingRoads?.[3]?.content.map((item, inx) => (
-                <li key={inx}>{item}</li>
+                <div key={inx}>{item}</div>
               ))}
             </div>
             <div className="header mt-8">
@@ -198,7 +198,7 @@ const RoadMap = () => {
             </div>
             <div className="road-item-content">
               {showingRoads?.[4]?.content.map((item, inx) => (
-                <li key={inx}>{item}</li>
+                <div key={inx}>{item}</div>
               ))}
             </div>
           </div>
