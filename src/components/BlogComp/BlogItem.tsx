@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { $height, $width, phoneSize } from '@/styled/mediaSize';
 import { flexPos, overDots } from '@/styled/mixin';
+import MyImg from '../MyImg';
 
 interface IProps {
   id: string;
@@ -65,13 +66,7 @@ const BlogItem = (props: IProps) => {
       <div>
         <div className="face-wrap">
           {!!props?.face && (
-            <Image
-              src={props?.face || ''}
-              width={300}
-              height={300}
-              alt=""
-              className="face-content"
-            />
+            <MyImg src={props?.face || ''} width={300} height={300} className="face-content" />
           )}
         </div>
 

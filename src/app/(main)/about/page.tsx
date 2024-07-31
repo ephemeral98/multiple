@@ -106,7 +106,7 @@ const About = () => {
         <Image priority className="about-face" src={require('@img/common/logo-about.png')} alt="" />
       </main>
 
-      <Team />
+      {/* <Team /> */}
     </AboutWrap>
   );
 };

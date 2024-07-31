@@ -2,7 +2,7 @@
 
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import BackBtn from '@cps/Buttons/BackBtn';
 import { $fontSize, $width, phoneSize } from '@/styled/mediaSize';
 import { useGetBlog } from '@/service/useArticle';
@@ -10,6 +10,8 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
+import { isClient } from '@/utils';
+import MyImg from '@/components/MyImg';
 
 interface BlogDetailProps {
   params: { blogId: string };
@@ -23,6 +25,10 @@ const BlogDetail = styled.div`
   .blog-detail-content {
     ${$fontSize('23rem', '16rem', '16rem')}
     color: #5c5c5cff;
+    a {
+      text-decoration: underline;
+      text-underline-offset: 6rem;
+    }
 
     img {
       /* max-width: 100%; */
@@ -65,7 +71,16 @@ const Blog: FC<BlogDetailProps> = ({ params }) => {
     if (!params.blogId) {
       return;
     }
-    getBlog(params.blogId);
+    getBlog(params.blogId).then((res) => {
+      setTimeout(() => {
+        if (!isClient()) {
+          return;
+        }
+        document.querySelectorAll('a').forEach(function (a) {
+          a.setAttribute('target', '_blank');
+        });
+      }, 0);
+    });
   }, [params.blogId]);
 
   return (
@@ -74,13 +89,7 @@ const Blog: FC<BlogDetailProps> = ({ params }) => {
       <main className="px-38 px-0">
         <BackBtn />
         <div className="face-wrap">
-          <Image
-            src={blog.cover}
-            width={300}
-            height={300}
-            alt=""
-            className="h-394 mx-auto mt-33 mb-54"
-          />
+          <MyImg src={blog.cover} className="h-394 mx-auto mt-33 mb-54" />
         </div>
 
         <section className="mt-57 flex items-center">
