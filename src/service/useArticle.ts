@@ -57,6 +57,7 @@ export const useGetBlog = () => {
       // http://47.121.205.210/
       // 将ip和协议去掉，只留下相对路径，不然https下访问http会协议混淆报错
       const content = resp.data?.content || '';
+      // const httpReg = /http:\/\/47\.121\.205\.210:8080/g;
       const httpReg = /http:\/\/8\.219\.186\.167:8080/g;
       let replaceContent = content.replace(httpReg, '');
       // replaceContent = content.replace(/\n/g, '\n &nbsp \n');

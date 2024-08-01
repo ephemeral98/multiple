@@ -25,8 +25,8 @@ const MyImg: FC<{
       {!loadedSrc ? (
         <NextImg.default
           src={props.src}
-          width={props.width || 10}
-          height={props.height || 10}
+          width={props.width || 300}
+          height={props.height || 300}
           alt=""
           className={props.className}
         />

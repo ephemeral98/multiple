@@ -1,6 +1,8 @@
 const UnoCSS = require('@unocss/webpack').default;
 const presetUno = require('@unocss/preset-uno').default;
 
+const targetIp = '8.219.186.167';
+
 const nextConfig = {
   compiler: {
     styledComponents: true,
@@ -34,24 +36,24 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '8.219.186.167',
+        hostname: targetIp,
         port: '',
         pathname: '/**',
       },
     ],
-    domains: ['8.219.186.167'],
+    // domains: [targetIp],
   },
 
   async redirects() {
     return [
       {
         source: '/api/:path*', // 本地 API 路径
-        destination: 'http://8.219.186.167:8081/:path*', // 目标 API 路径
+        destination: `http://${targetIp}:8081/:path*`, // 目标 API 路径
         permanent: false,
       },
       {
         source: '/image/:path*', // 本地 API 路径
-        destination: 'http://8.219.186.167:8080/image/:path*', // 目标 API 路径
+        destination: `http://${targetIp}:8080/image/:path*`, // 目标 API 路径
         permanent: false,
       },
     ];

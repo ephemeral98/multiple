@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { flexPos } from '@/styled/mixin';
 import Image from 'next/image';
-import { $fontSize, $height, $width } from '@/styled/mediaSize';
+import { $fontSize, $height, $paddingTop, $width } from '@/styled/mediaSize';
 import Sticky from '@cps/Lax/Sticky';
 import VideoBox from '@/components/VideoBox';
 import { useVideoPlay } from '../hooks/useVideoPlay';
@@ -19,7 +19,10 @@ const AboutDownload = styled.div`
     position: absolute;
     /* ${$width('100%', '1200rem', '1200rem')} */
     width: 100%;
-    /* ${$height('676rem', '676rem', '676rem')} */
+    /* ${$height('100vh', '676rem', '676rem')} */
+    height: 100vh;
+
+    object-fit: cover;
 
     margin: 0 auto;
     left: 0;
@@ -38,6 +41,7 @@ const AboutDownload = styled.div`
 
     ${flexPos('center')}
     flex-direction: column;
+    /* ${$paddingTop('325rem', '258rem', '258rem')} */
     text-align: center;
   }
 
@@ -53,13 +57,13 @@ const AboutDownload = styled.div`
 `;
 
 const Blog = () => {
-  const { targetRef: targetRef1, videoRef: videoRef4 } = useVideoPlay();
+  // const { targetRef: targetRef1, videoRef: videoRef4 } = useVideoPlay();
   const router = useRouter();
 
   return (
     <AboutDownload className="lax-bigger" data-lax-anchor="self">
-      {/* <Image src={require('@img/home/temp-about-download.png')} alt="" className="face" /> */}
-      <VideoBox className="two face" src="/video/video-4.mp4" ref={videoRef4}></VideoBox>
+      <Image unoptimized src={require('@img/home/temp-about-download.png')} alt="" className="face" />
+      {/* <VideoBox className="two face" src="/video/video-4.mp4" ref={videoRef4}></VideoBox> */}
 
       <main className="about-download-main">
         <div className="text-31 md:text-24 mb-24 font-bold">
