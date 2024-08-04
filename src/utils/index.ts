@@ -59,3 +59,19 @@ export const swapQueue = <T>(queue: T[], inx1: number, inx2: number): T[] => {
   arr[inx2] = item1;
   return arr;
 };
+
+/**
+ * 地址略写
+ * @param str 全地址
+ * @param frontLen 前面多少颗星星
+ * @param endLen 结尾多少个星星
+ */
+export function plusStar(str: string, frontLen: number, endLen: number) {
+  if (str?.length === undefined) return '';
+  var len = str.length - frontLen - endLen;
+  var xing = '';
+  for (var i = 0; i < len; i++) {
+    xing = '****';
+  }
+  return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+}

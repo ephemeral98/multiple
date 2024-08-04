@@ -28,6 +28,11 @@ export const useTopBar = () => {
       active: false,
     },
     {
+      text: 'Activity',
+      path: '/activity',
+      active: false,
+    },
+    {
       text: 'Docs',
       path: '',
       link: 'https://multiple-network.gitbook.io/multiple-network-gitbook/',
