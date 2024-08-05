@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { useSyncCallback } from '@/hooks';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
 import { flexPos } from '@/styled/mixin';
+import EmptyTable from './components/EmptyTable';
 
 const ActivityWraap = styled.div`
   padding-bottom: 152rem;
@@ -123,15 +124,17 @@ const Activity: React.FC = () => {
         <Table whiteList={whiteList} />
       </div>
 
-      <div className="flex-center">
-        <Pagination
-          onChange={(pageNumber: number, pageSize: number) => {
-            setPageInfo({ ...pageInfo, pageNum: pageNumber, pageSize });
-            refetchWhiteList();
-          }}
-          total={pageInfo.total}
-        />
-      </div>
+      {!!whiteList.length && (
+        <div className="flex-center">
+          <Pagination
+            onChange={(pageNumber: number, pageSize: number) => {
+              setPageInfo({ ...pageInfo, pageNum: pageNumber, pageSize });
+              refetchWhiteList();
+            }}
+            total={pageInfo.total}
+          />
+        </div>
+      )}
     </ActivityWraap>
   );
 };

@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { plusStar } from '@/utils';
 import { $fontSize, $width, phoneSize } from '@/styled/mediaSize';
+import EmptyTable from './EmptyTable';
 
 const TableWrap = styled.div`
   ${$width('1600rem', '1200rem', '1200rem')}
@@ -62,30 +63,36 @@ const Table: React.FC<{
         <div>Snapshot Time</div>
       </div>
 
-      {props.whiteList?.map((item) => {
-        return (
-          <div key={item.id} className="table-container">
-            <div>{item.seqNo}</div>
-            <div className="flex-center">
-              <div>{plusStar(item.walletAddr, 5, 5)}</div>
-              <Image
-                priority
-                data-clipboard-text={item.walletAddr}
-                className="w-26 md:w-20 ml-5 copy-btn cursor-pointer"
-                src={require('@img/common/icon-copy.svg')}
-                alt=""
-                onClick={() => {
-                  console.log('click');
-                }}
-              />
-            </div>
-            <div>{item.score}</div>
-            <div>{item.batchNo}</div>
-            <div>Eligibility</div>
-            <div>{item.snapshotTime}</div>
-          </div>
-        );
-      })}
+      {props.whiteList.length ? (
+        <>
+          {props.whiteList?.map((item) => {
+            return (
+              <div key={item.id} className="table-container">
+                <div>{item.seqNo}</div>
+                <div className="flex-center">
+                  <div>{plusStar(item.walletAddr, 5, 5)}</div>
+                  <Image
+                    priority
+                    data-clipboard-text={item.walletAddr}
+                    className="w-26 md:w-20 ml-5 copy-btn cursor-pointer"
+                    src={require('@img/common/icon-copy.svg')}
+                    alt=""
+                    onClick={() => {
+                      console.log('click');
+                    }}
+                  />
+                </div>
+                <div>{item.score}</div>
+                <div>{item.batchNo}</div>
+                <div>Eligibility</div>
+                <div>{item.snapshotTime}</div>
+              </div>
+            );
+          })}
+        </>
+      ) : (
+        <EmptyTable />
+      )}
     </TableWrap>
   );
 };

@@ -179,12 +179,13 @@ export const useEleScrollWay = ({
  * 需要在 确保能获取到DOM 的生命周期中调用，比如 onMounted
  */
 export const useCopy = () => {
-  const cpyer = new clipboard('.copy-btn');
-
   useEffect(() => {
     if (!isClient()) {
       return;
     }
+
+    const cpyer = new clipboard('.copy-btn');
+
     cpyer.on('success', (e) => {
       Message.success('Copy successful');
 
