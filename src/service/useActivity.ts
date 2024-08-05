@@ -29,46 +29,25 @@ export const useWhiteList = () => {
 
   const [whiteList, setWhiteList] = useState<IWhite[]>([]);
 
-  const fetchWhiteList = async () => {
-    const resp = await $GET<{ total: number; whiteList: IWhite[] }>('/api/whiteUser/page', {
+  /**
+   * 请求白名单
+   * @param addr
+   */
+  const fetchWhiteList = async (addr: string = '') => {
+    const resp = await $GET<{ total: number; whiteUserList: IWhite[] }>('/api/whiteUser/page', {
       pageNum: pageInfo.pageNum,
       pageSize: pageInfo.pageSize,
-      // walletAddr: '',
+      walletAddr: addr,
     });
 
     console.log('白名单...', resp);
-
-    const temp = [
-      {
-        batchNo: '3', // 阶段批次
-        createTime: '2024-02-01 11:12',
-        id: 1,
-        isDelete: 0,
-        score: '',
-        seqNo: '01', // 序号
-        snapshotTime: '2024-02-01 11:12', // 快照时间
-        updateTime: '2024-02-01 11:12',
-        walletAddr: '0x12301829038091231902803', // 钱包地址
-      },
-      {
-        batchNo: '3', // 阶段批次
-        createTime: '2024-02-01 11:12',
-        id: 2,
-        isDelete: 0,
-        score: '',
-        seqNo: '01', // 序号
-        snapshotTime: '2024-02-01 11:12', // 快照时间
-        updateTime: '2024-02-01 11:12',
-        walletAddr: '0x12301829038091231902803', // 钱包地址
-      },
-    ];
 
     setPageInfo({
       ...pageInfo,
       total: resp.data?.total!,
     });
 
-    setWhiteList(resp.data!.whiteList);
+    setWhiteList(resp.data!.whiteUserList);
   };
 
   return {

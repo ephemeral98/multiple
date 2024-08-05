@@ -72,5 +72,6 @@ export default defineConfig({
     ['disable', { filter: 'grayscale(98%)', opacity: '0.25' }],
     [/^font-([\.\d]+)$/, ([_, num]) => ({ 'font-weight': `${num}` })],
     ['text-up', { 'text-transform': 'uppercase' }],
+    ['white-nowrap', { 'white-space': 'nowrap' }],
   ],
 });

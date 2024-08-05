@@ -8,6 +8,9 @@ import { useModal } from '@/hooks/useModal';
 import Rule from './components/Rule';
 import { useWhiteList } from '@/service/useActivity';
 import { useEffect } from 'react';
+import { useSyncCallback } from '@/hooks';
+import { $fontSize, $height, $width } from '@/styled/mediaSize';
+import { flexPos } from '@/styled/mixin';
 
 const ActivityWraap = styled.div`
   padding-bottom: 152rem;
@@ -25,16 +28,22 @@ const ActivityWraap = styled.div`
 
   .search-wrap {
     width: 1200rem;
+    ${$width('100%', '100%', '1200rem')}
     position: absolute;
     left: 50%;
     top: 89%;
     transform: translate(-50%, -50%);
   }
 
+  .arco-pagination-list {
+    ${flexPos('center')}
+  }
+
   .arco-pagination-item {
-    height: 36rem;
-    width: 36rem;
-    font-size: 14rem;
+    ${$height('70rem', '36rem', '36rem')}
+    ${$width('70rem', '36rem', '36rem')}
+    ${$fontSize('26rem', '14rem', '14rem')}
+    ${flexPos('center')}
 
     &:hover {
       background-color: transparent !important;
@@ -64,6 +73,7 @@ const Activity: React.FC = () => {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
     },
+    className: 'rule-modal-wrap',
   });
 
   const {
@@ -80,6 +90,10 @@ const Activity: React.FC = () => {
     fetchWhiteList();
   }, []);
 
+  const refetchWhiteList = useSyncCallback(() => {
+    fetchWhiteList(walletAddr);
+  });
+
   return (
     <ActivityWraap>
       <Banner
@@ -91,23 +105,32 @@ const Activity: React.FC = () => {
           <div>Airdrop</div>
         </div>
 
-        <div className="search-wrap px-78">
+        <div className="search-wrap px-30 md:px-78">
           <Search
             value={walletAddr}
             onChange={(newVal: string) => {
               setWalletAddr(newVal);
             }}
-            onSearch={(e: any) => {
-              console.log('eee...', e);
+            onSearch={() => {
+              refetchWhiteList();
             }}
             onRuleClick={() => open()}
           />
         </div>
       </Banner>
-      <Table whiteList={whiteList} />
+
+      <div className="w-full overflow-auto">
+        <Table whiteList={whiteList} />
+      </div>
 
       <div className="flex-center">
-        <Pagination total={200} />
+        <Pagination
+          onChange={(pageNumber: number, pageSize: number) => {
+            setPageInfo({ ...pageInfo, pageNum: pageNumber, pageSize });
+            refetchWhiteList();
+          }}
+          total={pageInfo.total}
+        />
       </div>
     </ActivityWraap>
   );

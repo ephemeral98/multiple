@@ -1,9 +1,11 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
+import { $fontSize, $marginBottom, $width, phoneSize } from '@/styled/mediaSize';
+import { useEffect } from 'react';
 
 const RuleWrap = styled.div`
   background-color: #008c8c;
-  width: 900rem;
+  ${$width('100%', '900rem', '900rem')}
   height: 836rem;
   background: #131313;
   box-shadow: 0px 0 20rem 0px rgba(255, 255, 255, 0.25);
@@ -22,6 +24,7 @@ const RuleWrap = styled.div`
     place-items: center;
     align-content: center;
     padding: 0 31rem;
+    ${$fontSize('26rem', '14rem', '14rem')}
 
     .rule-title {
       font-size: 24rem;
@@ -29,15 +32,17 @@ const RuleWrap = styled.div`
   }
 
   .rule-main {
+    width: 100%;
     height: 100%;
     overflow: auto;
     padding-bottom: 53rem;
+    ${$fontSize('26rem', '14rem', '14rem')}
 
     .content-title {
-      font-size: 20rem;
       color: #fff;
       font-weight: bold;
       margin-bottom: 12rem;
+      ${$fontSize('26rem', '20rem', '20rem')}
     }
   }
 
@@ -48,7 +53,7 @@ const RuleWrap = styled.div`
   .ul-round {
     position: relative;
     margin-left: 15rem;
-    margin-bottom: 16rem;
+    ${$marginBottom('26rem', '16rem', '16rem')}
 
     &::before {
       left: -15rem;
@@ -60,6 +65,12 @@ const RuleWrap = styled.div`
       top: 50%;
       transform: translate(0, -50%);
       border-radius: 50%;
+
+      @media (max-width: ${phoneSize}) {
+        left: -25rem;
+        width: 20rem;
+        height: 20rem;
+      }
     }
   }
 
@@ -78,6 +89,13 @@ const RuleWrap = styled.div`
       top: 0%;
       transform: translate(0, 5rem);
       border-radius: 50%;
+
+      @media (max-width: ${phoneSize}) {
+        left: -30rem;
+        width: 18rem;
+        height: 18rem;
+        transform: translate(0, 7rem);
+      }
     }
   }
 `;
@@ -85,6 +103,14 @@ const RuleWrap = styled.div`
 const Rule: React.FC<{
   onClose: () => void;
 }> = ({ onClose }) => {
+  // useEffect(() => {
+  //   const t = document.querySelector('.rule-main');
+  //   console.log('ttt', t);
+  //   t.addEventListener('scroll', function (event) {
+  //     event.preventDefault();
+  //     event.stopPropagation();
+  //   });
+  // }, []);
   return (
     <RuleWrap>
       <header className="rule-header">
@@ -99,7 +125,7 @@ const Rule: React.FC<{
         />
       </header>
 
-      <main className="rule-main px-40 mt-56 text-16">
+      <main className="rule-main px-30 md:px-40 mt-56 text-22 md:text-16">
         <div className="content-title">Event Introduction</div>
 
         <div>Dear Multiple Network Users,</div>
@@ -148,7 +174,7 @@ const Rule: React.FC<{
           the official announcement.
         </div>
         <div className="ul-circle flex items-center">
-          Participation Link:
+          <div style={{ whiteSpace: 'nowrap' }}>Participation Link:</div>
           <a className="ml-5 text-#fff underline">
             https://app.galxe.com/quest/CMJag55imV76sQFspz2ciy/GCASqtkNqD
           </a>

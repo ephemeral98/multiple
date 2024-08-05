@@ -3,6 +3,7 @@ import { flexPos } from '@/styled/mixin';
 import { FC } from 'react';
 import { styled } from 'styled-components';
 import Image from 'next/image';
+import { $fontSize, $height, $width } from '@/styled/mediaSize';
 
 const SearchWrap = styled.div`
   .search-container {
@@ -13,22 +14,32 @@ const SearchWrap = styled.div`
     .search-content {
       margin-right: 16rem;
       flex: auto;
-      height: 72rem;
+      ${$height('90rem', '72rem', '72rem')}
       border-radius: 10rem;
       border: 1px solid #585858;
       padding: 24rem;
-      font-size: 16rem;
+      ${$fontSize('24rem', '16rem', '16rem')}
       color: #fff;
       background-color: transparent;
 
       &::placeholder {
         color: #585858;
+        ${$fontSize('20rem', '16rem', '16rem')}
+
+        transition: all 0.6s;
+      }
+
+      &:focus {
+        &::placeholder {
+          opacity: 0.6;
+        }
       }
     }
 
     .search-btn {
-      width: 72rem;
-      height: 72rem;
+      ${$width('90rem', '72rem', '72rem')}
+      ${$height('90rem', '72rem', '72rem')}
+
       border-radius: 10rem;
       ${flexPos('center')}
       border: 1px solid #585858;
@@ -51,15 +62,17 @@ const Search: FC<{
   return (
     <SearchWrap>
       <div className="flex justify-between items-center">
-        <div className="text-24 font-bold">Multiple Network Testnet Eligibility Checker</div>
+        <div className="text-20 md:text-24 font-bold">
+          Multiple Network Testnet Eligibility Checker
+        </div>
         <div onClick={props.onRuleClick} className="flex-center cursor-pointer">
           <Image
             priority
-            className="w-24 mr-8"
+            className="w-20 md:w-24 mr-8"
             src={require('@img/common/icon-alert.png')}
             alt=""
           />
-          <div className="text-24">Rules & Details</div>
+          <div className="text-20 md:text-24">Rules & Details</div>
         </div>
       </div>
 
@@ -74,7 +87,7 @@ const Search: FC<{
           }}
         />
         <button onClick={(e) => props.onSearch(props.value)} className="search-btn">
-          <IconSearch color="#545454" className="w-20" />
+          <IconSearch color="#545454" className="w-28 md:w-20" />
         </button>
       </div>
     </SearchWrap>

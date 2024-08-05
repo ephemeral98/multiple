@@ -11,6 +11,7 @@ import clipboard from 'clipboard';
 
 import { bpThrottle } from './useDeb';
 import { Message } from '@arco-design/web-react';
+import { isClient } from '@/utils';
 
 /**
  * 类似vue的nextTick，页面渲染前的临门一脚
@@ -181,6 +182,9 @@ export const useCopy = () => {
   const cpyer = new clipboard('.copy-btn');
 
   useEffect(() => {
+    if (!isClient()) {
+      return;
+    }
     cpyer.on('success', (e) => {
       Message.success('Copy successful');
 

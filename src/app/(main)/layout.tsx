@@ -16,6 +16,7 @@ import { bpThrottle } from '@/hooks/useDeb';
 import initRem from '@/utils/initRem';
 import useAppStore from '@/store/appStore';
 import { useCountDown } from 'ahooks';
+import { useCopy } from '@/hooks';
 
 const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({
@@ -34,6 +35,8 @@ export default function RootLayout({
       setShowApp(true);
     },
   });
+
+  useCopy();
 
   useEffect(() => {
     if (!isClient()) {
