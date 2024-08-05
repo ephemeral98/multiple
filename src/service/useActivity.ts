@@ -30,7 +30,7 @@ export const useWhiteList = () => {
   const [whiteList, setWhiteList] = useState<IWhite[]>([]);
 
   const fetchWhiteList = async () => {
-    const resp = await $GET('/api/whiteUser/page', {
+    const resp = await $GET<{ total: number; whiteList: IWhite[] }>('/api/whiteUser/page', {
       pageNum: pageInfo.pageNum,
       pageSize: pageInfo.pageSize,
       // walletAddr: '',
@@ -63,7 +63,12 @@ export const useWhiteList = () => {
       },
     ];
 
-    setWhiteList(temp);
+    setPageInfo({
+      ...pageInfo,
+      total: resp.data?.total!,
+    });
+
+    setWhiteList(resp.data!.whiteList);
   };
 
   return {

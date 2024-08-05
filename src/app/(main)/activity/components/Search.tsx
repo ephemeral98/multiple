@@ -19,6 +19,7 @@ const SearchWrap = styled.div`
       padding: 24rem;
       font-size: 16rem;
       color: #fff;
+      background-color: transparent;
 
       &::placeholder {
         color: #585858;

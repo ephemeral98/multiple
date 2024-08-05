@@ -7,8 +7,10 @@ import {
   DispatchWithoutAction,
   MutableRefObject,
 } from 'react';
+import clipboard from 'clipboard';
 
 import { bpThrottle } from './useDeb';
+import { Message } from '@arco-design/web-react';
 
 /**
  * 类似vue的nextTick，页面渲染前的临门一脚
@@ -168,4 +170,25 @@ export const useEleScrollWay = ({
     atTop,
     targetRef: ref,
   };
+};
+
+/**
+ * 复制操作
+ * 将需要的 className = 'cpy-btn'
+ * 需要在 确保能获取到DOM 的生命周期中调用，比如 onMounted
+ */
+export const useCopy = () => {
+  const cpyer = new clipboard('.copy-btn');
+
+  useEffect(() => {
+    cpyer.on('success', (e) => {
+      Message.success('Copy successful');
+
+      e.clearSelection();
+    });
+
+    return () => {
+      cpyer.destroy();
+    };
+  }, []);
 };
