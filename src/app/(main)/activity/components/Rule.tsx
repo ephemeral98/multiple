@@ -8,7 +8,7 @@ const RuleWrap = styled.div`
   ${$width('100%', '900rem', '900rem')}
   height: 836rem;
   background: #131313;
-  box-shadow: 0px 0 20rem 0px rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 0 5rem 0px rgba(255, 255, 255, 0.25);
   border-radius: 45rem 45rem 45rem 45rem;
   padding-top: 55rem;
   display: flex;
