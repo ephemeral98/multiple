@@ -68,7 +68,7 @@ const Table: React.FC<{
           {props.whiteList?.map((item) => {
             return (
               <div key={item.id} className="table-container">
-                <div>{item.seqNo}</div>
+                <div className="text-#5C5C5C">{item.seqNo}</div>
                 <div className="flex-center">
                   <div>{plusStar(item.walletAddr, 5, 5)}</div>
                   <Image
@@ -82,10 +82,10 @@ const Table: React.FC<{
                     }}
                   />
                 </div>
-                <div>{item.score}</div>
-                <div>{item.batchNo}</div>
+                <div className="text-#5C5C5C">{item.score}</div>
+                <div className="text-#5C5C5C">{item.batchNo}</div>
                 <div>Eligibility</div>
-                <div>{item.snapshotTime}</div>
+                <div className="text-#5C5C5C">{item.snapshotTime}</div>
               </div>
             );
           })}

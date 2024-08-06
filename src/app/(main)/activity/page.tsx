@@ -12,6 +12,7 @@ import { useSyncCallback } from '@/hooks';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
 import { flexPos } from '@/styled/mixin';
 import EmptyTable from './components/EmptyTable';
+import useAppStore from '@/store/appStore';
 
 const ActivityWraap = styled.div`
   padding-bottom: 152rem;
@@ -68,6 +69,8 @@ const ActivityWraap = styled.div`
 `;
 
 const Activity: React.FC = () => {
+  const appStore = useAppStore();
+
   const { open } = useModal(Rule, {
     maskColor: '#2a2a2aa3',
     animate: {
@@ -115,7 +118,10 @@ const Activity: React.FC = () => {
             onSearch={() => {
               refetchWhiteList();
             }}
-            onRuleClick={() => open()}
+            onRuleClick={() => {
+              appStore.lenis?.destroy?.();
+              open();
+            }}
           />
         </div>
       </Banner>

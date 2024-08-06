@@ -19,4 +19,8 @@ export const scrollAnimate = () => {
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
+
+  return {
+    lenis
+  }
 };

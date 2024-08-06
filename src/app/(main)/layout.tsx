@@ -46,6 +46,7 @@ export default function RootLayout({
     initRem();
     // 延迟滚动
     // scrollAnimate();
+    appStore.scrollAnimate();
     appStore.setCurDevice();
     window.onresize = bpThrottle(() => {
       appStore.setCurDevice();

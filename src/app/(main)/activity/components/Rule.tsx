@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { $fontSize, $marginBottom, $width, phoneSize } from '@/styled/mediaSize';
 import { useEffect } from 'react';
+import useAppStore from '@/store/appStore';
 
 const RuleWrap = styled.div`
   background-color: #008c8c;
@@ -103,14 +104,8 @@ const RuleWrap = styled.div`
 const Rule: React.FC<{
   onClose: () => void;
 }> = ({ onClose }) => {
-  // useEffect(() => {
-  //   const t = document.querySelector('.rule-main');
-  //   console.log('ttt', t);
-  //   t.addEventListener('scroll', function (event) {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //   });
-  // }, []);
+  const appStore = useAppStore();
+
   return (
     <RuleWrap>
       <header className="rule-header">
@@ -121,7 +116,10 @@ const Rule: React.FC<{
           className="w-27 cursor-pointer"
           src={require('@img/common/icon-close.svg')}
           alt=""
-          onClick={() => onClose()}
+          onClick={() => {
+            appStore.scrollAnimate();
+            onClose();
+          }}
         />
       </header>
 
