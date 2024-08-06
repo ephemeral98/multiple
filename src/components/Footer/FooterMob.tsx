@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { useRouter } from 'next/navigation';
 import Community, { GetStartBtn } from '../Community';
 import { useLaunchTo } from '@/hooks/useLaunchTo';
+import { useTopBar } from '../TopBar/useTopBar';
 
 const FooterWrap = styled.footer`
   .border-top-white {
@@ -12,6 +13,7 @@ const FooterWrap = styled.footer`
 
 const FooterMob = () => {
   const router = useRouter();
+  const { navList, setNavList } = useTopBar();
   const { PrivacyPolicy, TeamCondition, launchTo } = useLaunchTo();
 
   return (
@@ -19,38 +21,24 @@ const FooterMob = () => {
       <section className="w-full">
         <div className="flex items-center justify-between flex-col">
           <div className="flex-center flex-col">
-            <div
-              className="cursor-pointer text-27"
-              onClick={() => {
-                router.push('/product');
-              }}
-            >
-              Product
-            </div>
-            <div
-              onClick={() => {
-                router.push('/about');
-              }}
-              className="cursor-pointer text-27 mt-62"
-            >
-              About Us
-            </div>
-            <div
-              onClick={() => {
-                router.push('/blog');
-              }}
-              className="cursor-pointer text-27 mt-62"
-            >
-              Blog
-            </div>
-            <div
-              onClick={() => {
-                window.open('https://multiple-network.gitbook.io/multiple-network-gitbook/');
-              }}
-              className="cursor-pointer text-27 mt-62"
-            >
-              Docs
-            </div>
+            {navList.map((item, inx) => {
+              return (
+                <div
+                  key={item.text}
+                  className={`cursor-pointer text-27 ${inx > 0 ? 'mt-62' : ''} `}
+                  onClick={() => {
+                    if (item.link) {
+                      window.open(item.link);
+                      return;
+                    }
+                    router.push(item.path);
+                  }}
+                >
+                  {item.text}
+                </div>
+              );
+            })}
+
             <GetStartBtn className={'px-24! py-16! rounded-[4rem]!'} />
           </div>
 

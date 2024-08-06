@@ -5,6 +5,7 @@ import Community, { GetStartBtn } from '../Community';
 import { useLaunchTo } from '@/hooks/useLaunchTo';
 import { flexPos } from '@/styled/mixin';
 import Button from '../Buttons';
+import { useTopBar } from '../TopBar/useTopBar';
 
 const FooterWrap = styled.footer`
   ${flexPos('center')}
@@ -23,6 +24,7 @@ const FooterWrap = styled.footer`
 const Footer = () => {
   const router = useRouter();
   const { PrivacyPolicy, TeamCondition, launchTo } = useLaunchTo();
+  const { navList, setNavList } = useTopBar();
 
   return (
     <FooterWrap className="app-footer relative">
@@ -35,38 +37,23 @@ const Footer = () => {
 
           <div className="flex-center">
             <div className="flex-center mr-59">
-              <a
-                className="cursor-pointer text-#fff"
-                onClick={() => {
-                  router.push('/product');
-                }}
-              >
-                Product
-              </a>
-              <a
-                onClick={() => {
-                  router.push('/about');
-                }}
-                className="ml-59 cursor-pointer text-#fff"
-              >
-                About Us
-              </a>
-              <a
-                onClick={() => {
-                  router.push('/blog');
-                }}
-                className="ml-59 cursor-pointer text-#fff"
-              >
-                Blog
-              </a>
-              <a
-                onClick={() => {
-                  window.open('https://multiple-network.gitbook.io/multiple-network-gitbook/');
-                }}
-                className="ml-59 cursor-pointer text-#fff"
-              >
-                Docs
-              </a>
+              {navList.map((item, inx) => {
+                return (
+                  <a
+                    key={item.text}
+                    className={`cursor-pointer text-#fff ${inx > 0 ? 'ml-48' : ''} `}
+                    onClick={() => {
+                      if (item.link) {
+                        window.open(item.link);
+                        return;
+                      }
+                      router.push(item.path);
+                    }}
+                  >
+                    {item.text}
+                  </a>
+                );
+              })}
             </div>
             <Community size={51} gap={24} />
           </div>
