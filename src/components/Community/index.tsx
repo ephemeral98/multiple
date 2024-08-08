@@ -47,14 +47,14 @@ const Community = (props: IProps) => {
         className="icon-community cursor-pointer"
         src={require('@img/common/icon-x.png')}
         alt=""
-        onClick={() => window.open('https://x.com/multiple_global')}
+        onClick={() => window.open('https://x.com/MTP_Network')}
       />
       <Image
         priority
         className="icon-community cursor-pointer"
         src={require('@img/common/icon-m.png')}
         alt=""
-        onClick={() => window.open('https://medium.com/@multiple_global')}
+        onClick={() => window.open('https://medium.com/@Multiple_Network')}
       />
       <Image
         priority
