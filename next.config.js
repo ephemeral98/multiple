@@ -1,8 +1,8 @@
 const UnoCSS = require('@unocss/webpack').default;
 const presetUno = require('@unocss/preset-uno').default;
 
-// const targetIp = '8.219.186.167';
-const targetIp = '47.121.205.210';
+const targetIp = '8.219.186.167';
+// const targetIp = '47.121.205.210';
 
 const nextConfig = {
   compiler: {

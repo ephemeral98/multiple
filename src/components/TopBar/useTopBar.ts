@@ -28,8 +28,8 @@ export const useTopBar = () => {
       active: false,
     },
     {
-      text: 'Activity',
-      path: '/activity',
+      text: 'Airdrop',
+      path: '/airdrop',
       active: false,
     },
     {
