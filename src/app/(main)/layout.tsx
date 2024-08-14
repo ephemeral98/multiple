@@ -56,12 +56,18 @@ export default function RootLayout({
   return (
     <html style={{ fontSize: '1px' }}>
       <head>
-        <title>Multiple</title>
+        <title>Multiple Network - Monetise Your Internet Connection.</title>
         <link rel="icon" type="image/x-icon" href="/favicon.png" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <meta name="description" content="Monetise Your Internet Connection." />
+        <meta
+          name="keywords"
+          content="Multiple Network, Depin, Bandwith, OKX Ventures, Blockchain Infrastructure"
+        />
+        <meta name="author" content="Multiple" />
       </head>
       <body id="app" className={`${inter.className} app`}>
         {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />}

@@ -46,6 +46,7 @@ const ActivityWraap = styled.div`
     ${$width('70rem', '36rem', '36rem')}
     ${$fontSize('26rem', '14rem', '14rem')}
     ${flexPos('center')}
+    color: #5c5c5c;
 
     &:hover {
       background-color: transparent !important;

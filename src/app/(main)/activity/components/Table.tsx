@@ -65,30 +65,32 @@ const Table: React.FC<{
 
       {props.whiteList.length ? (
         <>
-          {props.whiteList?.map((item) => {
-            return (
-              <div key={item.id} className="table-container">
-                <div className="text-#5C5C5C">{item.seqNo}</div>
-                <div className="flex-center">
-                  <div>{plusStar(item.walletAddr, 5, 5)}</div>
-                  <Image
-                    priority
-                    data-clipboard-text={item.walletAddr}
-                    className="w-26 md:w-20 ml-5 copy-btn cursor-pointer"
-                    src={require('@img/common/icon-copy.svg')}
-                    alt=""
-                    onClick={() => {
-                      console.log('click');
-                    }}
-                  />
+          {props.whiteList
+            ?.filter((item) => item.walletAddr)
+            ?.map((item) => {
+              return (
+                <div key={item.id} className="table-container">
+                  <div className="text-#5C5C5C">{item.seqNo}</div>
+                  <div className="flex-center">
+                    <div>{plusStar(item.walletAddr, 5, 5)}</div>
+                    <Image
+                      priority
+                      data-clipboard-text={item.walletAddr}
+                      className="w-26 md:w-20 ml-5 copy-btn cursor-pointer"
+                      src={require('@img/common/icon-copy.svg')}
+                      alt=""
+                      onClick={() => {
+                        console.log('click');
+                      }}
+                    />
+                  </div>
+                  <div className="text-#5C5C5C">{item.score}</div>
+                  <div className="text-#5C5C5C">{item.batchNo}</div>
+                  <div>Eligible</div>
+                  <div className="text-#5C5C5C">{item.snapshotTime}</div>
                 </div>
-                <div className="text-#5C5C5C">{item.score}</div>
-                <div className="text-#5C5C5C">{item.batchNo}</div>
-                <div>Eligibility</div>
-                <div className="text-#5C5C5C">{item.snapshotTime}</div>
-              </div>
-            );
-          })}
+              );
+            })}
         </>
       ) : (
         <EmptyTable />
