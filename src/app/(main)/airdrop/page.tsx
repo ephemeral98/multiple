@@ -117,6 +117,7 @@ const Activity: React.FC = () => {
               setWalletAddr(newVal);
             }}
             onSearch={() => {
+              setPageInfo({ ...pageInfo, pageNum: 1, pageSize: 10 });
               refetchWhiteList();
             }}
             onRuleClick={() => {
@@ -128,7 +129,7 @@ const Activity: React.FC = () => {
       </Banner>
 
       <div className="w-full overflow-auto">
-        <Table whiteList={whiteList} />
+        <Table whiteList={whiteList} pageNumber={pageInfo.pageNum} />
       </div>
 
       {!!whiteList.length && (

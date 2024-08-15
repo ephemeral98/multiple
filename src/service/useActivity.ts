@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { $GET } from './request';
+import { requestSignal } from '@/utils/requestSignal';
 
 export interface IWhite {
   batchNo: string; // 阶段批次
@@ -12,6 +13,8 @@ export interface IWhite {
   updateTime: string;
   walletAddr: string; // 钱包地址
 }
+
+const { aborter, cancel } = requestSignal();
 
 /**
  * 获取白名单
@@ -34,11 +37,15 @@ export const useWhiteList = () => {
    * @param addr
    */
   const fetchWhiteList = async (addr: string = '') => {
-    const resp = await $GET<{ total: number; whiteUserList: IWhite[] }>('/api/whiteUser/page', {
-      pageNum: pageInfo.pageNum,
-      pageSize: pageInfo.pageSize,
-      walletAddr: addr,
-    });
+    cancel();
+
+    const resp = await aborter(
+      $GET<{ total: number; whiteUserList: IWhite[] }>('/api/whiteUser/page', {
+        pageNum: pageInfo.pageNum,
+        pageSize: pageInfo.pageSize,
+        walletAddr: addr,
+      })
+    );
 
     console.log('白名单...', resp);
 

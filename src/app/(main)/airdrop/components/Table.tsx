@@ -51,6 +51,7 @@ const TableWrap = styled.div`
 
 const Table: React.FC<{
   whiteList: IWhite[];
+  pageNumber: number;
 }> = (props) => {
   return (
     <TableWrap>
@@ -67,10 +68,10 @@ const Table: React.FC<{
         <>
           {props.whiteList
             ?.filter((item) => item.walletAddr)
-            ?.map((item) => {
+            ?.map((item, inx) => {
               return (
                 <div key={item.id} className="table-container">
-                  <div className="text-#5C5C5C">{item.seqNo}</div>
+                  <div className="text-#5C5C5C">{inx + 1 + (props.pageNumber - 1) * 10}</div>
                   <div className="flex-center">
                     <div>{plusStar(item.walletAddr, 5, 5)}</div>
                     <Image
