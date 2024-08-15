@@ -87,16 +87,18 @@ const Activity: React.FC = () => {
     setWalletAddr,
     fetchWhiteList,
     whiteList,
-    setWhiteList,
+    // setWhiteList,
     setPageInfo,
   } = useWhiteList();
+
+  // const { whiteList } = fetchWhiteList();
 
   useEffect(() => {
     fetchWhiteList();
   }, []);
 
   const refetchWhiteList = useSyncCallback(() => {
-    fetchWhiteList(walletAddr);
+    fetchWhiteList();
   });
 
   return (
@@ -128,10 +130,10 @@ const Activity: React.FC = () => {
       </Banner>
 
       <div className="w-full overflow-auto">
-        <Table whiteList={whiteList} />
+        <Table whiteList={whiteList || []} pageNumber={pageInfo.pageNum} />
       </div>
 
-      {!!whiteList.length && (
+      {!!whiteList?.length && (
         <div className="flex-center">
           <Pagination
             onChange={(pageNumber: number, pageSize: number) => {

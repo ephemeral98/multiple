@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { $GET } from './request';
+import useSWRMutation from 'swr/mutation';
 
 export interface IWhite {
   batchNo: string; // 阶段批次
@@ -27,19 +28,18 @@ export const useWhiteList = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [whiteList, setWhiteList] = useState<IWhite[]>([]);
+  // const [whiteList, setWhiteList] = useState<IWhite[]>([]);
 
   /**
    * 请求白名单
    * @param addr
    */
-  const fetchWhiteList = async (addr: string = '') => {
+  const { data, trigger, isMutating } = useSWRMutation('/api/whiteUser/page', async () => {
     const resp = await $GET<{ total: number; whiteUserList: IWhite[] }>('/api/whiteUser/page', {
       pageNum: pageInfo.pageNum,
       pageSize: pageInfo.pageSize,
-      walletAddr: addr,
+      walletAddr: walletAddr,
     });
-
     console.log('白名单...', resp);
 
     setPageInfo({
@@ -47,17 +47,31 @@ export const useWhiteList = () => {
       total: resp.data?.total!,
     });
 
-    setWhiteList(resp.data!.whiteUserList);
-  };
+    return resp.data;
+  });
+
+  // setPageInfo({
+  //   ...pageInfo,
+  //   total: data?.total!,
+  // });
+
+  // setWhiteList(data?.whiteUserList || []);
+
+  // return {
+  //   whiteList: data,
+  //   isMutating,
+  // };
 
   return {
     pageInfo,
     walletAddr,
     loading,
-    whiteList,
+    whiteList: data?.whiteUserList,
     setPageInfo,
-    setWhiteList,
+    // setWhiteList,
     setWalletAddr,
-    fetchWhiteList,
+    // fetchWhiteList,
+    isMutating,
+    fetchWhiteList: trigger,
   };
 };

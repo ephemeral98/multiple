@@ -42,7 +42,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    // domains: process.env.NODE_ENV === 'production' ? false : [targetIp],
+    domains: process.env.NODE_ENV === 'production' ? false : [targetIp],
   },
 
   async redirects() {
