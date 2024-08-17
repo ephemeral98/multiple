@@ -14,3 +14,14 @@ export const useLaunchTo = () => {
     launchTo,
   };
 };
+
+export const useLaunchToApp = () => {
+  const appLink = useRef('https://www.app.multiple.cc');
+  const launchTo = (link: string) => {
+    window.open(link);
+  };
+  return {
+    appLink,
+    launchTo,
+  };
+};

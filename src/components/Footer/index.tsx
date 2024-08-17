@@ -6,6 +6,7 @@ import { useLaunchTo } from '@/hooks/useLaunchTo';
 import { flexPos } from '@/styled/mixin';
 import Button from '../Buttons';
 import { useTopBar } from '../TopBar/useTopBar';
+import { useLaunchToApp } from '@/hooks/useLaunchTo';
 
 const FooterWrap = styled.footer`
   ${flexPos('center')}
@@ -25,6 +26,7 @@ const Footer = () => {
   const router = useRouter();
   const { PrivacyPolicy, TeamCondition, launchTo } = useLaunchTo();
   const { navList, setNavList } = useTopBar();
+  const { appLink, launchTo: launchToApp } = useLaunchToApp();
 
   return (
     <FooterWrap className="app-footer relative">
@@ -32,7 +34,9 @@ const Footer = () => {
         <div className="footer-main px-45">
           <div className="flex-center">
             <Button onClick={() => router.push('/product')}>Download</Button>
-            <Button className={'ml-31'}>Get Started</Button>
+            <Button onClick={() => launchToApp(appLink.current)} className={'ml-31'}>
+              Get Started
+            </Button>
           </div>
 
           <div className="flex-center">

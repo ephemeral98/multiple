@@ -97,7 +97,14 @@ const Product = () => {
           </div>
         </div>
 
-        <button className="download-btn text-27 md:text-14">Downloads coming soon</button>
+        <button
+          onClick={() => {
+            window.open('https://cdn.app.multiple.cc/client/MultipleSetup.exe');
+          }}
+          className="download-btn text-27 md:text-14"
+        >
+          Download Checker Client
+        </button>
       </section>
 
       <main className="mt-216 pb-192 md:pb-224">

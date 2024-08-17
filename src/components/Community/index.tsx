@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { CSSProperties } from 'react';
 import { flexPos } from '@/styled/mixin';
 import { Message } from '@arco-design/web-react';
+import { useLaunchToApp } from '@/hooks/useLaunchTo';
 
 interface IProps {
   size?: number;
@@ -85,12 +86,14 @@ const StartBtnWrap = styled.button`
   margin-top: 62rem;
 `;
 export const GetStartBtn = (props: IPropsStartBtn) => {
+  const { appLink, launchTo } = useLaunchToApp();
+
   return (
     <StartBtnWrap
       style={props.style}
       className={props.className}
       onClick={() => {
-        Message.normal('Coming Soon...');
+        launchTo(appLink.current);
       }}
     >
       Get Started

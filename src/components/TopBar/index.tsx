@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useTopBar } from './useTopBar';
 import { GetStartBtn } from '../Community';
 import Button from '../Buttons';
+import { useLaunchToApp } from '@/hooks/useLaunchTo';
 
 const TopBarWrap = styled.header`
   position: absolute;
@@ -69,6 +70,7 @@ const TopBarWrap = styled.header`
 const TopBar = () => {
   const router = useRouter();
   const { navList } = useTopBar();
+  const { appLink, launchTo } = useLaunchToApp();
 
   return (
     <TopBarWrap>
@@ -103,7 +105,9 @@ const TopBar = () => {
 
         <div className="flex-center">
           <Button onClick={() => router.push('/product')}>Download</Button>
-          <Button className={'ml-31'}>Get Started</Button>
+          <Button onClick={() => launchTo(appLink.current)} className={'ml-31'}>
+            Get Started
+          </Button>
         </div>
       </div>
     </TopBarWrap>

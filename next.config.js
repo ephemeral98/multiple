@@ -33,17 +33,29 @@ const nextConfig = {
     return config;
   },
 
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: targetIp,
-        port: '',
-        pathname: '/**',
-      },
-    ],
-    // domains: process.env.NODE_ENV === 'production' ? false : [targetIp],
-  },
+  images:
+    process.env.NODE_ENV === 'production'
+      ? {
+          remotePatterns: [
+            {
+              protocol: 'http',
+              hostname: targetIp,
+              port: '',
+              pathname: '/**',
+            },
+          ],
+        }
+      : {
+          remotePatterns: [
+            {
+              protocol: 'http',
+              hostname: targetIp,
+              port: '',
+              pathname: '/**',
+            },
+          ],
+          domains: [targetIp],
+        },
 
   async redirects() {
     return [

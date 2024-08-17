@@ -7,6 +7,7 @@ import VideoBox from '@/components/VideoBox';
 import { useVideoPlay } from '../hooks/useVideoPlay';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/Buttons';
+import { useLaunchToApp } from '@/hooks/useLaunchTo';
 
 const AboutDownload = styled.div`
   margin-top: 346rem;
@@ -59,10 +60,16 @@ const AboutDownload = styled.div`
 const Blog = () => {
   // const { targetRef: targetRef1, videoRef: videoRef4 } = useVideoPlay();
   const router = useRouter();
+  const { appLink, launchTo } = useLaunchToApp();
 
   return (
     <AboutDownload className="lax-bigger" data-lax-anchor="self">
-      <Image unoptimized src={require('@img/home/temp-about-download.png')} alt="" className="face" />
+      <Image
+        unoptimized
+        src={require('@img/home/temp-about-download.png')}
+        alt=""
+        className="face"
+      />
       {/* <VideoBox className="two face" src="/video/video-4.mp4" ref={videoRef4}></VideoBox> */}
 
       <main className="about-download-main">
@@ -77,7 +84,9 @@ const Blog = () => {
           <Button className="btn" onClick={() => router.push('/product')}>
             Download
           </Button>
-          <Button className="btn mt-46 md:mt-0 md:ml-31">Get Started</Button>
+          <Button className="btn mt-46 md:mt-0 md:ml-31" onClick={() => launchTo(appLink.current)}>
+            Get Started
+          </Button>
         </div>
       </main>
     </AboutDownload>
