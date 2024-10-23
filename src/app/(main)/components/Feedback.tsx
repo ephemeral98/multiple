@@ -144,7 +144,7 @@ const Feedback: React.FC = () => {
       avatar: require('@img/home/avatar4.png'),
       name: 'Node Ninja',
       content: [
-        `I was lucky to get whitelist access to participate in Multiple Network's testnet. The process has been smooth and rewarding, allowing me to share resources effortlessly while earning rewards. It’s exciting to be part of this innovative platform and see its potential firsthand.`,
+        `Using Multiple Network means taking control of my privacy. I no longer have to worry about harassing calls or scam messages, as my information is kept secure through Multiple's technology. It feels great to have my privacy back in my own hands!  - Xavier Siah`,
       ],
       deg: 0,
     },

@@ -87,19 +87,19 @@ const About = () => {
 
           <div className="main-text text-27 md:text-14">
             <div>
-              We are a team of ecosystem builders and network architects leveraging SD-WAN
-              technology to build a network layer to enable high-powered transmission of digital
-              assts and data possible.
+              Multiple Network is a privacy-protection and transmission acceleration network based
+              on P2P and SD-WAN (Software-Defined Wide Area Network) technologies.
             </div>
             <div>
-              By creating multiple parallel channels to optimise bandwidth, our solution beautifully
-              meets the constant need to feed sophisticated AI models with proprietary data,
-              ensuring that it is sent with speed, privacy and cost-efficiency through our
-              decentralised flotilla of bandwidth providers.
+              By aggregating the bandwidth of distributed node users, it creates a programmable P2P
+              network. Users can leverage this network’s API to enable anonymous communication and
+              high-speed encrypted data transmission.
             </div>
             <div>
-              Critically, it also enables remote teams and individuals to work and share across
-              borders without hiccups in connectivity.
+              Compared to traditional anonymous networks like TOR, Multiple offers higher bandwidth
+              and lower latency. Its current use cases focus on input-side privacy protection in AI
+              model calls, search engine interactions, and large-scale data encryption and
+              acceleration. The first phase testnet of Multiple Network launched in August 2024.
             </div>
           </div>
         </div>

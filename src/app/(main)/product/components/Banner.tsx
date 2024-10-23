@@ -113,14 +113,14 @@ const Banner = () => {
       <main className="banner-content">
         <div className="banner-text">
           <div className="text-46 md:text-64 text-up">
-            <div>Monetise your</div>
-            <div> internet connection.</div>
-            <div> Join and earn.</div>
+            <div>Building a decentralized</div>
+            <div> network to fuel private</div>
+            <div> encrypted transmission.</div>
           </div>
           <div className="content px-30 md:px-0 mt-33 text-23 md:text-20 leading-[1.4]">
-            <div>Our AI-powered network layer revolutionises the way data is transmitted by</div>
-            <div>allowing multiple simultaneous channels through your current bandwidth and</div>
-            <div>intelligently selects the best private nodes for point to point navigation.</div>
+            <div>Multiple Network is a privacy-focused, transmission acceleration network</div>
+            <div>leveraging P2P and SD-WAN technologies, enabling anonymous</div>
+            <div>communication and encrypted high-speed data transfer.</div>
           </div>
         </div>
 
