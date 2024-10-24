@@ -64,8 +64,8 @@ const ProductWrap = styled.div<{ $end: boolean }>`
       white-space: nowrap;
       color: #fff;
 
-      &.download-linux {
-        background: linear-gradient(180deg, #567ecd 0%, #15236c 100%);
+      &:hover {
+        background-image: linear-gradient(180deg, #567ecd 0%, #15236c 100%);
         border: none;
       }
 
@@ -125,7 +125,7 @@ const Product = () => {
               alt=""
             />
 
-            <div>Downloads windows</div>
+            <div>Download for Windows</div>
           </button>
 
           <button
@@ -141,7 +141,7 @@ const Product = () => {
               alt=""
             />
 
-            <div>Downloads Linux</div>
+            <div>Download for Linux</div>
           </button>
         </div>
       </section>
