@@ -144,7 +144,7 @@ const Feedback: React.FC = () => {
       avatar: require('@img/home/avatar4.png'),
       name: 'Node Ninja',
       content: [
-        `Using Multiple Network means taking control of my privacy. I no longer have to worry about harassing calls or scam messages, as my information is kept secure through Multiple's technology. It feels great to have my privacy back in my own hands!  - Xavier Siah`,
+        `I was lucky to get whitelist access to participate in Multiple Network's testnet. The process has been smooth and rewarding, allowing me to share resources effortlessly while earning rewards. It’s exciting to be part of this innovative platform and see its potential firsthand.`,
       ],
       deg: 0,
     },
@@ -158,6 +158,19 @@ const Feedback: React.FC = () => {
       name: 'Ethan Brooks',
       content: [
         `Decentralized WAN is changing how we connect and share resources. Multiple Network uses this cool tech to make things more efficient, secure, and affordable. With decentralized control, it boosts privacy, cuts costs, and keeps connections reliable. It’s a big step forward for networking!`,
+      ],
+      deg: 0,
+    },
+    {
+      text: '6',
+      active: false,
+      readyRun: false,
+      back: false,
+      readyBack: false,
+      avatar: require('@img/home/avatar6.png'),
+      name: 'Xavier Siah',
+      content: [
+        `Using Multiple Network means taking control of my privacy. I no longer have to worry about harassing calls or scam messages, as my information is kept secure through Multiple's technology. It feels great to have my privacy back in my own hands!`,
       ],
       deg: 0,
     },
