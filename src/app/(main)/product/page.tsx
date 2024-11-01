@@ -130,7 +130,7 @@ const Product = () => {
 
           <button
             onClick={() => {
-              Message.info('Coming soon');
+              window.open('https://cdn.app.multiple.cc/client/MultipleForLinux.tar');
             }}
             className="download-btn download-linux ml-25 text-27 md:text-14 flex-center"
           >
