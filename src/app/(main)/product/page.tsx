@@ -13,6 +13,7 @@ import StepMob from './components/StepComp/StepMob';
 import { useState } from 'react';
 import { Message } from '@arco-design/web-react';
 import { $width } from '@/styled/mediaSize';
+import { useTonWallet } from '@tonconnect/ui-react';
 
 const ProductWrap = styled.div<{ $end: boolean }>`
   line-height: 1;
@@ -76,6 +77,22 @@ const ProductWrap = styled.div<{ $end: boolean }>`
     }
   }
 `;
+
+export const Wallet = () => {
+  const wallet = useTonWallet();
+
+  return (
+    <div className="w-300 h-300 bg-[tomato]">
+      <div>Lorem ipsum dolor sit.</div>
+      {wallet && (
+        <div className="w-300 h-300 bg-skyblue">
+          <span>Connected wallet: {wallet.name}</span>
+          <span>Device: {wallet.device.appName}</span>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Product = () => {
   const appStore = useAppStore();
@@ -145,6 +162,8 @@ const Product = () => {
           </button>
         </div>
       </section>
+
+      <Wallet />
 
       <main className="mt-216 pb-192 md:pb-224">
         <ProductHeader>How to use Multiple</ProductHeader>

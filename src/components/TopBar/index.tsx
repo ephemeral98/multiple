@@ -8,6 +8,10 @@ import { useTopBar } from './useTopBar';
 import { GetStartBtn } from '../Community';
 import Button from '../Buttons';
 import { useLaunchToApp } from '@/hooks/useLaunchTo';
+import useTonWallet from '@/hooks/useWallet/useTonWallet';
+import { TonConnectButton } from '@tonconnect/ui-react';
+import ConnectTonButton from '../Buttons/ConnectTonButton';
+import { useTonConnectModal } from '@tonconnect/ui-react';
 
 const TopBarWrap = styled.header`
   position: absolute;
@@ -71,6 +75,9 @@ const TopBar = () => {
   const router = useRouter();
   const { navList } = useTopBar();
   const { appLink, launchTo } = useLaunchToApp();
+  const { connectWallet, walletAddress } = useTonWallet();
+
+  const { open, close, state } = useTonConnectModal();
 
   return (
     <TopBarWrap>
@@ -105,9 +112,17 @@ const TopBar = () => {
 
         <div className="flex-center">
           <Button onClick={() => router.push('/product')}>Download</Button>
-          <Button onClick={() => launchTo(appLink.current)} className={'ml-31'}>
-            Get Started
+          <Button
+            onClick={() => {
+              open();
+            }}
+            className={'ml-31'}
+          >
+            Get Started::{walletAddress}
           </Button>
+
+          <TonConnectButton className="connect-ton-btn" />
+          <ConnectTonButton />
         </div>
       </div>
     </TopBarWrap>

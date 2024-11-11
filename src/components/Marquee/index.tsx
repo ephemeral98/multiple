@@ -3,17 +3,17 @@ import { isClient } from '@/utils';
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
-const MarqueeWrap = styled.div<{ calcwidth: string; trans: string; duration: string }>`
+const MarqueeWrap = styled.div<{ $calcwidth: string; $trans: string; $duration: string }>`
   @keyframes marquee {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(${(props) => props.trans});
+      transform: translateX(${(props) => props.$trans});
     }
   }
 
-  width: ${(props) => props.calcwidth};
+  width: ${(props) => props.$calcwidth};
   overflow: hidden;
 
   display: flex;
@@ -26,7 +26,7 @@ const MarqueeWrap = styled.div<{ calcwidth: string; trans: string; duration: str
 
   .moving-text {
     flex: 0 0 100%;
-    animation: marquee ${(props) => props.duration} linear infinite;
+    animation: marquee ${(props) => props.$duration} linear infinite;
   }
 `;
 
@@ -72,9 +72,9 @@ const Marquee = (props: {
   return (
     <MarqueeWrap
       className={`${props.className} ${duration === '0s' ? 'stick' : ''}`}
-      calcwidth={calcWidth}
-      trans={trans}
-      duration={duration}
+      $calcwidth={calcWidth}
+      $trans={trans}
+      $duration={duration}
     >
       <div className="moving-text" ref={MarqueeContentRef}>
         {props.children}
