@@ -17,6 +17,12 @@ import { $width } from '@/styled/mediaSize';
 const ProductWrap = styled.div<{ $end: boolean }>`
   line-height: 1;
 
+  li {
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+  }
+
   .arco-affix {
     position: ${(props) => (props.$end ? 'static' : 'fixed')} !important;
   }
@@ -60,18 +66,61 @@ const ProductWrap = styled.div<{ $end: boolean }>`
       ${$width('280rem', '319rem', '319rem')}
       height: 87rem;
       font-size: 20rem;
+      position: relative;
 
       white-space: nowrap;
       color: #fff;
 
-      &:hover {
-        background-image: linear-gradient(180deg, #567ecd 0%, #15236c 100%);
+      &.border-none {
         border: none;
+      }
+
+      .download-linux {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 10rem;
       }
 
       @media (max-width: 750px) {
         padding: 37rem 52rem;
         border-radius: 19rem;
+      }
+
+      .download-panel {
+        width: 100%;
+        /* height: 102rem; */
+        max-height: 0;
+        position: absolute;
+        left: 0;
+        top: 84rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0 24rem;
+        font-size: 16rem;
+        transition: all 0.3s ease-in-out;
+        border: solid 1px transparent;
+        border-top: none;
+        border-radius: 0 0 16rem 16rem;
+
+        .panel-item {
+          flex: 1;
+          ${flexPos('space-between')}
+          cursor: pointer;
+          overflow: hidden;
+        }
+      }
+
+      &:hover {
+        background: linear-gradient(180deg, #567ecd 0%, #15236c 100%);
+        border: none;
+
+        .download-panel {
+          max-height: 300rem;
+          padding: 22rem 24rem;
+          border: solid 1px #fff;
+          border-top: none;
+        }
       }
     }
   }
@@ -128,20 +177,40 @@ const Product = () => {
             <div>Download for Windows</div>
           </button>
 
-          <button
-            onClick={() => {
-              window.open('https://cdn.app.multiple.cc/client/MultipleForLinux.tar');
-            }}
-            className="download-btn download-linux ml-25 text-27 md:text-14 flex-center"
-          >
-            <Image
-              priority
-              className="w-36 mr-8"
-              src={require('@img/product/icon-linux.png')}
-              alt=""
-            />
+          <button className="download-btn p-0! ml-25 text-27 md:text-14  cursor-auto!">
+            <div className="download-linux flex-center cursor-pointer">
+              <Image
+                priority
+                className="w-36 mr-8"
+                src={require('@img/product/icon-linux.png')}
+                alt=""
+              />
 
-            <div>Download for Linux</div>
+              <div>Downloads Linux</div>
+            </div>
+
+            <div className={'download-panel'}>
+              <li
+                className="panel-item"
+                onClick={() => {
+                  window.open('https://cdn.app.multiple.cc/client/linux/x64/multipleforlinux.tar');
+                }}
+              >
+                <div>Download for Linux</div>
+                <div>x64</div>
+              </li>
+              <li
+                className="panel-item mt-22"
+                onClick={() => {
+                  window.open(
+                    'https://cdn.app.multiple.cc/client/linux/arm64/multipleforlinux.tar'
+                  );
+                }}
+              >
+                <div>Download for Linux</div>
+                <div>arm64</div>
+              </li>
+            </div>
           </button>
         </div>
       </section>
