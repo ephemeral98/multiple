@@ -8,6 +8,7 @@ import { useTopBar } from './useTopBar';
 import { GetStartBtn } from '../Community';
 import Button from '../Buttons';
 import { useLaunchToApp } from '@/hooks/useLaunchTo';
+import { topbarHeight } from '@/styled/var';
 
 const TopBarWrap = styled.header`
   position: absolute;
@@ -17,7 +18,7 @@ const TopBarWrap = styled.header`
   backdrop-filter: blur(3px);
 
   .topbar-content {
-    height: 100rem;
+    height: ${topbarHeight};
     margin: 0 auto;
     ${flexPos('space-between')}
 
