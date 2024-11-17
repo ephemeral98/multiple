@@ -121,7 +121,7 @@ const TopBar = () => {
             Get Started::{walletAddress}
           </Button>
 
-          <TonConnectButton className="connect-ton-btn" />
+          {/* <TonConnectButton className="connect-ton-btn" /> */}
           <ConnectTonButton />
         </div>
       </div>

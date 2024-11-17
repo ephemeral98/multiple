@@ -74,7 +74,7 @@ export default function RootLayout({
         {/* {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />} */}
 
         {showApp && (
-          <TonConnectUIProvider manifestUrl="http://192.168.1.101:3000/tonconnect-manifest.json">
+          <TonConnectUIProvider manifestUrl="https://ton-connect.github.io/demo-dapp-with-wallet/tonconnect-manifest.json">
             <Wrapper>
               <div slot="left" className="h-full">
                 <Suspense></Suspense>
