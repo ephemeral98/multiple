@@ -66,7 +66,7 @@ export const swapQueue = <T>(queue: T[], inx1: number, inx2: number): T[] => {
  * @param frontLen 前面多少颗星星
  * @param endLen 结尾多少个星星
  */
-export function plusStar(str: string, frontLen: number, endLen: number) {
+export const plusStar = (str: string, frontLen: number, endLen: number) => {
   if (str?.length === undefined) return '';
   var len = str.length - frontLen - endLen;
   var xing = '';
@@ -74,4 +74,4 @@ export function plusStar(str: string, frontLen: number, endLen: number) {
     xing = '****';
   }
   return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
-}
+};

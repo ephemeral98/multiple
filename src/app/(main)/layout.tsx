@@ -17,6 +17,7 @@ import initRem from '@/utils/initRem';
 import useAppStore from '@/store/appStore';
 import { useCountDown } from 'ahooks';
 import { useCopy } from '@/hooks';
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
 const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({
@@ -70,17 +71,19 @@ export default function RootLayout({
         <meta name="author" content="Multiple" />
       </head>
       <body id="app" className={`${inter.className} app`}>
-        {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />}
+        {/* {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />} */}
 
         {showApp && (
-          <Wrapper>
-            <div slot="left" className="h-full">
-              <Suspense></Suspense>
-            </div>
-            <div slot="main" className="h-full">
-              {children}
-            </div>
-          </Wrapper>
+          <TonConnectUIProvider manifestUrl="https://ton-connect.github.io/demo-dapp-with-wallet/tonconnect-manifest.json">
+            <Wrapper>
+              <div slot="left" className="h-full">
+                <Suspense></Suspense>
+              </div>
+              <div slot="main" className="h-full">
+                {children}
+              </div>
+            </Wrapper>
+          </TonConnectUIProvider>
         )}
       </body>
     </html>
