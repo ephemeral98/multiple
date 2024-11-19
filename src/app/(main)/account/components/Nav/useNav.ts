@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react';
 
-export enum EAccountTag {
+export enum EAccountKey {
   account = 'account',
   nft = 'nft',
 }
 
 export interface IAccountNav {
-  tag: EAccountTag;
+  key: EAccountKey;
   text: string;
   active: boolean;
 }
@@ -14,12 +14,12 @@ export interface IAccountNav {
 export const useNav = () => {
   const [navList, setNavList] = useState<IAccountNav[]>([
     {
-      tag: EAccountTag.account,
+      key: EAccountKey.account,
       text: 'Account',
       active: true,
     },
     {
-      tag: EAccountTag.nft,
+      key: EAccountKey.nft,
       text: 'NFT',
       active: false,
     },
@@ -29,9 +29,9 @@ export const useNav = () => {
     return navList.find((item) => item.active);
   }, [navList]);
 
-  const updateNav = (nav: IAccountNav) => {
+  const updateNavByKey = (navKey: EAccountKey) => {
     const newwList = navList.map((item) => {
-      item.active = item.tag === nav.tag;
+      item.active = item.key === navKey;
       return item;
     });
     setNavList(newwList);
@@ -41,6 +41,6 @@ export const useNav = () => {
     navList,
     activeNav,
     setNavList,
-    updateNav,
+    updateNavByKey,
   };
 };

@@ -1,7 +1,7 @@
 'use client';
 
 import { styled } from 'styled-components';
-import { IAccountNav, useNav } from './useNav';
+import { EAccountKey, IAccountNav, useNav } from './useNav';
 import { FC } from 'react';
 
 const NavPcWrap = styled.div`
@@ -20,7 +20,7 @@ const NavPcWrap = styled.div`
   }
 `;
 
-const NavPc: FC<{ navList: IAccountNav[]; onClickNav: (nav: IAccountNav) => void }> = ({
+const NavPc: FC<{ navList: IAccountNav[]; onClickNav: (navKey: EAccountKey) => void }> = ({
   navList,
   onClickNav,
 }) => {
@@ -28,8 +28,8 @@ const NavPc: FC<{ navList: IAccountNav[]; onClickNav: (nav: IAccountNav) => void
     <NavPcWrap>
       {navList.map((nav) => (
         <div
-          onClick={() => onClickNav(nav)}
-          key={nav.tag}
+          onClick={() => onClickNav(nav.key)}
+          key={nav.key}
           className={`nav-item ${nav.active && 'active'}`}
         >
           {nav.text}
