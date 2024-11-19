@@ -29,7 +29,12 @@ const NftPurchaseWrap = styled.div`
 `;
 
 const NftPurchase: React.FC = () => {
-  const { open } = useModal(BuyNftPop, {});
+  const { open } = useModal(BuyNftPop, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+  });
 
   return (
     <NftPurchaseWrap>

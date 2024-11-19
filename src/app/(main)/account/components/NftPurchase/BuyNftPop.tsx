@@ -1,8 +1,9 @@
 'use client';
 
 import { styled } from 'styled-components';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Image from 'next/image';
+import Form from '@/components/Form';
 
 interface IBuyNftPop {
   onClose: () => void;
@@ -11,12 +12,45 @@ interface IBuyNftPop {
 const BuyNftPopWrap = styled.div`
   background-color: #1a1d1f;
   width: 591rem;
-  height: 671rem;
+  /* height: 671rem; */
+  padding-bottom: 61rem;
   border-radius: 24rem;
   position: relative;
+
+  .addr-inp {
+    width: 504rem;
+    height: 72rem;
+    border-radius: 20rem;
+    border: solid 1px #d9d9d9;
+    margin: 0 auto;
+    padding: 0 24rem;
+    font-size: 16rem;
+    color: #fff;
+  }
+
+  .form-btn {
+    width: 370rem;
+    height: 70rem;
+    border-radius: 10rem;
+    font-size: 16rem;
+    margin: 0 auto;
+
+    &.submit-btn {
+      background-color: #fff;
+      color: #1a1d1f;
+      margin-top: 46rem;
+    }
+
+    &.cancel-btn {
+      border: solid 1rem #fff;
+      margin-top: 32rem;
+    }
+  }
 `;
 
 const BuyNftPop: FC<IBuyNftPop> = (props) => {
+  const [addrInp, setAddrInp] = useState('');
+
   return (
     <BuyNftPopWrap>
       <Image
@@ -28,7 +62,60 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
           props.onClose();
         }}
       />
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa, facilis?
+
+      <div className="flex-center pt-32 text-20">Buy NFTs</div>
+
+      <section className="text-center mt-67 px-28">
+        <div>Price</div>
+        <div className="text-24 font-bold mt-16">1200USDT</div>
+        <div className="mt-45 mb-24 flex-center">
+          <div className="text-16">Promotion code (optional)</div>
+          <Image
+            className="w-16 ml-11 cursor-pointer"
+            priority
+            src={require('@img/common/icon-query.png')}
+            alt=""
+            onClick={() => {
+              console.log('click');
+            }}
+          />
+        </div>
+
+        <Form.Wrap
+          onError={(err) => {
+            console.log('这里可以获取错误消息, true则是无错误', err);
+            if (err !== true) {
+              window.alert(err);
+            }
+          }}
+          onSubmit={async () => {
+            // 如果rules规则不通过 或者 isRequired不通过，则不会触发这个callback
+            // await fetch(); // 等待提交表单
+            // window.alert('提交成功');
+            console.log('提交成功');
+          }}
+        >
+          <Form.Inp
+            className="addr-inp"
+            isRequired="Please enter wallet address" // 这里可设置必填，value是提示
+            name="one" // name不要写相同的
+            value={addrInp}
+            onChange={(e) => setAddrInp(e.target.value)}
+            rules={(value) => {
+              if (!/^\d+/.test(value)) {
+                return '*The wallet address you entered is not a valid discount code, please re-enter!';
+              }
+
+              return true; // 必须只有 严格return true 才会通过规则
+            }}
+          />
+
+          <Form.Btn className="form-btn submit-btn">BUY NOW</Form.Btn>
+          <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
+            Cancel
+          </button>
+        </Form.Wrap>
+      </section>
     </BuyNftPopWrap>
   );
 };
