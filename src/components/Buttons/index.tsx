@@ -6,6 +6,7 @@ interface IPropsStartBtn {
   style?: CSSProperties;
   className?: string;
   children?: React.ReactNode;
+  staticLight?: boolean;
   onClick?: () => void;
 }
 
@@ -17,16 +18,18 @@ const ButtonWrap = styled.button`
   padding: 16rem 24rem;
   transition: all 0.4s;
 
-  &:hover {
-    background-color: #fff;
-    color: #000;
+  &.hightlight {
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
   }
 `;
 const Button = (props: IPropsStartBtn) => {
   return (
     <ButtonWrap
       style={props.style}
-      className={props.className}
+      className={`${!props.staticLight ? 'hightlight' : ''} ${props.className}`}
       onClick={() => {
         if (props.onClick) {
           props.onClick();

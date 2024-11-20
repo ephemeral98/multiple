@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Rules from './Rules';
 import { useModal } from '@/hooks/useModal';
 import BuyNftPop from './BuyNftPop';
+import { useState } from 'react';
 
 const NftPurchaseWrap = styled.div`
   width: 1100rem;
@@ -35,6 +36,8 @@ const NftPurchase: React.FC = () => {
       exitActive: 'animate__animated animate__fadeOut',
     },
   });
+
+  const [quantity, setQuantity] = useState('');
 
   return (
     <NftPurchaseWrap>
@@ -76,20 +79,32 @@ const NftPurchase: React.FC = () => {
                   src={require('@img/common/icon-sub.png')}
                   alt=""
                   onClick={() => {
-                    console.log('click');
+                    if (+quantity <= 0) {
+                      return;
+                    }
+                    setQuantity(String(+quantity - 1));
                   }}
                 />
 
-                <input type="text" className="inp" />
+                <input
+                  type="text"
+                  className="inp"
+                  value={quantity}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    const reg = /^[1-9]\d*$/;
+                    if (newValue === '' || reg.test(newValue)) {
+                      setQuantity(newValue);
+                    }
+                  }}
+                />
 
                 <Image
                   className="w-20 cursor-pointer"
                   priority
                   src={require('@img/common/icon-plus.png')}
                   alt=""
-                  onClick={() => {
-                    console.log('click');
-                  }}
+                  onClick={() => setQuantity(String(+quantity + 1))}
                 />
               </div>
             </div>

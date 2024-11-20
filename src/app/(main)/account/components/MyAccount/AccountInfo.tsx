@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
+import { useTonAddress } from '@tonconnect/ui-react';
 
 const AccountInfoWrap = styled.div`
   max-width: 870rem;
@@ -28,6 +29,8 @@ const AccountInfoWrap = styled.div`
 `;
 
 const AccountInfo = () => {
+  const walletAddress = useTonAddress();
+
   return (
     <AccountInfoWrap>
       <div className="text-24 mb-32">Account Information</div>
@@ -36,16 +39,13 @@ const AccountInfo = () => {
         <div className="account-item">
           <div className="title">Wallet Account</div>
           <div className="flex items-center">
-            <div className="content">usdfdfsdfslkdfjlksjklsjfjlsdkjfkldsjfklsjdfljsdklfj</div>
+            <div className="content">{walletAddress}</div>
             <Image
               priority
-              data-clipboard-text={'alksjdlkjs'}
+              data-clipboard-text={walletAddress}
               className="w-26 md:w-20 ml-5 copy-btn cursor-pointer"
               src={require('@img/common/icon-copy.svg')}
               alt=""
-              onClick={() => {
-                console.log('click');
-              }}
             />
           </div>
         </div>
