@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useTonConnectUI } from '@tonconnect/ui-react';
+import { useTonConnectModal, useTonConnectUI } from '@tonconnect/ui-react';
 import Button from '.';
 import { plusStar } from '@/utils';
 import TonWeb from 'tonweb';
+import TestTon from './TestTon';
 
 const ConnectWallet = () => {
   const [tonConnectUI] = useTonConnectUI(); // 获取 TonConnect 实例
   const [connected, setConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState('');
   const [wallet, setWallet] = useState(null);
+  const { open, close, state } = useTonConnectModal();
 
   useEffect(() => {
     // 状态变化处理函数
@@ -43,7 +45,7 @@ const ConnectWallet = () => {
   // const tonweb = new TonWeb();
   const provider = new TonWeb.HttpProvider('https://toncenter.com/api/v2/jsonRPC', {
     // apiKey: 'YOUR_TONCENTER_API_KEY', // 替换为你的 API 密钥
-    apiKey: 'd75f0995d491f9ac7df1694300f628d91654c790ec69547fe57bd08d2327e665',
+    apiKey: '16ef4ba09eac9ab5c1f919ed7a7e913483435d1a8e5f88f0eb1a6831837ace81',
   });
 
   const COLLECTION_ADDRESS = 'EQD4Vnk_OhtrHPpCS53jXoxH6Hmfcz3Itm3iF8mrliiCYIPh'; // 你的 NFT 集合合约地址
@@ -215,6 +217,7 @@ const ConnectWallet = () => {
   });
 
   if (connected) {
+    return <TestTon />
     return (
       <Button
         onClick={() => {

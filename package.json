@@ -11,6 +11,9 @@
   "dependencies": {
     "@arco-design/web-react": "^2.60.1",
     "@studio-freight/lenis": "^1.0.42",
+    "@ton/core": "^0.59.0",
+    "@ton/crypto": "^3.3.0",
+    "@ton/ton": "^15.1.0",
     "@tonconnect/sdk": "^3.0.5",
     "@tonconnect/ui-react": "^2.0.9",
     "ahooks": "^3.7.10",
