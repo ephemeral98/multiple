@@ -186,7 +186,7 @@ const Product = () => {
                 alt=""
               />
 
-              <div>Downloads Linux</div>
+              <div>Download for Linux</div>
             </div>
 
             <div className={'download-panel'}>
