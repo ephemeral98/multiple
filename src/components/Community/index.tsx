@@ -62,7 +62,7 @@ const Community = (props: IProps) => {
         className="icon-community cursor-pointer"
         src={require('@img/common/icon-tg.png')}
         alt=""
-        onClick={() => window.open('https://t.me/MultipleOfficialGroup')}
+        onClick={() => window.open('https://t.me/MultipleNetworkOfficialGroup')}
       />
     </CommunityWrap>
   );
