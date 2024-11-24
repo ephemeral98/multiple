@@ -79,3 +79,11 @@ export const $marginY = (px1: string, px2: string, px3: string) => css`
   ${templateSize('margin-top', px1, px2, px3)}
   ${templateSize('margin-bottom', px1, px2, px3)}
 `;
+
+export const $maxWidth = (px1: string, px2: string, px3: string) => css`
+  ${templateSize('max-width', px1, px2, px3)}
+`;
+
+export const $minWidth = (px1: string, px2: string, px3: string) => css`
+  ${templateSize('min-width', px1, px2, px3)}
+`;

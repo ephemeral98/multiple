@@ -81,7 +81,7 @@ const Input = (props: IProps) => {
           handleInputChange(e);
         }}
       />
-      <div className="text-#FF6C4C mt-12">{String(errTips)}</div>
+      <div className="text-#FF6C4C mt-12 text-20 text-14">{String(errTips)}</div>
       {/* <div>{JSON.stringify(state)}</div> */}
     </>
   );

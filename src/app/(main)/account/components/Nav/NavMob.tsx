@@ -5,12 +5,27 @@ import { EAccountKey, IAccountNav, useNav } from './useNav';
 import { FC } from 'react';
 import { Tabs, Typography } from '@arco-design/web-react';
 const TabPane = Tabs.TabPane;
-const style = {
-  textAlign: 'center',
-  marginTop: 20,
-};
 
 const NavMobWrap = styled.div`
+  width: 100%;
+  margin-bottom: 52rem;
+
+  .arco-tabs-header-title {
+    font-size: 31rem;
+    color: #fff;
+
+    &.arco-tabs-header-title-active {
+      color: #fff;
+      font-size: 46rem;
+    }
+  }
+
+  .arco-tabs-header-nav {
+    &::before {
+      height: 0;
+    }
+  }
+
   .arco-tabs-header-ink {
     background-color: #fff;
   }
@@ -23,7 +38,7 @@ const NavMob: FC<{ navList: IAccountNav[]; onClickNav: (navTag: EAccountKey) => 
   return (
     <NavMobWrap>
       <Tabs
-        className={''}
+        className={'w-full'}
         defaultActiveTab="1"
         onClickTab={(e: string) => {
           onClickNav(e as EAccountKey);

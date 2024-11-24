@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { FC, useState } from 'react';
 import Image from 'next/image';
 import Form from '@/components/Form';
+import { $fontSize, $height, $width } from '@/styled/mediaSize';
 
 interface IBuyNftPop {
   onClose: () => void;
@@ -11,7 +12,7 @@ interface IBuyNftPop {
 
 const BuyNftPopWrap = styled.div`
   background-color: #1a1d1f;
-  width: 591rem;
+  ${$width('90%', '591rem', '591rem')}
   /* height: 671rem; */
   padding-bottom: 61rem;
   border-radius: 24rem;
@@ -19,20 +20,21 @@ const BuyNftPopWrap = styled.div`
 
   .addr-inp {
     width: 504rem;
-    height: 72rem;
+    /* ${$width('90%', '504rem', '504rem')} */
+    ${$height('82rem', '72rem', '72rem')}
     border-radius: 20rem;
     border: solid 1px #d9d9d9;
     margin: 0 auto;
     padding: 0 24rem;
-    font-size: 16rem;
+    ${$fontSize('24rem', '16rem', '16rem')}
     color: #fff;
   }
 
   .form-btn {
     width: 370rem;
-    height: 70rem;
+    ${$height('82rem', '70rem', '70rem')}
+    ${$fontSize('24rem', '16rem', '16rem')}
     border-radius: 10rem;
-    font-size: 16rem;
     margin: 0 auto;
 
     &.submit-btn {
@@ -63,15 +65,15 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
         }}
       />
 
-      <div className="flex-center pt-32 text-20">Buy NFTs</div>
+      <div className="flex-center pt-32 text-28 md:text-20">Buy NFTs</div>
 
       <section className="text-center mt-67 px-28">
         <div>Price</div>
-        <div className="text-24 font-bold mt-16">1200USDT</div>
+        <div className="text-26 md:text-24 font-bold mt-16">1200USDT</div>
         <div className="mt-45 mb-24 flex-center">
-          <div className="text-16">Promotion code (optional)</div>
+          <div className="text-20 md:text-16">Promotion code (optional)</div>
           <Image
-            className="w-16 ml-11 cursor-pointer"
+            className="w-20 md:w-16 ml-11 cursor-pointer"
             priority
             src={require('@img/common/icon-query.png')}
             alt=""

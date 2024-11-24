@@ -21,7 +21,7 @@ const TestTon: FC<{}> = () => {
     // const address2 = new TonWeb.utils.Address('EQCe18j7pOFw9-oqZ-JW3a8NRgMU6-7cPnV_BLgQnnxGiAO0');
 
     client.runMethod(address, 'get_collection_data', []).then((resp) => {
-      console.log('respppp...', resp.stack.items);
+      console.log('respppp...', resp.stack);
       // console.log('respppp...', resp.stack.items[1].cell.toString());
 
       const tt = resp.stack.items.filter((item, inx) => inx > 0);
@@ -133,7 +133,7 @@ const TestTon: FC<{}> = () => {
   };
 
   useEffect(() => {
-    handleMint();
+    fetchAccountData();
   }, []);
 
   return (

@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import TonWeb from 'tonweb';
 import TestTon from './TestTon';
 
-const AddrWrap = styled.div`
+export const AddrWrap = styled.div`
   border-right: solid 1px #fff;
   padding-right: 8rem;
   margin-right: 8rem;
@@ -49,6 +49,8 @@ const ConnectWallet = () => {
     tonConnectUI.disconnect();
     setConnected(false);
   };
+
+  // return <TestTon />
 
   if (connected) {
     return (

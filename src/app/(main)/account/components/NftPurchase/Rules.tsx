@@ -1,20 +1,23 @@
 'use client';
+import { $fontSize, $marginBottom, $paddingX } from '@/styled/mediaSize';
 import { styled } from 'styled-components';
 
 const RulesWrap = styled.div`
+  ${$paddingX('60rem', '0', '0')}
+
   .rule-title {
-    font-size: 24rem;
+    ${$fontSize('31rem', '24rem', '24rem')}
+    ${$marginBottom('31rem', '21rem', '21rem')}
     font-weight: bold;
-    margin-bottom: 21rem;
     color: #fff;
   }
 
   .rule-content {
-    font-size: 16rem;
+    ${$fontSize('23rem', '16rem', '16rem')}
     color: #5c5c5c;
 
     > div {
-      font-size: 16rem;
+      ${$fontSize('23rem', '16rem', '16rem')}
       color: #5c5c5c;
 
       &:not(:first-child) {
@@ -33,7 +36,7 @@ const RulesWrap = styled.div`
 const Rules: React.FC = () => {
   return (
     <RulesWrap>
-      <div className="rule-title">Pioneer NFT Rules</div>
+      <div className="rule-title mb-41! md:mb-21!">Pioneer NFT Rules</div>
 
       <div className="rule-item">
         <div className="rule-title">Introduction</div>
