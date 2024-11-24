@@ -25,7 +25,6 @@ const ConnectWallet: FC<IConnectBtn> = (props) => {
   // const walletAddress = useTonAddress();
   // const router = useRouter();
   // const [tonConnectUI] = useTonConnectUI(); // 获取 TonConnect 实例
-  const [wallet, setWallet] = useState(null);
   // const { open, close, state } = useTonConnectModal();
 
   if (props.connected) {

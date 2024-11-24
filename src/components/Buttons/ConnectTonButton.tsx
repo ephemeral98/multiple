@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useTonConnectModal, useTonConnectUI, useTonAddress } from '@tonconnect/ui-react';
+import {
+  useTonConnectModal,
+  useTonConnectUI,
+  useTonAddress,
+  ConnectedWallet,
+} from '@tonconnect/ui-react';
 import Button from '.';
 import Image from 'next/image';
 import { plusStar } from '@/utils';
@@ -20,12 +25,12 @@ const ConnectWallet = () => {
   const router = useRouter();
   const [tonConnectUI] = useTonConnectUI(); // 获取 TonConnect 实例
   const [connected, setConnected] = useState(false);
-  const [wallet, setWallet] = useState(null);
+  const [wallet, setWallet] = useState<ConnectedWallet | null>(null);
   const { open, close, state } = useTonConnectModal();
 
   useEffect(() => {
     // 状态变化处理函数
-    const handleStatusChange = (wallet) => {
+    const handleStatusChange = (wallet: ConnectedWallet | null) => {
       console.log('wallet...', wallet);
       if (wallet) {
         setWallet(wallet);
@@ -50,7 +55,7 @@ const ConnectWallet = () => {
     setConnected(false);
   };
 
-  // return <TestTon />
+  return <TestTon />
 
   if (connected) {
     return (
