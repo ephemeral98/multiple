@@ -1,4 +1,4 @@
-import { Address, TonClient, TupleReader } from '@ton/ton';
+import { Address, TonClient, TupleReader, Tuple, Cell } from '@ton/ton';
 import { FC, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import TonWeb from 'tonweb';
@@ -47,7 +47,6 @@ const TestTon: FC<{}> = () => {
     //   console.log('rrrrrr', r.readAddress().toString());
     // });
 
-
     for (let i = 0, len = 7; i < len; i++) {
       client
         .runMethod(address, 'get_nft_address_by_index', [{ type: 'int', value: BigInt(i) }])
@@ -65,16 +64,43 @@ const TestTon: FC<{}> = () => {
           client.runMethod(Address.parse(addr), 'get_nft_data', []).then((resp) => {
             console.log('resppppsss...', resp.stack);
             const tt = resp.stack.items.filter((item, inx) => inx === 3);
-            console.log('ttttt', tt);
-
             const r = new TupleReader(tt);
 
-            // const tt2 = resp.stack.items.filter((item, inx) => inx === 5);
+            const tt1 = resp.stack.items.filter((item, inx) => inx === 1);
+            const r1 = new TupleReader(tt1);
+            const res1 = r1.readNumber();
+            console.log('res1...', res1);
 
-            // const r2 = new TupleReader(tt2);
-            // console.log('r2222', r2.readString());
+            const tt2 = resp.stack.items.filter((item, inx) => inx === 4);
+            console.log('tt2222', tt2);
+            const r2 = new TupleReader(tt2);
 
-            
+            const res2 = r2.readString();
+            console.log('res2...', res2);
+
+            const tt3 = resp.stack.items.filter((item, inx) => inx === 0);
+            const r3 = new TupleReader(tt3);
+            console.log('r3333', r3.readBoolean());
+
+            const target = tt2[0].cell.toBoc();
+
+            console.log('tt222.cell', target);
+            // const individualContent = Cell.fromBoc(tt2[0].cell);
+            // console.log('individualContent...', individualContent);
+
+            // const params = Tuple.fromItems([index, individualContent]);
+
+            client
+              .runMethod(address, 'get_nft_content', [
+                { type: 'int', value: BigInt(res1) },
+                { type: 'cell', cell: tt2[0].cell },
+              ])
+              .then((resp) => {
+                console.log('get_nft_content...', resp.stack);
+
+                const r = new TupleReader(resp.stack.items);
+                console.log('rrrr', r.readString());
+              });
           });
         });
     }
