@@ -12,7 +12,7 @@ import { styled } from 'styled-components';
 import { useRouter } from 'next/navigation';
 
 import TonWeb from 'tonweb';
-import TestTon from './TestTon';
+import TestTon from './TestTon2';
 
 export const AddrWrap = styled.div`
   border-right: solid 1px #fff;

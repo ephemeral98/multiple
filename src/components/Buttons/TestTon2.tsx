@@ -1,6 +1,6 @@
 // import { TonClient, WalletContractV4, internal } from '@ton/ton';
 import { mnemonicNew, mnemonicToPrivateKey } from '@ton/crypto';
-import { TonClient, Address } from '@ton/core';
+import { Address } from '@ton/ton';
 
 import { FC, useEffect } from 'react';
 import { styled } from 'styled-components';
@@ -10,40 +10,42 @@ const TestTon2Wrap = styled.div``;
 
 const TestTon2: FC<{}> = () => {
   const init = async () => {
-    // 创建客户端
-    const client = new TonClient({
-      endpoint: 'https://toncenter.com/api/v2/jsonRPC',
-    });
+    const getNftData = async (nftAddress) => {
+      // const account = 'UQDa-sdjuSGXmaj2AQ1f6xlHbakZW47rmtTyG2SDbTIAGXej';
+      const account = '0:dafac763b9219799a8f6010d5feb19476da9195b8eeb9ad4f21b64836d320019';
+      // const url = `https://tonapi.io/v2/nfts/collections?address=${nftAddress}`; // 使用 POST 请求的 URL
+      // const url = `https://tonapi.io/v2/nfts/collections/${account}/items`; // 使用 POST 请求的 URL
 
-    // 合约地址，需要替换成你的合约地址
-    const contractAddress = '你的合约地址';
+      const url = `https://tonapi.io/v2/accounts/${account}/nfts?collection=${nftAddress}`;
+      const body = {
+        id: 1, // 添加一个有效的id
+        jsonrpc: '2.0', // jsonrpc 的版本号
+        method: 'get_nft_data', // 使用正确的方法名
+        params: [
+          { type: 'address', value: nftAddress }, // 传递NFT合约地址
+        ],
+      };
 
-    // 创建合约实例
-    const contract = new Contract({
-      client,
-      address: Address.parse(contractAddress),
-      abi: [
-        {
-          // 这里假设你有ABI定义，需要根据实际情况调整
-          name: 'get_collection_data',
-          inputs: [],
-          outputs: [
-            { name: 'next_item_index', type: 'uint32' },
-            { name: 'collection_content', type: 'string' },
-            { name: 'owner_address', type: 'address' },
-          ],
-        },
-      ],
-    });
+      try {
+        const response = await fetch(url, {
+          method: 'GET', // 使用 POST 请求
+          headers: {
+            'Content-Type': 'application/json', // 请求体格式是JSON
+          },
+          // body: JSON.stringify(body), // 将请求体转换为 JSON 字符串
+        });
 
-    // 调用 get_collection_data 方法
-    const { next_item_index, collection_content, owner_address } = await contract.methods
-      .get_collection_data()
-      .call();
+        const data = await response.json(); // 解析响应
+        console.log('NFT Data:', data);
+        return data;
+      } catch (error) {
+        console.error('Error fetching NFT data:', error);
+      }
+    };
 
-    console.log('Next item index:', next_item_index);
-    console.log('Collection content:', collection_content);
-    console.log('Owner address:', owner_address.toString());
+    // 调用函数获取NFT数据
+    const nftAddress = 'EQCe18j7pOFw9-oqZ-JW3a8NRgMU6-7cPnV_BLgQnnxGiAO0'; // 替换为你的NFT合约地址
+    getNftData(nftAddress);
   };
 
   useEffect(() => {
