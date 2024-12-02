@@ -20,6 +20,10 @@ const NavMobWrap = styled.div`
     }
   }
 
+  .arco-tabs-header-nav-line .arco-tabs-header-title:hover .arco-tabs-header-title-text::before {
+    background-color: transparent !important;
+  }
+
   .arco-tabs-header-nav {
     &::before {
       height: 0;

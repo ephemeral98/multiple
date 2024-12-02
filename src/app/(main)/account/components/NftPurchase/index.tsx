@@ -83,7 +83,7 @@ const NftPurchase: React.FC = () => {
       )}
 
       <section className="purchase-info">
-        <div className="purchase-face">
+        <div className="purchase-face md:mr-33">
           <Image
             className="w-full"
             priority

@@ -3,8 +3,12 @@ import Image from 'next/image';
 import { useTonAddress } from '@tonconnect/ui-react';
 import { $fontSize, $marginBottom, $maxWidth, $paddingBottom } from '@/styled/mediaSize';
 import useAppStore from '@/store/appStore';
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { plusStar } from '@/utils';
+
+interface IAccountInfoProps {
+  balance: string | number;
+}
 
 const AccountInfoWrap = styled.div`
   /* max-width: 870rem; */
@@ -34,7 +38,7 @@ const AccountInfoWrap = styled.div`
   }
 `;
 
-const AccountInfo = () => {
+const AccountInfo: FC<IAccountInfoProps> = (props) => {
   const appStore = useAppStore();
   const walletAddress = useTonAddress();
   const showWalletAddr = useMemo(
@@ -63,7 +67,7 @@ const AccountInfo = () => {
         <div className="account-item">
           <div className="title">Account Balance</div>
           <div>
-            <div className="content">2000 MTP</div>
+            <div className="content">{props.balance} MTP</div>
           </div>
         </div>
       </section>

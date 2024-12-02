@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import AccountInfo from './AccountInfo';
 import NftItem from '@/components/NFT/NftItem';
 import { $paddingX, $width, phoneSize } from '@/styled/mediaSize';
+import { useNft } from '@/service/useNft';
 
 const MyAccountWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -25,28 +26,19 @@ const MyAccountWrap = styled.div`
 `;
 
 const MyAccount: React.FC = () => {
+  const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
+
   return (
     <MyAccountWrap>
-      <AccountInfo />
+      <AccountInfo balance={accountBalanceMTP} />
 
       <div className="mt-62 md:mt-72">
         <div className="text-31 md:text-24 mb-33">My NFT</div>
 
         <div className="nft-list">
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
-          <NftItem />
+          {myNftMetadata.map((item, inx) => (
+            <NftItem key={inx} metadata={item} />
+          ))}
         </div>
       </div>
     </MyAccountWrap>

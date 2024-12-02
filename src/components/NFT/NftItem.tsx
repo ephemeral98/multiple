@@ -2,6 +2,7 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
+import { IMetadata } from '@/service/useNft';
 
 const NftItemWrap = styled.div`
   .nft-content {
@@ -23,26 +24,18 @@ const NftItemWrap = styled.div`
   }
 `;
 
-const NftItem: React.FC = () => {
+const NftItem: React.FC<{ metadata: IMetadata }> = ({ metadata }) => {
   return (
     <NftItemWrap>
       <section className="nft-content">
-        <Image
-          className="w-full"
-          priority
-          src={require('@img/nft/img-nft.png')}
-          alt=""
-          onClick={() => {
-            console.log('click');
-          }}
-        />
+        <img src={metadata.image} alt="" className="w-full" />
 
         <button className="transfer-btn">Transfer</button>
       </section>
 
       <div className="flex justify-between items-center text-23 md:text-16 mt-16">
-        <div>Multiple NFT</div>
-        <div className="ml-10">#23321</div>
+        <div>{metadata.name}</div>
+        {/* <div className="ml-10">{metadata.}</div> */}
       </div>
     </NftItemWrap>
   );

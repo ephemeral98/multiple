@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation';
 
 import TonWeb from 'tonweb';
 import TestTon from './TestTon2';
+import TransferTon from './TransferTon';
+import { Address } from '@ton/core';
 
 export const AddrWrap = styled.div`
   border-right: solid 1px #fff;
@@ -29,6 +31,10 @@ const ConnectWallet = () => {
   const { open, close, state } = useTonConnectModal();
 
   useEffect(() => {
+
+    const myAddr = Address.parse('UQDa-sdjuSGXmaj2AQ1f6xlHbakZW47rmtTyG2SDbTIAGXej');
+    console.log('我的地址i：：：', myAddr.toString());
+
     // 状态变化处理函数
     const handleStatusChange = (wallet: ConnectedWallet | null) => {
       console.log('wallet...', wallet);
@@ -54,8 +60,14 @@ const ConnectWallet = () => {
     tonConnectUI.disconnect();
     setConnected(false);
   };
+  
 
-  return <TestTon />
+  return (
+    <>
+      <TestTon />
+      <TransferTon />
+    </>
+  );
 
   if (connected) {
     return (
