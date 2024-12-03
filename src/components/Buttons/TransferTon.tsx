@@ -9,7 +9,7 @@ const TestTon2Wrap = styled.div``;
 // 假设这是 NFT 合约地址和购买 NFT 所需的代币数量
 const nftContractAddress = 'EQDt2lZoKGLU-So2AUmpt50A0RzSW0Gb3NPlyp--j8_rYJB9'; // NFT 合约地址
 const nftItemId = 6; // 购买的 NFT ID
-const nftPriceInNano = 1.5; // 购买 NFT 所需的代币数量（单位：TON）
+const nftPriceInNano = '1.5'; // 购买 NFT 所需的代币数量（单位：TON）
 
 const BuyNFT: FC = () => {
   const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
@@ -21,7 +21,7 @@ const BuyNFT: FC = () => {
   });
 
   // 购买 NFT 函数
-  const buyNFT = async (nftId: number, nftPrice: number) => {
+  const buyNFT = async (nftId: number, nftPrice: number | string) => {
     if (!tonAddress) {
       open(); // 如果没有连接钱包，打开钱包连接界面
       return;
@@ -30,7 +30,9 @@ const BuyNFT: FC = () => {
     console.log('Buying NFT ID:', nftId, 'Price:', nftPrice, 'TON');
 
     try {
-      const TBNB = Address.parse('EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA');
+      const TBNB = Address.parse(
+        '0:0d4374952ba5e6fc3f73bddbbf890f0cb9cdfcc4c1f75251a5cf4f889de573ce'
+      );
       const newNftAddr = Address.parse('EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5');
       const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
       const recipientAddress = Address.parse('UQA2JTJpD4UYu-OA0HdXXRKQ90O4GusuWo3I0r6QNEcsxvx6'); // 用户的钱包地址
@@ -38,8 +40,8 @@ const BuyNFT: FC = () => {
       // const jettonMasterAddress = Address.parse(config.tpxContract);  // tpx 合约的代币地址
       // const destinationAddress = Address.parse(config.depositReceive); // 接收地址
       const userAddress = Address.parse(tonAddress);
-      const jettonMaster = TON_CLIENT.open(JettonMaster.create(TBNB));
-      const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
+      // const jettonMaster = TON_CLIENT.open(JettonMaster.create(TBNB));
+      // const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
 
       // console.log('recipientAddress...', recipientAddress.toString());
       console.log('exec nftAddrs....', nftAddrs.toString());
@@ -48,9 +50,9 @@ const BuyNFT: FC = () => {
 
       // 构建交易体
       const body = beginCell()
-        // .storeUint(0xf8a7ea5, 32)
-        .storeUint(1, 64) // 可调整的参数，表示交易类型或标识符
-        .storeCoins(toNano(nftPrice.toString())) // NFT 价格作为交易金额
+        .storeUint(0xf8a7ea5, 32)
+        .storeUint(0, 64) // 可调整的参数，表示交易类型或标识符
+        .storeCoins(toNano(nftPrice)) // NFT 价格作为交易金额
         .storeAddress(newNftAddr) // t-usdt
         .storeAddress(newNftAddr) // 新的所有者地址
         // .storeUint(nftId, 64) // NFT 的 ID
@@ -64,7 +66,8 @@ const BuyNFT: FC = () => {
         validUntil: Math.floor(Date.now() / 1000) + 360, // 设置交易过期时间
         messages: [
           {
-            address: jettonWallet.toString(), // NFT 合约地址
+            // address: TBNB.toString(), // NFT 合约地址
+            address: '0:0d4374952ba5e6fc3f73bddbbf890f0cb9cdfcc4c1f75251a5cf4f889de573ce',
             amount: toNano('0.1').toString(), // 转账手续费（gas费用）
             payload: body.toBoc().toString('base64'), // 将交易体编码为 base64
             // destination: recipientAddress,
