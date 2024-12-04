@@ -7,7 +7,8 @@ import TonWeb from 'tonweb';
 const TestTon2Wrap = styled.div``;
 
 // 假设这是 NFT 合约地址和购买 NFT 所需的代币数量
-const nftContractAddress = 'EQDt2lZoKGLU-So2AUmpt50A0RzSW0Gb3NPlyp--j8_rYJB9'; // NFT 合约地址
+// const nftContractAddress = 'EQDsycZ7-ws-EqMm7YvVVJ2_-jAzN2bDdij3woCc0y4Mq-m5'; // NFT 合约地址
+const nftContractAddress = 'EQDqJtt45Wl5HFYqMCzzzUeNtsSr2NAtXBmRcRd-5nl-EZ6w'; // NFT 合约地址
 const nftItemId = 6; // 购买的 NFT ID
 const nftPriceInNano = '1.5'; // 购买 NFT 所需的代币数量（单位：TON）
 
@@ -220,15 +221,88 @@ const BuyNFT: FC = () => {
     );
   };
 
+  const doTransfer = async (nftId: number, nftPrice: number | string) => {
+    if (!tonAddress) {
+      open(); // 如果没有连接钱包，打开钱包连接界面
+      return;
+    }
+
+    console.log('Buying NFT ID:', nftId, 'Price:', nftPrice, 'TON');
+
+    try {
+      // const TBNB = Address.parse(
+      //   '0:0d4374952ba5e6fc3f73bddbbf890f0cb9cdfcc4c1f75251a5cf4f889de573ce'
+      // );
+      const TBNB = Address.parse('EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA');
+      const USDT = Address.parse('EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs');
+
+      const newNftAddr = Address.parse('EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5');
+      // const newNftAddr = Address.parse(
+      //   '0:f3124062565626eb53fa2c9ddbaec1b032d8d4a488f98dfdf14375af4a0e5cee'
+      // );
+      const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
+      const recipientAddress = Address.parse('UQA2JTJpD4UYu-OA0HdXXRKQ90O4GusuWo3I0r6QNEcsxvx6'); // 用户的钱包地址
+
+      // const jettonMasterAddress = Address.parse(config.tpxContract);  // tpx 合约的代币地址
+      // const destinationAddress = Address.parse(config.depositReceive); // 接收地址
+      const userAddress = Address.parse(tonAddress);
+      // const jettonMaster = TON_CLIENT.open(JettonMaster.create(nftAddrs));
+      // const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
+
+      const nftMaster = TON_CLIENT.open(JettonMaster.create(newNftAddr));
+      console.log('Address.parse(tonAddress)...', Address.parse(tonAddress).toString());
+      // const nftWallet = await nftMaster.getWalletAddress(userAddress);
+
+      // 构建交易体
+      const body = beginCell()
+        .storeUint(0x5fcc3d14, 32) // NFT 转移操作码 0x5fcc3d14
+        .storeUint(0, 64) // query_id:uint64
+
+        .storeAddress(recipientAddress) // new_owner:MsgAddress
+        .storeAddress(recipientAddress) // response_destination:MsgAddress
+        // .storeAddress(Address.parse(tonAddress)) // response_destination:MsgAddress
+        .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
+        .storeCoins(toNano(0.1)) // forward_amount:(VarUInteger 16)
+        .storeUint(0, 1) // forward_payload:(Either Cell ^Cell)
+        .endCell();
+
+      // const forwardPayload = new TextEncoder().encode(recipientAddress.toString()); // 将接收者地址转为字节序列
+      // 构建交易消息
+      const transaction = {
+        validUntil: Math.floor(Date.now() / 1000) + 360, // 设置交易过期时间
+        messages: [
+          {
+            // address: TBNB.toString(), // NFT 合约地址
+            // address: '0:0d4374952ba5e6fc3f73bddbbf890f0cb9cdfcc4c1f75251a5cf4f889de573ce',
+            address: nftAddrs.toString(),
+            amount: toNano('0.05').toString(), // 转账手续费（gas费用）
+            payload: body.toBoc().toString('base64'), // 将交易体编码为 base64
+            // destination: recipientAddress,
+            // responseDestination: recipientAddress,
+            // forwardPayload: forwardPayload.toString(),
+          },
+        ],
+      };
+
+      // 通过 TonConnectUI 发送交易
+      const res = await tonConnectUI.sendTransaction(transaction);
+
+      console.log('转成了...', res);
+      // alert('NFT purchase successful!');
+    } catch (error) {
+      console.log('报错了：Error purchasing NFT:', error);
+      // alert('Error purchasing NFT');
+    }
+  };
   return (
     <TestTon2Wrap>
       <div
         className="w-100 h-50 bg-pink"
         onClick={() => {
           console.log('Initiating purchase...');
-          buyNFT(nftItemId, nftPriceInNano); // 传递 NFT ID 和购买价格
+          // doTransfer(nftItemId, nftPriceInNano); // 传递 NFT ID 和购买价格
           // handleTransfer();
-          // tempTransfer();
+          doTransfer(6, 1.5);
         }}
       >
         Buy NFT
