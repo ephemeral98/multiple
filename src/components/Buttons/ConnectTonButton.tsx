@@ -31,13 +31,8 @@ const ConnectWallet = () => {
   const { open, close, state } = useTonConnectModal();
 
   useEffect(() => {
-
-    const myAddr = Address.parse('UQDa-sdjuSGXmaj2AQ1f6xlHbakZW47rmtTyG2SDbTIAGXej');
-    console.log('我的地址i：：：', myAddr.toString());
-
     // 状态变化处理函数
     const handleStatusChange = (wallet: ConnectedWallet | null) => {
-      console.log('wallet...', wallet);
       if (wallet) {
         setWallet(wallet);
         setConnected(true);
@@ -60,14 +55,13 @@ const ConnectWallet = () => {
     tonConnectUI.disconnect();
     setConnected(false);
   };
-  
 
-  return (
-    <>
-      <TestTon />
-      <TransferTon />
-    </>
-  );
+  // return (
+  //   <>
+  //     <TestTon />
+  //     <TransferTon />
+  //   </>
+  // );
 
   if (connected) {
     return (

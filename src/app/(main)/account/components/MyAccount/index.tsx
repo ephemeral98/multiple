@@ -6,6 +6,7 @@ import AccountInfo from './AccountInfo';
 import NftItem from '@/components/NFT/NftItem';
 import { $paddingX, $width, phoneSize } from '@/styled/mediaSize';
 import { useNft } from '@/service/useNft';
+import { useTonAddress } from '@tonconnect/ui-react';
 
 const MyAccountWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -27,6 +28,15 @@ const MyAccountWrap = styled.div`
 
 const MyAccount: React.FC = () => {
   const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
+  const walletAddress = useTonAddress();
+
+  if (!walletAddress) {
+    return (
+      <MyAccountWrap>
+        <div className="text-24 text-center py-300">No Data...</div>
+      </MyAccountWrap>
+    );
+  }
 
   return (
     <MyAccountWrap>
