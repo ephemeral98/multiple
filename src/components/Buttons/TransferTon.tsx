@@ -36,6 +36,8 @@ const BuyNFT: FC = () => {
       //   '0:0d4374952ba5e6fc3f73bddbbf890f0cb9cdfcc4c1f75251a5cf4f889de573ce'
       // );
       const TBNB = Address.parse('EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA');
+      const USDT = Address.parse('EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs');
+
       const newNftAddr = Address.parse('EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5');
       // const newNftAddr = Address.parse(
       //   '0:f3124062565626eb53fa2c9ddbaec1b032d8d4a488f98dfdf14375af4a0e5cee'
@@ -46,7 +48,7 @@ const BuyNFT: FC = () => {
       // const jettonMasterAddress = Address.parse(config.tpxContract);  // tpx 合约的代币地址
       // const destinationAddress = Address.parse(config.depositReceive); // 接收地址
       const userAddress = Address.parse(tonAddress);
-      const jettonMaster = TON_CLIENT.open(JettonMaster.create(TBNB));
+      const jettonMaster = TON_CLIENT.open(JettonMaster.create(USDT));
       const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
 
       const nftMaster = TON_CLIENT.open(JettonMaster.create(newNftAddr));
@@ -70,15 +72,15 @@ const BuyNFT: FC = () => {
       const body = beginCell()
         .storeUint(0xf8a7ea5, 32)
         .storeUint(0, 64) // 可调整的参数，表示交易类型或标识符
-        .storeCoins(toNano(1.2)) // NFT 价格作为交易金额
+        .storeCoins(toNano(0.00005)) // NFT 价格作为交易金额
         // .storeCoins(2) // NFT 价格作为交易金额
-        .storeAddress(newNftAddr) // t-usdt
-        .storeAddress(newNftAddr) // 新的所有者地址
+        .storeAddress(recipientAddress) // t-usdt
+        .storeAddress(recipientAddress) // 新的所有者地址
         // .storeUint(nftId, 64) // NFT 的 ID
         // .storeCoins(toNano('1.2'))
-        .storeMaybeRef(forwardPayload) // 可能包含的其他数据，可以是 null
+        // .storeMaybeRef(forwardPayload) // 可能包含的其他数据，可以是 null
         .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
-        .storeCoins(toNano(0.1)) // forward_ton_amount:(VarUInteger 16)
+        .storeCoins(toNano(0.00001)) // forward_ton_amount:(VarUInteger 16)
         .storeUint(0, 1)
         .endCell();
 
