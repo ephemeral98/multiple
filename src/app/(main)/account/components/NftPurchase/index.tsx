@@ -16,6 +16,7 @@ import {
   phoneSize,
 } from '@/styled/mediaSize';
 import useAppStore from '@/store/appStore';
+import { useNftContract } from '@/contracts/useNft';
 
 const NftPurchaseWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -65,16 +66,23 @@ const NftPurchaseWrap = styled.div`
 `;
 
 const NftPurchase: React.FC = () => {
+  const [quantity, setQuantity] = useState('');
+
+  const { handleBuyNft } = useNftContract();
+
+  const appStore = useAppStore();
+
+  const handleBuy = async () => {};
+
   const { open } = useModal(BuyNftPop, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
     },
+    props: {
+      onBuy: handleBuyNft,
+    },
   });
-
-  const [quantity, setQuantity] = useState('');
-
-  const appStore = useAppStore();
 
   return (
     <NftPurchaseWrap>

@@ -8,6 +8,7 @@ import { $fontSize, $height, $width } from '@/styled/mediaSize';
 
 interface IBuyNftPop {
   onClose: () => void;
+  onBuy: () => void;
 }
 
 const BuyNftPopWrap = styled.div`
@@ -87,23 +88,23 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
           onError={(err) => {
             console.log('这里可以获取错误消息, true则是无错误', err);
             if (err !== true) {
-              window.alert(err);
+              // window.alert(err);
             }
           }}
           onSubmit={async () => {
             // 如果rules规则不通过 或者 isRequired不通过，则不会触发这个callback
-            // await fetch(); // 等待提交表单
-            // window.alert('提交成功');
-            console.log('提交成功');
+            props.onBuy();
           }}
         >
           <Form.Inp
             className="addr-inp"
-            isRequired="Please enter wallet address" // 这里可设置必填，value是提示
+            // isRequired="Please enter wallet address" // 这里可设置必填，value是提示
             name="one" // name不要写相同的
             value={addrInp}
             onChange={(e) => setAddrInp(e.target.value)}
             rules={(value) => {
+              return true; // 必须只有 严格return true 才会通过规则
+
               if (!/^\d+/.test(value)) {
                 return '*The wallet address you entered is not a valid discount code, please re-enter!';
               }

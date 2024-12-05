@@ -24,13 +24,18 @@ const NftItemWrap = styled.div`
   }
 `;
 
-const NftItem: React.FC<{ metadata: IMetadata }> = ({ metadata }) => {
+const NftItem: React.FC<{ metadata: IMetadata; onTransfer: () => void }> = ({
+  metadata,
+  onTransfer,
+}) => {
   return (
     <NftItemWrap>
       <section className="nft-content">
         <img src={metadata.image} alt="" className="w-full" />
 
-        <button className="transfer-btn">Transfer</button>
+        <button className="transfer-btn" onClick={() => onTransfer()}>
+          Transfer
+        </button>
       </section>
 
       <div className="flex justify-between items-center text-23 md:text-16 mt-16">

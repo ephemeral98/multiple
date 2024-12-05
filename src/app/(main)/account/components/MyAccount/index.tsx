@@ -7,6 +7,7 @@ import NftItem from '@/components/NFT/NftItem';
 import { $paddingX, $width, phoneSize } from '@/styled/mediaSize';
 import { useNft } from '@/service/useNft';
 import { useTonAddress } from '@tonconnect/ui-react';
+import { useNftContract } from '@/contracts/useNft';
 
 const MyAccountWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -27,6 +28,7 @@ const MyAccountWrap = styled.div`
 `;
 
 const MyAccount: React.FC = () => {
+  const { handleTransferNft } = useNftContract();
   const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
   const walletAddress = useTonAddress();
 
@@ -47,7 +49,14 @@ const MyAccount: React.FC = () => {
 
         <div className="nft-list">
           {myNftMetadata.map((item, inx) => (
-            <NftItem key={inx} metadata={item} />
+            <NftItem
+              key={inx}
+              metadata={item}
+              onTransfer={() => {
+                console.log('doTransfer....');
+                handleTransferNft();
+              }}
+            />
           ))}
         </div>
       </div>
