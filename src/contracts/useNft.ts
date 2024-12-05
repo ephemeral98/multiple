@@ -1,5 +1,6 @@
-import { TonClient4, JettonMaster, toNano, beginCell, Address, address } from '@ton/ton';
+import { TonClient4, TonClient, JettonMaster, toNano, beginCell, Address, address } from '@ton/ton';
 import { useTonAddress, useTonConnectUI, useTonConnectModal } from '@tonconnect/ui-react';
+import { useEffect, useState } from 'react';
 
 const TBNBAddress = 'EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA';
 const NFTAddress = 'EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5';
@@ -20,10 +21,16 @@ export const useNftContract = () => {
     timeout: 30000,
   });
 
+  const tonClient = new TonClient({ endpoint: 'https://mainnet-v4.tonhubapi.com' });
+
+  const [loadBuyNft, setLoadBuyNft] = useState(false);
+
   /**
    * 购买nft
    */
   const handleBuyNft = async () => {
+    setLoadBuyNft(true);
+
     const userAddress = Address.parse(tonAddress);
     const jettonMaster = TON_CLIENT.open(JettonMaster.create(TBNB));
     const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
@@ -59,16 +66,49 @@ export const useNftContract = () => {
       ],
     };
 
-    const res = await tonConnectUI.sendTransaction(transaction);
+    const res = await tonConnectUI.sendTransaction(transaction).catch(() => {
+      setLoadBuyNft(false);
+    });
     console.log('转成了...', res);
   };
+
+  async function fetchTransactionsForAccount(
+    accountAddress: string,
+    lastTransactionLT: number,
+    lastTransactionHash: string
+  ) {
+    try {
+      console.log('accountAddress...', tonAddress);
+      const transactions = await tonClient.getTransactions(
+        Address.parse(accountAddress), // 地址对象
+        { limit: 10 }
+      );
+      return transactions;
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (!tonAddress) {
+      return;
+    }
+    fetchTransactionsForAccount(
+      tonAddress,
+      51551473000001,
+      'e285a1dc3a41f3b41e3588ece98a4ec915f88f8bfd8e3d5f7c31e52375f8be7c'
+    ).then((res) => {
+      console.log('res...', res);
+    });
+  }, [tonAddress]);
 
   /**
    * 转nft
    */
-  const handleTransferNft = async () => {
+  const handleTransferNft = async (nftWalletAddr: string) => {
     const receiptAddr = Address.parse(recipientAddress);
-    const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
+    // const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
+    const nftAddrs = Address.parse(nftWalletAddr);
 
     // 构建交易体
     const body = beginCell()
@@ -101,5 +141,6 @@ export const useNftContract = () => {
   return {
     handleBuyNft,
     handleTransferNft,
+    loadBuyNft,
   };
 };

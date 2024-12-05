@@ -31,7 +31,7 @@ export const useNft = () => {
 
     console.log('我的nft...', resp);
     const metadata = resp.nft_items.map((item: any) => {
-      return item.metadata;
+      return item;
     });
     setMyNftMetadata(metadata);
   };

@@ -3,10 +3,12 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
 import { IMetadata } from '@/service/useNft';
+import { Address } from '@ton/core';
 
 const NftItemWrap = styled.div`
+  ${$width('298rem', '278rem', '278rem')}
   .nft-content {
-    ${$width('298rem', '278rem', '278rem')}
+    width: 100%;
     ${$height('363rem', '339rem', '339rem')}
     border: solid 1px #d9d9d9;
     border-radius: 10rem;
@@ -24,23 +26,23 @@ const NftItemWrap = styled.div`
   }
 `;
 
-const NftItem: React.FC<{ metadata: IMetadata; onTransfer: () => void }> = ({
+const NftItem: React.FC<{ metadata: any; onTransfer: (nftAddr: string) => void }> = ({
   metadata,
   onTransfer,
 }) => {
   return (
     <NftItemWrap>
       <section className="nft-content">
-        <img src={metadata.image} alt="" className="w-full" />
+        <img src={metadata.metadata.image} alt="" className="w-full" />
 
-        <button className="transfer-btn" onClick={() => onTransfer()}>
+        <button className="transfer-btn" onClick={() => onTransfer(metadata.address)}>
           Transfer
         </button>
       </section>
 
-      <div className="flex justify-between items-center text-23 md:text-16 mt-16">
-        <div>{metadata.name}</div>
-        {/* <div className="ml-10">{metadata.}</div> */}
+      <div className="flex justify-between md:justify-center items-center text-23 md:text-16 mt-16">
+        <div>{metadata.metadata.name}</div>
+        <div className="ml-10">#{metadata.index}</div>
       </div>
     </NftItemWrap>
   );

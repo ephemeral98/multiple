@@ -5,10 +5,12 @@ import { FC, useState } from 'react';
 import Image from 'next/image';
 import Form from '@/components/Form';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
+import Waiting from '@/components/Waiting';
 
 interface IBuyNftPop {
   onClose: () => void;
   onBuy: () => void;
+  loadBuyNft: boolean;
 }
 
 const BuyNftPopWrap = styled.div`
@@ -36,17 +38,17 @@ const BuyNftPopWrap = styled.div`
     ${$height('82rem', '70rem', '70rem')}
     ${$fontSize('24rem', '16rem', '16rem')}
     border-radius: 10rem;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 
     &.submit-btn {
       background-color: #fff;
       color: #1a1d1f;
-      margin-top: 46rem;
+      /* margin-top: 46rem; */
     }
 
     &.cancel-btn {
       border: solid 1rem #fff;
-      margin-top: 32rem;
+      margin: 32rem auto 0;
     }
   }
 `;
@@ -92,6 +94,9 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             }
           }}
           onSubmit={async () => {
+            if (props.loadBuyNft) {
+              return;
+            }
             // 如果rules规则不通过 或者 isRequired不通过，则不会触发这个callback
             props.onBuy();
           }}
@@ -113,7 +118,10 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             }}
           />
 
-          <Form.Btn className="form-btn submit-btn">BUY NOW</Form.Btn>
+          <Waiting style={{ margin: '46rem auto 0' }} isLoading={props.loadBuyNft}>
+            <Form.Btn className="form-btn submit-btn">BUY NOW::{String(props.loadBuyNft)}</Form.Btn>
+          </Waiting>
+
           <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
             Cancel
           </button>

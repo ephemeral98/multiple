@@ -68,7 +68,7 @@ const NftPurchaseWrap = styled.div`
 const NftPurchase: React.FC = () => {
   const [quantity, setQuantity] = useState('');
 
-  const { handleBuyNft } = useNftContract();
+  const { handleBuyNft, loadBuyNft } = useNftContract();
 
   const appStore = useAppStore();
 
@@ -81,6 +81,7 @@ const NftPurchase: React.FC = () => {
     },
     props: {
       onBuy: handleBuyNft,
+      loadBuyNft: loadBuyNft,
     },
   });
 

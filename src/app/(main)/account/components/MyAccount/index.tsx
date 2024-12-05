@@ -17,6 +17,7 @@ const MyAccountWrap = styled.div`
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-gap: 24rem;
+    justify-content: flex-start;
 
     @media (max-width: ${phoneSize}) {
       grid-template-columns: repeat(2, auto);
@@ -52,9 +53,8 @@ const MyAccount: React.FC = () => {
             <NftItem
               key={inx}
               metadata={item}
-              onTransfer={() => {
-                console.log('doTransfer....');
-                handleTransferNft();
+              onTransfer={(nftAddr) => {
+                handleTransferNft(nftAddr);
               }}
             />
           ))}

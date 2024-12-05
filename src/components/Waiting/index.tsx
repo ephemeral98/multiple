@@ -28,9 +28,10 @@ const WaitingWrap = styled.div`
 `;
 
 interface IProps {
+  isLoading: boolean; // 加载状态
   width?: string;
   height?: string;
-  isLoading: boolean; // 加载状态
+  style?: React.CSSProperties;
   isError?: boolean; // 请求失败
   bg?: string; // 遮罩层背景颜色
   children: ReactNode;
@@ -50,6 +51,7 @@ const Waiting = (props: IProps) => {
       return;
     }
     const style = getComputedStyle(loadContent.current!.firstElementChild!);
+    console.log('styledd', style.width);
     setContentSize({
       width: props.width || style.width,
       height: props.height || style.height,
@@ -68,6 +70,8 @@ const Waiting = (props: IProps) => {
   return (
     <WaitingWrap
       style={{
+        ...props.style,
+        width: props.width || (Number.parseFloat(contentSize.width) ? contentSize.width : '100%'),
         height:
           props.height || (Number.parseFloat(contentSize.height) ? contentSize.height : '100%'),
       }}
