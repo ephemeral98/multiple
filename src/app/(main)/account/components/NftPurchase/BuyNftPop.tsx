@@ -119,7 +119,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
           />
 
           <Waiting style={{ margin: '46rem auto 0' }} isLoading={props.loadBuyNft}>
-            <Form.Btn className="form-btn submit-btn">BUY NOW::{String(props.loadBuyNft)}</Form.Btn>
+            <Form.Btn className="form-btn submit-btn">BUY NOW</Form.Btn>
           </Waiting>
 
           <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">

@@ -91,5 +91,6 @@
 }
 
 #tc-widget-root {
-  display: none;
+  position: relative;
+  z-index: 10003;
 }
