@@ -3,7 +3,8 @@ import { useTonAddress, useTonConnectUI, useTonConnectModal } from '@tonconnect/
 import { useEffect, useState } from 'react';
 
 const TBNBAddress = 'EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA';
-const NFTAddress = 'EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5';
+// const NFTAddress = 'EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5';
+const NFTAddress = 'EQACI7Hr1vkbYFZHE--n92SfcOXJXPwVDTeqcwEienp4CD09';
 const recipientAddress = 'UQA2JTJpD4UYu-OA0HdXXRKQ90O4GusuWo3I0r6QNEcsxvx6';
 const nftContractAddress = 'EQDqJtt45Wl5HFYqMCzzzUeNtsSr2NAtXBmRcRd-5nl-EZ6w'; // NFT 合约地址
 
@@ -35,19 +36,55 @@ export const useNftContract = () => {
     const jettonMaster = TON_CLIENT.open(JettonMaster.create(TBNB));
     const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
 
+    const forwardPayload = beginCell()
+      .storeCoins(BigInt(1000000000))
+      .storeAddress(Address.parse(recipientAddress))
+      .storeAddress(userAddress)
+      // .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
+      // .storeCoins(toNano(0.00001)) // forward_ton_amount:(VarUInteger 16)
+      // .storeCoins(toNano(0.1)) // forward_ton_amount:(VarUInteger 16)
+      // .storeUint(0, 1)
+      .endCell();
+
+    // const cell = beginCell()
+    //   .store(
+    //     storeJettonTransferMessage({
+    //       queryId: 42n,
+    //       amount: 100n,
+    //       destination: Address.parse('[DESTINATION]'),
+    //       responseDestination: Address.parse('[RESPONSE_DESTINATION]'),
+    //       customPayload: null,
+    //       forwardAmount: 1n,
+    //       forwardPayload: null,
+    //     })
+    //   )
+    //   .endCell();
+
+    // const cell = beginCell()
+    //   .storeUint(260734629, 32)
+    //   .storeUint(42, 64)
+    //   .storeCoins(100)
+    //   .storeAddress(Address.parse('[DESTINATION]'))
+    //   .storeAddress(Address.parse('[RESPONSE_DESTINATION]'))
+    //   .storeMaybeRef(null)
+    //   .storeCoins(1)
+    //   .storeMaybeRef(null)
+    //   .endCell();
+
     // 构建交易体
     const body = beginCell()
       .storeUint(0xf8a7ea5, 32)
       .storeUint(0, 64) // 可调整的参数，表示交易类型或标识符
       // .storeCoins(toNano(0.00005)) // NFT 价格作为交易金额
-      .storeCoins(toNano(1.21))
+      .storeCoins(toNano(1))
 
       // .storeCoins(2) // NFT 价格作为交易金额
       .storeAddress(NFT) // t-usdt
       .storeAddress(NFT) // 新的所有者地址
       // .storeUint(nftId, 64) // NFT 的 ID
       // .storeCoins(toNano('1.2'))
-      // .storeMaybeRef(forwardPayload) // 可能包含的其他数据，可以是 null
+      .storeMaybeRef(forwardPayload) // 可能包含的其他数据，可以是 null
+      // .storeRef(forwardPayload)
       .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
       // .storeCoins(toNano(0.00001)) // forward_ton_amount:(VarUInteger 16)
       .storeCoins(toNano(0.1)) // forward_ton_amount:(VarUInteger 16)
@@ -60,7 +97,7 @@ export const useNftContract = () => {
       messages: [
         {
           address: jettonWallet.toString(),
-          amount: toNano(0.16).toString(), // 转账手续费（gas费用）
+          amount: toNano(0.15).toString(), // 转账手续费（gas费用）
           payload: body.toBoc().toString('base64'), // 将交易体编码为 base64
         },
       ],
