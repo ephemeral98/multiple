@@ -70,7 +70,6 @@ const ActivityWraap = styled.div`
 `;
 
 const Activity: React.FC = () => {
-  return <div></div>
   const appStore = useAppStore();
 
   const { open } = useModal(Rule, {
