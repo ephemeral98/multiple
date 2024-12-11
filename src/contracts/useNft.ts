@@ -37,13 +37,13 @@ export const useNftContract = () => {
     const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
 
     const forwardPayload = beginCell()
-      .storeCoins(toNano(1))
       .storeAddress(Address.parse(recipientAddress))
       .storeAddress(userAddress)
       // .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
       // .storeCoins(toNano(0.00001)) // forward_ton_amount:(VarUInteger 16)
       // .storeCoins(toNano(0.1)) // forward_ton_amount:(VarUInteger 16)
       // .storeUint(0, 1)
+      .storeCoins(toNano(1))
       .endCell();
 
     // const cell = beginCell()
@@ -94,7 +94,8 @@ export const useNftContract = () => {
       // .storeUint(0, 1)
       .storeBit(1)
 
-      .storeRef(forwardPayload)
+      // .storeRef(forwardPayload)
+      .storeMaybeRef(forwardPayload) // 可能包含的其他数据，可以是 null
       .endCell();
 
     // 构建交易消息
