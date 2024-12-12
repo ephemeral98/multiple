@@ -149,8 +149,8 @@ export const useNftContract = () => {
   /**
    * 转nft
    */
-  const handleTransferNft = async (nftWalletAddr: string) => {
-    const receiptAddr = Address.parse(recipientAddress);
+  const handleTransferNft = async (nftWalletAddr: string, recipientAddr: string) => {
+    const receiptAddr = Address.parse(recipientAddr);
     // const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
     const nftAddrs = Address.parse(nftWalletAddr);
 

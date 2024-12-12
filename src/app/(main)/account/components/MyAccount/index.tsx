@@ -1,13 +1,15 @@
 'use client';
 import { styled } from 'styled-components';
 import { flexPos } from '@/styled/mixin';
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 import AccountInfo from './AccountInfo';
 import NftItem from '@/components/NFT/NftItem';
 import { $paddingX, $width, phoneSize } from '@/styled/mediaSize';
 import { useNft } from '@/service/useNft';
 import { useTonAddress } from '@tonconnect/ui-react';
 import { useNftContract } from '@/contracts/useNft';
+import { useModal } from '@/hooks/useModal';
+import TransferPop from './TransferPop';
 
 const MyAccountWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -29,9 +31,23 @@ const MyAccountWrap = styled.div`
 `;
 
 const MyAccount: React.FC = () => {
-  const { handleTransferNft } = useNftContract();
+  const { handleTransferNft, loadBuyNft } = useNftContract();
   const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
   const walletAddress = useTonAddress();
+
+  const curNft = useRef('');
+
+  const { open } = useModal(TransferPop, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+    props: {
+      onConfirm: handleTransferNft,
+      loadBuyNft: loadBuyNft,
+      curNft: curNft.current,
+    },
+  });
 
   if (!walletAddress) {
     return (
@@ -54,7 +70,8 @@ const MyAccount: React.FC = () => {
               key={inx}
               metadata={item}
               onTransfer={(nftAddr) => {
-                handleTransferNft(nftAddr);
+                curNft.current = nftAddr;
+                open();
               }}
             />
           ))}

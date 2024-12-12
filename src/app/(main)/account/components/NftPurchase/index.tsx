@@ -117,45 +117,6 @@ const NftPurchase: React.FC = () => {
                 <span className="text-17 ml-8">USDT</span>
               </div>
             </div>
-
-            <div className="mt-62 md:mt-0">
-              <div className="text-23 md:text-14 mb-27 md:mb-0">Quantity</div>
-              <div className="flex-center mt-8">
-                <Image
-                  className="w-38 md:w-20 cursor-pointer"
-                  priority
-                  src={require('@img/common/icon-sub.png')}
-                  alt=""
-                  onClick={() => {
-                    if (+quantity <= 0) {
-                      return;
-                    }
-                    setQuantity(String(+quantity - 1));
-                  }}
-                />
-
-                <input
-                  type="text"
-                  className="inp"
-                  value={quantity}
-                  onChange={(e) => {
-                    const newValue = e.target.value;
-                    const reg = /^[1-9]\d*$/;
-                    if (newValue === '' || reg.test(newValue)) {
-                      setQuantity(newValue);
-                    }
-                  }}
-                />
-
-                <Image
-                  className="w-38 md:w-20 cursor-pointer"
-                  priority
-                  src={require('@img/common/icon-plus.png')}
-                  alt=""
-                  onClick={() => setQuantity(String(+quantity + 1))}
-                />
-              </div>
-            </div>
           </div>
 
           <button className="buy-btn" onClick={() => open()}>
