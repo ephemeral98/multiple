@@ -37,13 +37,18 @@ const MyAccount: React.FC = () => {
 
   const curNft = useRef('');
 
+  const doTransfer = async (nftWalletAddr: string, recipientAddr: string) => {
+    await handleTransferNft(nftWalletAddr, recipientAddr);
+    getMyNft();
+  };
+
   const { open } = useModal(TransferPop, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
     },
     props: {
-      onConfirm: handleTransferNft,
+      onConfirm: doTransfer,
       loadBuyNft: loadBuyNft,
       curNft: curNft.current,
     },

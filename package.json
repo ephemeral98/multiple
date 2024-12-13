@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@arco-design/web-react": "^2.60.1",
+    "@orbs-network/ton-access": "^2.3.3",
     "@studio-freight/lenis": "^1.0.42",
     "@ton/blueprint": "^0.26.0",
     "@ton/core": "^0.59.0",

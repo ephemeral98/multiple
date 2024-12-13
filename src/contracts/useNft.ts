@@ -1,6 +1,7 @@
 import { TonClient4, TonClient, JettonMaster, toNano, beginCell, Address, address } from '@ton/ton';
 import { useTonAddress, useTonConnectUI, useTonConnectModal } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
+import { useWait } from './tools';
 
 const TBNBAddress = 'EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA';
 // const NFTAddress = 'EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5';
@@ -10,6 +11,7 @@ const recipientAddress = 'UQA2JTJpD4UYu-OA0HdXXRKQ90O4GusuWo3I0r6QNEcsxvx6';
 const nftContractAddress = 'EQDqJtt45Wl5HFYqMCzzzUeNtsSr2NAtXBmRcRd-5nl-EZ6w'; // NFT 合约地址
 
 export const useNftContract = () => {
+  const { client, wait, msgHash, finalizedTx } = useWait();
   const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
   const [tonConnectUI] = useTonConnectUI();
 
@@ -26,6 +28,7 @@ export const useNftContract = () => {
   const tonClient = new TonClient({ endpoint: 'https://mainnet-v4.tonhubapi.com' });
 
   const [loadBuyNft, setLoadBuyNft] = useState(false);
+  const [loadTransfer, setLoadTransfer] = useState(false);
 
   /**
    * 购买nft
@@ -41,62 +44,18 @@ export const useNftContract = () => {
     const forwardPayload = beginCell()
       .storeAddress(Address.parse(recipientAddr))
       .storeAddress(userAddress)
-      // .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
-      // .storeCoins(toNano(0.00001)) // forward_ton_amount:(VarUInteger 16)
-      // .storeCoins(toNano(0.1)) // forward_ton_amount:(VarUInteger 16)
-      // .storeUint(0, 1)
-      // .storeCoins(toNano(1))
       .endCell();
-
-    // const cell = beginCell()
-    //   .store(
-    //     storeJettonTransferMessage({
-    //       queryId: 42n,
-    //       amount: 100n,
-    //       destination: Address.parse('[DESTINATION]'),
-    //       responseDestination: Address.parse('[RESPONSE_DESTINATION]'),
-    //       customPayload: null,
-    //       forwardAmount: 1n,
-    //       forwardPayload: null,
-    //     })
-    //   )
-    //   .endCell();
-
-    // const cell = beginCell()
-    //   .storeUint(260734629, 32)
-    //   .storeUint(42, 64)
-    //   .storeCoins(100)
-    //   .storeAddress(Address.parse('[DESTINATION]'))
-    //   .storeAddress(Address.parse('[RESPONSE_DESTINATION]'))
-    //   .storeMaybeRef(null)
-    //   .storeCoins(1)
-    //   .storeMaybeRef(null)
-    //   .endCell();
 
     // 构建交易体
     const body = beginCell()
       .storeUint(0xf8a7ea5, 32)
       .storeUint(0, 64) // 可调整的参数，表示交易类型或标识符
-      // .storeCoins(toNano(0.00005)) // NFT 价格作为交易金额
       .storeCoins(toNano(1))
-
-      // .storeCoins(2) // NFT 价格作为交易金额
       .storeAddress(NFT) // t-usdt
       .storeAddress(NFT) // 新的所有者地址
-      // .storeUint(nftId, 64) // NFT 的 ID
-      // .storeCoins(toNano('1.2'))
-      // .storeMaybeRef(forwardPayload) // 可能包含的其他数据，可以是 null
-
-      // .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
       .storeBit(0)
-
-      // .storeCoins(toNano(0.00001)) // forward_ton_amount:(VarUInteger 16)
       .storeCoins(toNano(0.1)) // forward_ton_amount:(VarUInteger 16)
-
-      // .storeUint(0, 1)
       .storeBit(1)
-
-      // .storeRef(forwardPayload)
       .storeMaybeRef(forwardPayload) // 可能包含的其他数据，可以是 null
       .endCell();
 
@@ -115,6 +74,10 @@ export const useNftContract = () => {
     const res = await tonConnectUI.sendTransaction(transaction).catch(() => {
       setLoadBuyNft(false);
     });
+
+    if (res?.boc) {
+      await wait(res.boc);
+    }
     console.log('转成了...', res);
   };
 
@@ -152,7 +115,10 @@ export const useNftContract = () => {
    * 转nft
    */
   const handleTransferNft = async (nftWalletAddr: string, recipientAddr: string) => {
+    setLoadTransfer(true);
     const receiptAddr = Address.parse(recipientAddr);
+    console.log('recipientAddr...', recipientAddr);
+    console.log('receiptAddr....', receiptAddr.toString());
     // const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
     const nftAddrs = Address.parse(nftWalletAddr);
 
@@ -165,7 +131,7 @@ export const useNftContract = () => {
       .storeAddress(receiptAddr) // response_destination:MsgAddress
       // .storeAddress(Address.parse(tonAddress)) // response_destination:MsgAddress
       .storeUint(0, 1) // custom_payload:(Maybe ^Cell)
-      .storeCoins(toNano(0.1)) // forward_amount:(VarUInteger 16)
+      .storeCoins(toNano(0)) // forward_amount:(VarUInteger 16)
       .storeUint(0, 1) // forward_payload:(Either Cell ^Cell)
       .endCell();
 
@@ -180,7 +146,14 @@ export const useNftContract = () => {
       ],
     };
 
-    const res = await tonConnectUI.sendTransaction(transaction);
+    const res = await tonConnectUI.sendTransaction(transaction).catch(() => {
+      setLoadTransfer(false);
+    });
+
+    if (res?.boc) {
+      await wait(res.boc);
+    }
+
     console.log('转成了...', res);
   };
 
