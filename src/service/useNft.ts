@@ -10,7 +10,7 @@ export interface IMetadata {
 }
 
 export const useNft = () => {
-  const nftAddress = 'EQCe18j7pOFw9-oqZ-JW3a8NRgMU6-7cPnV_BLgQnnxGiAO0'; // 替换为你的NFT合约地址
+  const nftAddress = 'EQAQbKfrIMoRgU6zi0CEY_3nvI1ga1eKVgREDUULKp_38PHa'; // 替换为你的NFT合约地址
   const account = '0:dafac763b9219799a8f6010d5feb19476da9195b8eeb9ad4f21b64836d320019';
   const url = `https://tonapi.io/v2/accounts/${account}/nfts?collection=${nftAddress}`;
 

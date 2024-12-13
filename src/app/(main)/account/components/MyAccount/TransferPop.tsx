@@ -88,7 +88,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
               return;
             }
             // 如果rules规则不通过 或者 isRequired不通过，则不会触发这个callback
-            props.onConfirm(props.curNft, addrInp);
+            props.onConfirm(props.curNft, addrInp?.trim?.());
           }}
         >
           <Form.Inp

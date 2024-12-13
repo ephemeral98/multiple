@@ -113,7 +113,7 @@ const NftPurchase: React.FC = () => {
             <div className="md:mr-54">
               <div className="text-23 md:text-14">Price</div>
               <div className="mt-8 text-31 md:text-24">
-                <span>12300</span>
+                <span>1200</span>
                 <span className="text-17 ml-8">USDT</span>
               </div>
             </div>

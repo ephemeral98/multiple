@@ -9,7 +9,7 @@ import Waiting from '@/components/Waiting';
 
 interface IBuyNftPop {
   onClose: () => void;
-  onBuy: () => void;
+  onBuy: (recipientAddr: string) => void;
   loadBuyNft: boolean;
 }
 
@@ -98,7 +98,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
               return;
             }
             // 如果rules规则不通过 或者 isRequired不通过，则不会触发这个callback
-            props.onBuy();
+            props.onBuy(addrInp?.trim?.());
           }}
         >
           <Form.Inp
