@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Form from '@/components/Form';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
 import Waiting from '@/components/Waiting';
+import { isAddress } from '@/contracts/tools';
 
 interface IBuyNftPop {
   onClose: () => void;
@@ -108,7 +109,13 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             value={addrInp}
             onChange={(e) => setAddrInp(e.target.value)}
             rules={(value) => {
-              return true; // 必须只有 严格return true 才会通过规则
+              if (!value) {
+                return true;
+              }
+              const isAddr = isAddress(value?.trim?.());
+              return !isAddr
+                ? '*The wallet address you entered is not a valid discount code, please re-enter!'
+                : true;
 
               if (!/^\d+/.test(value)) {
                 return '*The wallet address you entered is not a valid discount code, please re-enter!';
@@ -118,7 +125,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             }}
           />
 
-          <Waiting style={{ margin: '46rem auto 0' }} isLoading={props.loadBuyNft}>
+          <Waiting width='370rem' style={{ margin: '46rem auto 0' }} isLoading={props.loadBuyNft}>
             <Form.Btn className="form-btn submit-btn">BUY NOW</Form.Btn>
           </Waiting>
 

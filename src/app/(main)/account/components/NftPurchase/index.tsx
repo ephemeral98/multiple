@@ -17,6 +17,7 @@ import {
 } from '@/styled/mediaSize';
 import useAppStore from '@/store/appStore';
 import { useNftContract } from '@/contracts/useNft';
+import { useTonAddress, useTonConnectModal } from '@tonconnect/ui-react';
 
 const NftPurchaseWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -66,13 +67,16 @@ const NftPurchaseWrap = styled.div`
 `;
 
 const NftPurchase: React.FC = () => {
-  const [quantity, setQuantity] = useState('');
+  const walletAddress = useTonAddress();
+  const { open: connectWallet, close, state } = useTonConnectModal();
 
   const { handleBuyNft, loadBuyNft } = useNftContract();
 
   const appStore = useAppStore();
 
-  const handleBuy = async () => {};
+  const handleBuy = async (recipientAddr: string) => {
+    await handleBuyNft(recipientAddr);
+  };
 
   const { open } = useModal(BuyNftPop, {
     animate: {
@@ -80,7 +84,7 @@ const NftPurchase: React.FC = () => {
       exitActive: 'animate__animated animate__fadeOut',
     },
     props: {
-      onBuy: handleBuyNft,
+      onBuy: handleBuy,
       loadBuyNft: loadBuyNft,
     },
   });
@@ -93,21 +97,13 @@ const NftPurchase: React.FC = () => {
 
       <section className="purchase-info">
         <div className="purchase-face md:mr-33">
-          <Image
-            className="w-full"
-            priority
-            src={require('@img/nft/img-nft.png')}
-            alt=""
-            onClick={() => {
-              console.log('click');
-            }}
-          />
+          <Image className="w-full" priority src={require('@img/nft/img-nft.png')} alt="" />
         </div>
 
         <div>
-          <div className="purchase-face-info mx-auto font-bold text-31 md:mt-24 mt-23 md:mt-0 flex justify-between">
+          <div className="purchase-face-info mx-auto font-bold text-31 md:mt-24 mt-23 md:mt-0 flex justify-center">
             <span>Multiple NFT </span>
-            <span className="ml-20">#23321</span>
+            {/* <span className="ml-20">#23321</span> */}
           </div>
           <div className="flex-center flex-col md:flex-row text-center md:text-start mt-45">
             <div className="md:mr-54">
@@ -119,7 +115,16 @@ const NftPurchase: React.FC = () => {
             </div>
           </div>
 
-          <button className="buy-btn" onClick={() => open()}>
+          <button
+            className="buy-btn"
+            onClick={() => {
+              if (!walletAddress) {
+                connectWallet();
+                return;
+              }
+              open();
+            }}
+          >
             BUY NOW
           </button>
         </div>

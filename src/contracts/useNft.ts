@@ -34,7 +34,15 @@ export const useNftContract = () => {
    * 购买nft
    * @param recipientAddr 接收者地址
    */
-  const handleBuyNft = async (recipientAddr: string) => {
+  const handleBuyNft = async (recipientAddr?: string) => {
+    let _recipientAddr = NFTAddress;
+    let fee = 1.2;
+    // 有优惠码
+    if (recipientAddr) {
+      _recipientAddr = recipientAddr;
+      fee = 1;
+    }
+
     setLoadBuyNft(true);
 
     const userAddress = Address.parse(tonAddress);
@@ -42,7 +50,7 @@ export const useNftContract = () => {
     const jettonWallet = await jettonMaster.getWalletAddress(userAddress);
 
     const forwardPayload = beginCell()
-      .storeAddress(Address.parse(recipientAddr))
+      .storeAddress(Address.parse(_recipientAddr))
       .storeAddress(userAddress)
       .endCell();
 
@@ -50,7 +58,7 @@ export const useNftContract = () => {
     const body = beginCell()
       .storeUint(0xf8a7ea5, 32)
       .storeUint(0, 64) // 可调整的参数，表示交易类型或标识符
-      .storeCoins(toNano(1))
+      .storeCoins(toNano(fee))
       .storeAddress(NFT) // t-usdt
       .storeAddress(NFT) // 新的所有者地址
       .storeBit(0)
@@ -81,44 +89,12 @@ export const useNftContract = () => {
     console.log('转成了...', res);
   };
 
-  async function fetchTransactionsForAccount(
-    accountAddress: string,
-    lastTransactionLT: number,
-    lastTransactionHash: string
-  ) {
-    try {
-      console.log('accountAddress...', tonAddress);
-      const transactions = await tonClient.getTransactions(
-        Address.parse(accountAddress), // 地址对象
-        { limit: 10 }
-      );
-      return transactions;
-    } catch (error) {
-      console.error('Error fetching transactions:', error);
-    }
-  }
-
-  useEffect(() => {
-    if (!tonAddress) {
-      return;
-    }
-    fetchTransactionsForAccount(
-      tonAddress,
-      51551473000001,
-      'e285a1dc3a41f3b41e3588ece98a4ec915f88f8bfd8e3d5f7c31e52375f8be7c'
-    ).then((res) => {
-      console.log('res...', res);
-    });
-  }, [tonAddress]);
-
   /**
    * 转nft
    */
   const handleTransferNft = async (nftWalletAddr: string, recipientAddr: string) => {
     setLoadTransfer(true);
     const receiptAddr = Address.parse(recipientAddr);
-    console.log('recipientAddr...', recipientAddr);
-    console.log('receiptAddr....', receiptAddr.toString());
     // const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
     const nftAddrs = Address.parse(nftWalletAddr);
 

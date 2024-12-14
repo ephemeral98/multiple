@@ -69,18 +69,22 @@ const MyAccount: React.FC = () => {
       <div className="mt-62 md:mt-72">
         <div className="text-31 md:text-24 mb-33">My NFT</div>
 
-        <div className="nft-list">
-          {myNftMetadata.map((item, inx) => (
-            <NftItem
-              key={inx}
-              metadata={item}
-              onTransfer={(nftAddr) => {
-                curNft.current = nftAddr;
-                open();
-              }}
-            />
-          ))}
-        </div>
+        {!myNftMetadata?.length && <div className="text-center my-100">No Data...</div>}
+
+        {!!myNftMetadata?.length && (
+          <div className="nft-list">
+            {myNftMetadata.map((item, inx) => (
+              <NftItem
+                key={inx}
+                metadata={item}
+                onTransfer={(nftAddr) => {
+                  curNft.current = nftAddr;
+                  open();
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </MyAccountWrap>
   );

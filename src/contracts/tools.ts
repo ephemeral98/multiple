@@ -12,6 +12,20 @@ interface WaitForTransactionOptions {
   refetchLimit?: number;
 }
 
+/**
+ * 判断一个字符串是不是ton地址
+ * @param addr
+ * @returns
+ */
+export const isAddress = (addr: string): boolean => {
+  try {
+    Address.parse(addr);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const useAsyncInitialize = <T>(func: () => Promise<T>, deps: unknown[] = []) => {
   const [state, setState] = useState<T | undefined>();
 
