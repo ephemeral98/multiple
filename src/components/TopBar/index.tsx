@@ -113,21 +113,6 @@ const TopBar = () => {
           <Button onClick={() => launchTo(appLink.current)}>Get Started</Button>
 
           <ConnectTonButton />
-
-          {/* {walletAddress ? (
-            <Button
-              onClick={() => {
-                console.log('钱包...');
-              }}
-              className={'ml-31'}
-            >
-              {walletAddress}
-            </Button>
-          ) : (
-            <Button onClick={() => open()} className={'ml-31'}>
-              Connect Wallet::{String(walletAddress)}
-            </Button>
-          )} */}
         </div>
       </div>
     </TopBarWrap>

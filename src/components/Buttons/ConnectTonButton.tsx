@@ -11,11 +11,6 @@ import { plusStar } from '@/utils';
 import { styled } from 'styled-components';
 import { useRouter } from 'next/navigation';
 
-import TonWeb from 'tonweb';
-import TestTon from './TestTon2';
-import TransferTon from './TransferTon';
-import { Address } from '@ton/core';
-
 export const AddrWrap = styled.div`
   border-right: solid 1px #fff;
   padding-right: 8rem;
@@ -55,13 +50,6 @@ const ConnectWallet = () => {
     tonConnectUI.disconnect();
     setConnected(false);
   };
-
-  // return (
-  //   <>
-  //     <TestTon />
-  //     <TransferTon />
-  //   </>
-  // );
 
   if (connected) {
     return (

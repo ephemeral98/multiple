@@ -3,8 +3,6 @@ import Image from 'next/image';
 import { INav, useTopBar } from '../useTopBar';
 import { flexPos } from '@/styled/mixin';
 import Community, { GetStartBtn } from '@/components/Community';
-// import ConnectTonButton from '@/components/Buttons/ConnectTonButton';
-import { Suspense, useEffect, useState } from 'react';
 import ConnectWallet from './ConnectBtn';
 
 interface IProps {

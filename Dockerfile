@@ -5,15 +5,15 @@ FROM ubuntu:latest
 RUN apt-get update && \
     apt-get install -y curl gnupg2
 
-# 添加 Node.js 源并安装 Node.js 和 Yarn
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+RUN apt-get update && apt-get install -y --reinstall ca-certificates curl build-essential \
+    && curl -s https://nodejs.org/dist/v22.11.0/node-v22.11.0-linux-x64.tar.xz \
+    -o node-v22.11.0-linux-x64.tar.xz && tar xf node-v22.11.0-linux-x64.tar.xz \
+    && cd node-v22.11.0-linux-x64 && cp -r bin include lib share /usr/local \
+    && rm -rf /node-v22.11.0-linux-x64.tar.xz /node-v22.11.0-linux-x64
 
-# 安装 Yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && \
-    apt-get install -y yarn
+
+# 设置 npm 使用淘宝镜像
+RUN npm config set registry https://registry.npmmirror.com
 
 # 设置工作目录
 WORKDIR /app
@@ -22,7 +22,7 @@ WORKDIR /app
 COPY package.json ./
 
 # 安装依赖，这里不使用yarn install --production是因为还需要安装dev的依赖
-RUN yarn
+RUN npm i yarn -g
 
 # 复制 .next 和 public 文件夹到工作目录
 COPY .next .next
@@ -34,7 +34,12 @@ COPY ecosystem.config.js ./
 COPY next.config.js ./
 
 # 安装 PM2 全局依赖
-RUN yarn global add pm2
+# RUN yarn global add pm2
+# RUN yarn add pm2 -g
+RUN npm i pm2 -g
+
+RUN yarn
+
 
 # 暴露端口
 EXPOSE 3000

@@ -9,13 +9,13 @@ const useTonWallet = () => {
   useEffect(() => {
     // 初始化 TonConnect
     const tonConnectInstance = new TonConnect({
-      manifestUrl: 'https://multiple.cc/static-files/manifest.json'
+      manifestUrl: 'https://multiple.cc/static-files/manifest.json',
     });
     setTonConnect(tonConnectInstance);
 
     // 检查是否已有连接
-    tonConnectInstance.restoreConnection().then((connectedAccount) => {
-      console.log('connectedAccount....', connectedAccount);
+    tonConnectInstance.restoreConnection().then((connectedAccount: any) => {
+      // console.log('connectedAccount....', connectedAccount);
 
       if (connectedAccount) {
         setConnected(true);
@@ -24,8 +24,7 @@ const useTonWallet = () => {
     });
 
     // // 监听状态变化
-    tonConnectInstance.onStatusChange((status) => {
-      console.log('status....', status);
+    tonConnectInstance.onStatusChange((status: any) => {
       if (status.connected) {
         setConnected(true);
         setWalletAddress(status.account.address);

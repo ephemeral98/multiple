@@ -6,7 +6,12 @@ import { flexPos } from '@/styled/mixin';
 import { useModal } from '@/hooks/useModal';
 import Menu from './components/Menu';
 import { useEffect, useState } from 'react';
-import { useTonConnectModal, useTonConnectUI, useTonAddress } from '@tonconnect/ui-react';
+import {
+  useTonConnectModal,
+  useTonConnectUI,
+  useTonAddress,
+  ConnectedWallet,
+} from '@tonconnect/ui-react';
 
 const TopBarMobWrap = styled.header`
   position: absolute;
@@ -24,9 +29,7 @@ const TopBarMob = () => {
   const walletAddress = useTonAddress();
   const [tonConnectUI] = useTonConnectUI(); // 获取 TonConnect 实例
   const [connected, setConnected] = useState(false);
-  const [wallet, setWallet] = useState(null);
   const { open } = useTonConnectModal();
-  const { navList } = useTopBar();
   const { toggle, isOpen, close } = useModal(Menu, {
     // root: '#root',
     animate: {
@@ -63,10 +66,8 @@ const TopBarMob = () => {
 
   useEffect(() => {
     // 状态变化处理函数
-    const handleStatusChange = (wallet) => {
-      console.log('wallet...', wallet);
+    const handleStatusChange = (wallet: ConnectedWallet | null) => {
       if (wallet) {
-        setWallet(wallet);
         setConnected(true);
       } else {
         setConnected(false);
