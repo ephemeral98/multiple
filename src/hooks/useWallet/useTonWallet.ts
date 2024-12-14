@@ -9,7 +9,7 @@ const useTonWallet = () => {
   useEffect(() => {
     // 初始化 TonConnect
     const tonConnectInstance = new TonConnect({
-      manifestUrl: 'https://ton-connect.github.io/demo-dapp-with-wallet/tonconnect-manifest.json'
+      manifestUrl: 'https://multiple.cc/static-files/manifest.json'
     });
     setTonConnect(tonConnectInstance);
 
