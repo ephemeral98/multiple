@@ -2,11 +2,12 @@ import { TonClient4, TonClient, JettonMaster, toNano, beginCell, Address, addres
 import { useTonAddress, useTonConnectUI, useTonConnectModal } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
 import { useWait } from './tools';
+import { Message } from '@arco-design/web-react';
 
 const TBNBAddress = 'EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA';
 // const NFTAddress = 'EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5';
 // const NFTAddress = 'EQACI7Hr1vkbYFZHE--n92SfcOXJXPwVDTeqcwEienp4CD09';
-const NFTAddress = 'EQAQbKfrIMoRgU6zi0CEY_3nvI1ga1eKVgREDUULKp_38PHa';
+export const NFTAddress = 'EQAQbKfrIMoRgU6zi0CEY_3nvI1ga1eKVgREDUULKp_38PHa';
 const recipientAddress = 'UQA2JTJpD4UYu-OA0HdXXRKQ90O4GusuWo3I0r6QNEcsxvx6';
 const nftContractAddress = 'EQDqJtt45Wl5HFYqMCzzzUeNtsSr2NAtXBmRcRd-5nl-EZ6w'; // NFT 合约地址
 
@@ -80,12 +81,15 @@ export const useNftContract = () => {
     };
 
     const res = await tonConnectUI.sendTransaction(transaction).catch(() => {
+      Message.error('error');
       setLoadBuyNft(false);
     });
 
     if (res?.boc) {
       await wait(res.boc);
     }
+    setLoadBuyNft(false);
+    Message.success('success');
     console.log('转成了...', res);
   };
 
@@ -123,12 +127,15 @@ export const useNftContract = () => {
     };
 
     const res = await tonConnectUI.sendTransaction(transaction).catch(() => {
+      Message.error('error');
       setLoadTransfer(false);
     });
 
     if (res?.boc) {
       await wait(res.boc);
     }
+    setLoadTransfer(false);
+    Message.success('success');
 
     console.log('转成了...', res);
   };

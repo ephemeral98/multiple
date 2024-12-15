@@ -76,7 +76,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
         <div className="text-26 md:text-24 font-bold mt-16">1200USDT</div>
         <div className="mt-45 mb-24 flex-center">
           <div className="text-20 md:text-16">Promotion code (optional)</div>
-          <Image
+          {/* <Image
             className="w-20 md:w-16 ml-11 cursor-pointer"
             priority
             src={require('@img/common/icon-query.png')}
@@ -84,7 +84,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             onClick={() => {
               console.log('click');
             }}
-          />
+          /> */}
         </div>
 
         <Form.Wrap
@@ -129,9 +129,9 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             <Form.Btn className="form-btn submit-btn">BUY NOW</Form.Btn>
           </Waiting>
 
-          <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
+          {/* <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
             Cancel
-          </button>
+          </button> */}
         </Form.Wrap>
       </section>
     </BuyNftPopWrap>

@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { $GET } from './request';
+import { useTonAddress } from '@tonconnect/ui-react';
+import { NFTAddress } from '@/contracts/useNft';
 
 export interface IMetadata {
   attributes: string[];
@@ -10,16 +12,16 @@ export interface IMetadata {
 }
 
 export const useNft = () => {
-  const nftAddress = 'EQAQbKfrIMoRgU6zi0CEY_3nvI1ga1eKVgREDUULKp_38PHa'; // 替换为你的NFT合约地址
-  const account = '0:dafac763b9219799a8f6010d5feb19476da9195b8eeb9ad4f21b64836d320019';
-  const url = `https://tonapi.io/v2/accounts/${account}/nfts?collection=${nftAddress}`;
+  const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
 
   const [myNftMetadata, setMyNftMetadata] = useState<IMetadata[]>([]);
 
   /**
    * 获取我的nft
    */
-  const getMyNft = async () => {
+  const getMyNft = async (addr: string) => {
+    const url = `https://tonapi.io/v2/accounts/${addr}/nfts?collection=${NFTAddress}`;
+
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -41,8 +43,11 @@ export const useNft = () => {
   }, [myNftMetadata]);
 
   useEffect(() => {
-    getMyNft();
-  }, []);
+    if (!tonAddress) {
+      return;
+    }
+    getMyNft(tonAddress);
+  }, [tonAddress]);
 
   return {
     getMyNft,

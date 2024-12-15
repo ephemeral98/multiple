@@ -120,9 +120,9 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             <Form.Btn className="form-btn submit-btn">Confirm</Form.Btn>
           </Waiting>
 
-          <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
+          {/* <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
             Cancel
-          </button>
+          </button> */}
         </Form.Wrap>
       </section>
     </BuyNftPopWrap>

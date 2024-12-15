@@ -34,12 +34,13 @@ const MyAccount: React.FC = () => {
   const { handleTransferNft, loadBuyNft } = useNftContract();
   const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
   const walletAddress = useTonAddress();
+  const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
 
   const curNft = useRef('');
 
   const doTransfer = async (nftWalletAddr: string, recipientAddr: string) => {
     await handleTransferNft(nftWalletAddr, recipientAddr);
-    getMyNft();
+    getMyNft(tonAddress);
   };
 
   const { open } = useModal(TransferPop, {
