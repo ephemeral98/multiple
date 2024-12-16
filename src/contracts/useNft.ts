@@ -1,4 +1,14 @@
-import { TonClient4, TonClient, JettonMaster, toNano, beginCell, Address, address } from '@ton/ton';
+import {
+  TonClient4,
+  TonClient,
+  JettonMaster,
+  toNano,
+  beginCell,
+  Address,
+  address,
+  Cell,
+  TupleReader,
+} from '@ton/ton';
 import { useTonAddress, useTonConnectUI, useTonConnectModal } from '@tonconnect/ui-react';
 import { useEffect, useState } from 'react';
 import { useWait } from './tools';
@@ -140,9 +150,47 @@ export const useNftContract = () => {
     console.log('转成了...', res);
   };
 
+  /**
+   * 获取优惠码列表
+   */
+  const getLeaderInfo = async (address: string) => {
+    async function encodeAddressToCell(address: string) {
+      const addr = Address.parse(address);
+      const cell = beginCell().storeAddress(addr).endCell();
+      return cell;
+    }
+
+    try {
+      console.log('账号...', address);
+      const a = await encodeAddressToCell('UQBeaGrkqUPtKYDv-U4DlwYFLXUcg-kRsZHO-4WKdwSKovku');
+
+      console.log('a....', a);
+      const resp = await client?.runMethod(NFT, 'get_leader_info', [
+        // { type: 'cell', cell: Cell.fromHex(recipientAddress) },
+        // { type: 'cell', cell: a },
+        // { type: 'builder', cell: a }
+        { type: 'slice', cell: a },
+      ]);
+      // const resp = await client?.runMethod(NFT, 'get_collection_data', []);
+      console.log('resp...', resp);
+
+      const temp = resp.stack.items.filter((item, inx) => inx === 1);
+      console.log('temp...', temp);
+
+      const nftAddrInx = new TupleReader(temp);
+      console.log('nftAddrInx....', nftAddrInx);
+
+      const addr = nftAddrInx.readNumber();
+      console.log('nftAddrInx2222', addr);
+    } catch (error) {
+      console.log('error...', error);
+    }
+  };
+
   return {
     handleBuyNft,
     handleTransferNft,
+    getLeaderInfo,
     loadBuyNft,
   };
 };

@@ -32,6 +32,7 @@ const BuyNftPopWrap = styled.div`
     padding: 0 24rem;
     ${$fontSize('24rem', '16rem', '16rem')}
     color: #fff;
+    background-color: transparent;
   }
 
   .form-btn {
@@ -59,16 +60,6 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
 
   return (
     <BuyNftPopWrap>
-      <Image
-        className="absolute w-20 top-36 right-36 cursor-pointer"
-        priority
-        src={require('@img/common/icon-pop-close.png')}
-        alt=""
-        onClick={() => {
-          props.onClose();
-        }}
-      />
-
       <div className="flex-center pt-32 text-28 md:text-20">Buy NFTs</div>
 
       <section className="text-center mt-67 px-28">
@@ -125,13 +116,13 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             }}
           />
 
-          <Waiting width='370rem' style={{ margin: '46rem auto 0' }} isLoading={props.loadBuyNft}>
+          <Waiting width="370rem" style={{ margin: '46rem auto 0' }} isLoading={props.loadBuyNft}>
             <Form.Btn className="form-btn submit-btn">BUY NOW</Form.Btn>
           </Waiting>
 
-          {/* <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
+          <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
             Cancel
-          </button> */}
+          </button>
         </Form.Wrap>
       </section>
     </BuyNftPopWrap>

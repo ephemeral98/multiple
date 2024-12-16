@@ -33,6 +33,7 @@ const BuyNftPopWrap = styled.div`
     padding: 0 24rem;
     ${$fontSize('24rem', '16rem', '16rem')}
     color: #fff;
+    background-color: transparent;
   }
 
   form {

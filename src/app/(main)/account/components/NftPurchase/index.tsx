@@ -70,7 +70,7 @@ const NftPurchase: React.FC = () => {
   const walletAddress = useTonAddress();
   const { open: connectWallet, close, state } = useTonConnectModal();
 
-  const { handleBuyNft, loadBuyNft } = useNftContract();
+  const { handleBuyNft, loadBuyNft, getLeaderInfo } = useNftContract();
 
   const appStore = useAppStore();
 
@@ -118,11 +118,12 @@ const NftPurchase: React.FC = () => {
           <button
             className="buy-btn"
             onClick={() => {
-              if (!walletAddress) {
-                connectWallet();
-                return;
-              }
-              open();
+              // if (!walletAddress) {
+              //   connectWallet();
+              //   return;
+              // }
+              // open();
+              getLeaderInfo('UQDa-sdjuSGXmaj2AQ1f6xlHbakZW47rmtTyG2SDbTIAGXej');
             }}
           >
             BUY NOW
