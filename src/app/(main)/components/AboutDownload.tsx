@@ -74,10 +74,14 @@ const Blog = () => {
 
       <main className="about-download-main">
         <div className="text-31 md:text-24 mb-24 font-bold">
-          Multiple - The best solution for data storage and data transmission
+          <span className="text-#2865FF">Multiple Network</span> is a Web3 Privacy Acceleration
+          solution for <span className="text-#2865FF">AI</span>
         </div>
         <div className="text-23 md:text-16">
-          Ensure data privacy All data is encrypted during storage and transmission
+          Provides privacy protection and data acceleration services based on{' '}
+          <span className="text-#2865FF">P2P</span> and{' '}
+          <span className="text-#2865FF">SD-WAN </span>
+          technologies. 
         </div>
 
         <div className="flex-center flex-col md:flex-row mt-69 text-23 md:text-16">

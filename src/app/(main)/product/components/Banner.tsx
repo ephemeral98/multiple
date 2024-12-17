@@ -8,6 +8,7 @@ import { useVideoPlay } from '../../hooks/useVideoPlay';
 import { flexPos } from '@/styled/mixin';
 import { $borderRadius, $fontSize, $height, $width, phoneSize } from '@/styled/mediaSize';
 import { useEffect } from 'react';
+import { Message } from '@arco-design/web-react';
 
 const BannerWrap = styled.div`
   width: 100%;
@@ -50,10 +51,9 @@ const BannerWrap = styled.div`
     }
 
     .access-btn {
-      background: linear-gradient(134deg, #303030 0%, #000000 100%);
+      background-color: #2865ff;
       padding: 0 79rem;
       margin-top: 66rem;
-      border: 1px solid #585858;
       ${$fontSize('27rem', '20rem', '20rem')}
       ${$height('106rem', '64rem', '64rem')}
       ${$borderRadius('19rem', '10rem', '10rem')}
@@ -102,29 +102,39 @@ const BannerWrap = styled.div`
 
 const Banner = () => {
   const appStore = useAppStore();
-  const { targetRef: targetRef1, videoRef: videoRef1 } = useVideoPlay();
+  // const { targetRef: targetRef1, videoRef: videoRef1 } = useVideoPlay();
 
   return (
     <BannerWrap>
       <LaxScale>
-        <VideoBox className="one" src="/video/video-1.mp4" ref={videoRef1}></VideoBox>
+        {/* <VideoBox className="one" src="/video/video-1.mp4" ref={videoRef1}></VideoBox> */}
+        <div className="w-full h-screen">
+          <Image
+            src={require('@img/home/banner.png')}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
       </LaxScale>
 
       <main className="banner-content">
         <div className="banner-text">
-          <div className="text-46 md:text-64 text-up">
-            <div>Building a decentralized</div>
-            <div> network to fuel private</div>
-            <div> encrypted transmission.</div>
+          <div className="text-46 md:text-64">
+            <div>Web3 Privacy Acceleration </div>
+            <div>
+              Solution for <span className="text-#2865FF">AI</span>
+            </div>
           </div>
-          <div className="content px-30 md:px-0 mt-33 text-23 md:text-20 leading-[1.4]">
+          {/* <div className="content px-30 md:px-0 mt-33 text-23 md:text-20 leading-[1.4]">
             <div>Multiple Network is a privacy-focused, transmission acceleration network</div>
             <div>leveraging P2P and SD-WAN technologies, enabling anonymous</div>
             <div>communication and encrypted high-speed data transfer.</div>
-          </div>
+          </div> */}
         </div>
 
-        {/* <button className="access-btn">Get access</button> */}
+        <button className="access-btn" onClick={() => window.open('https://www.app.multiple.cc')}>
+          Get Started
+        </button>
       </main>
 
       <Marquee

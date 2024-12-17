@@ -15,7 +15,8 @@ const TitleWrap = styled.div`
     font-weight: 400;
     ${$fontSize('46rem', '64rem', '64rem')}
     text-transform: uppercase;
-    background: linear-gradient(to right, #3a3a3a, #fff, #3a3a3a);
+    /* background: linear-gradient(to right, #3a3a3a, #fff, #3a3a3a); */
+    background: linear-gradient(to right, #7895ff 0%, #ffffff 100%);
     -webkit-background-clip: text;
     color: transparent;
   }

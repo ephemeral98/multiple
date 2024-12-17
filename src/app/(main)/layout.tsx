@@ -71,7 +71,10 @@ export default function RootLayout({
         <meta name="author" content="Multiple" />
       </head>
       <body id="app" className={`${inter.className} app`}>
-        {welcomeEnd && <Welcome onEnd={() => setWelcomeEnd(false)} />}
+        {welcomeEnd && <Welcome onEnd={() => {
+          console.log('end...');
+          setWelcomeEnd(false);
+        }} />}
 
         {showApp && (
           <TonConnectUIProvider manifestUrl="https://multiple.cc/static-files/manifest.json">
