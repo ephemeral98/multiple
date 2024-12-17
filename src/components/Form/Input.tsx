@@ -12,7 +12,7 @@ interface IProps {
   placeHolder?: string;
   isRequired?: string; // 是否输入框可以不填？传递的值是：当不填写的的时候可作为提示
   name: string;
-  rules?: (value: string) => string | true; // 规则，返回true才可以提交表单
+  rules?: (value: string) => Promise<string | true>; // 规则，返回true才可以提交表单
 }
 const Input = (props: IProps) => {
   const { state, dispatch } = useFormContext();

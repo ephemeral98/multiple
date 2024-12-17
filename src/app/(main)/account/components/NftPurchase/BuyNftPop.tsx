@@ -7,11 +7,13 @@ import Form from '@/components/Form';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
 import Waiting from '@/components/Waiting';
 import { isAddress } from '@/contracts/tools';
+import { isCoupon } from '@/contracts/useNft';
 
 interface IBuyNftPop {
   onClose: () => void;
   onBuy: (recipientAddr: string) => void;
   loadBuyNft: boolean;
+  client: any;
 }
 
 const BuyNftPopWrap = styled.div`
@@ -99,20 +101,26 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             name="one" // name不要写相同的
             value={addrInp}
             onChange={(e) => setAddrInp(e.target.value)}
-            rules={(value) => {
+            rules={async (value) => {
               if (!value) {
                 return true;
               }
-              const isAddr = isAddress(value?.trim?.());
-              return !isAddr
-                ? '*The wallet address you entered is not a valid discount code, please re-enter!'
-                : true;
 
-              if (!/^\d+/.test(value)) {
-                return '*The wallet address you entered is not a valid discount code, please re-enter!';
+              const val = value?.trim?.();
+
+              const msg =
+                '*The wallet address you entered is not a valid discount code, please re-enter!';
+              const isAddr = isAddress(val);
+
+              if (!isAddr) {
+                return msg;
               }
 
-              return true; // 必须只有 严格return true 才会通过规则
+              const c = await isCoupon(val, props.client);
+              if (!c) {
+                return msg;
+              }
+              return true;
             }}
           />
 

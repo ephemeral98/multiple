@@ -103,7 +103,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             name="one" // name不要写相同的
             value={addrInp}
             onChange={(e) => setAddrInp(e.target.value)}
-            rules={(value) => {
+            rules={async (value) => {
               const isAddr = isAddress(value?.trim?.());
               return !isAddr
                 ? '*The wallet address you entered is not a valid discount code, please re-enter!'

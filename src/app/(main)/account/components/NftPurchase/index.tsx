@@ -18,6 +18,9 @@ import {
 import useAppStore from '@/store/appStore';
 import { useNftContract } from '@/contracts/useNft';
 import { useTonAddress, useTonConnectModal } from '@tonconnect/ui-react';
+import Pending from '@/components/TransactionStatus/Pending';
+import Fail from '@/components/TransactionStatus/Fail';
+import Success from '@/components/TransactionStatus/Success';
 
 const NftPurchaseWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -70,7 +73,7 @@ const NftPurchase: React.FC = () => {
   const walletAddress = useTonAddress();
   const { open: connectWallet, close, state } = useTonConnectModal();
 
-  const { handleBuyNft, loadBuyNft, getLeaderInfo } = useNftContract();
+  const { handleBuyNft, loadBuyNft, coupon, client } = useNftContract();
 
   const appStore = useAppStore();
 
@@ -86,7 +89,30 @@ const NftPurchase: React.FC = () => {
     props: {
       onBuy: handleBuy,
       loadBuyNft: loadBuyNft,
+      client,
     },
+  });
+
+  const { open: showPending } = useModal(Pending, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+  });
+
+  const { open: showSuccess } = useModal(Success, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+  });
+
+  const { open: showFail } = useModal(Fail, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+    props: {},
   });
 
   return (
@@ -118,12 +144,13 @@ const NftPurchase: React.FC = () => {
           <button
             className="buy-btn"
             onClick={() => {
-              // if (!walletAddress) {
-              //   connectWallet();
-              //   return;
-              // }
-              // open();
-              getLeaderInfo('UQDa-sdjuSGXmaj2AQ1f6xlHbakZW47rmtTyG2SDbTIAGXej');
+              showSuccess();
+              return;
+              if (!walletAddress) {
+                connectWallet();
+                return;
+              }
+              open();
             }}
           >
             BUY NOW

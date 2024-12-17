@@ -10,6 +10,9 @@ import { useTonAddress } from '@tonconnect/ui-react';
 import { useNftContract } from '@/contracts/useNft';
 import { useModal } from '@/hooks/useModal';
 import TransferPop from './TransferPop';
+import Pending from '@/components/TransactionStatus/Pending';
+import Fail from '@/components/TransactionStatus/Fail';
+import Success from '@/components/TransactionStatus/Success';
 
 const MyAccountWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -53,6 +56,28 @@ const MyAccount: React.FC = () => {
       loadBuyNft: loadBuyNft,
       curNft: curNft.current,
     },
+  });
+
+  const { open: showPending } = useModal(Pending, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+  });
+
+  const { open: showSuccess } = useModal(Success, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+  });
+
+  const { open: showFail } = useModal(Fail, {
+    animate: {
+      enterActive: 'animate__animated animate__fadeIn',
+      exitActive: 'animate__animated animate__fadeOut',
+    },
+    props: {},
   });
 
   if (!walletAddress) {

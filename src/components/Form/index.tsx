@@ -46,7 +46,7 @@ const Form = forwardRef((props: IProps, ref: ForwardedRef<HTMLFormElement>) => {
         action=""
         onSubmit={async (e) => {
           e.preventDefault();
-          const resp = validResp();
+          const resp = await validResp();
           if (resp === true) {
             if (loading) {
               return;

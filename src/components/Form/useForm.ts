@@ -41,9 +41,9 @@ export const useFormState = (
    * @param itemName name
    * @returns !== true，则说明规则不通过
    */
-  const permitRuleItem = (itemName: string): string | true => {
+  const permitRuleItem = async (itemName: string): Promise<string | true> => {
     const item = state[itemName];
-    const res = item.validRules.fn?.(item.value) ?? true;
+    const res = (await item.validRules.fn?.(item.value)) ?? true;
     // 更新规则是否合法
     dispatch({
       type: EType.updateInput,
@@ -86,11 +86,11 @@ export const useFormState = (
   /**
    * 校验是否所有制定规则都通过
    */
-  const permitRules = (): string | true => {
+  const permitRules = async (): Promise<string | true> => {
     let tag;
     for (const key in state) {
       if (Object.prototype.hasOwnProperty.call(state, key)) {
-        const resp = permitRuleItem(key);
+        const resp = await permitRuleItem(key);
         if (resp !== true) {
           tag = resp;
         }
@@ -102,15 +102,15 @@ export const useFormState = (
   /**
    * 提交表单的校验
    */
-  const validResp = (): string | true => {
+  const validResp = async (): Promise<string | true> => {
     let tag = true;
-    const resp1 = validSubmit();
+    const resp1 = await validSubmit();
     if (resp1 !== true) {
       // window.alert('不合法：' + resp1);
       tag = false;
       return resp1;
     }
-    const resp2 = permitRules();
+    const resp2 = await permitRules();
     if (resp2 !== true) {
       // window.alert('不合法：' + resp2);
       tag = false;

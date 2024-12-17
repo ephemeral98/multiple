@@ -10,7 +10,7 @@ export interface IPayload {
   value: string; // 值
   isRequired: string | undefined; // 是否必填
   validRules: {
-    fn: ((value: string) => string | true) | undefined;
+    fn: ((value: string) => Promise<string | true>) | undefined;
     val: boolean;
   };
   message: string; // 错误消息等

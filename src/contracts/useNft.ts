@@ -99,7 +99,9 @@ export const useNftContract = () => {
       await wait(res.boc);
     }
     setLoadBuyNft(false);
-    Message.success('success');
+    if (res) {
+      Message.success('success');
+    }
     console.log('转成了...', res);
   };
 
@@ -145,52 +147,67 @@ export const useNftContract = () => {
       await wait(res.boc);
     }
     setLoadTransfer(false);
-    Message.success('success');
+    if (res) {
+      Message.success('success');
+    }
 
     console.log('转成了...', res);
   };
 
   /**
-   * 获取优惠码列表
+   * 判断是否为优惠券
    */
-  const getLeaderInfo = async (address: string) => {
+  const coupon = async (address: string): Promise<boolean> => {
     async function encodeAddressToCell(address: string) {
       const addr = Address.parse(address);
       const cell = beginCell().storeAddress(addr).endCell();
       return cell;
     }
-
     try {
-      console.log('账号...', address);
-      const a = await encodeAddressToCell('UQBeaGrkqUPtKYDv-U4DlwYFLXUcg-kRsZHO-4WKdwSKovku');
-
-      console.log('a....', a);
-      const resp = await client?.runMethod(NFT, 'get_leader_info', [
-        // { type: 'cell', cell: Cell.fromHex(recipientAddress) },
-        // { type: 'cell', cell: a },
-        // { type: 'builder', cell: a }
-        { type: 'slice', cell: a },
+      const tempCell = await encodeAddressToCell(address);
+      const resp: any = await client?.runMethod(NFT, 'get_leader_info', [
+        { type: 'slice', cell: tempCell },
       ]);
-      // const resp = await client?.runMethod(NFT, 'get_collection_data', []);
-      console.log('resp...', resp);
 
-      const temp = resp.stack.items.filter((item, inx) => inx === 1);
-      console.log('temp...', temp);
-
+      const temp = resp.stack.items.filter((item: any, inx: number) => inx === 1);
       const nftAddrInx = new TupleReader(temp);
-      console.log('nftAddrInx....', nftAddrInx);
 
       const addr = nftAddrInx.readNumber();
-      console.log('nftAddrInx2222', addr);
+      return true;
     } catch (error) {
-      console.log('error...', error);
+      return false;
     }
   };
 
   return {
     handleBuyNft,
     handleTransferNft,
-    getLeaderInfo,
+    coupon,
     loadBuyNft,
+    client,
   };
+};
+
+export const isCoupon = async (address: string, client: any): Promise<boolean> => {
+  const NFT = Address.parse(NFTAddress);
+
+  async function encodeAddressToCell(address: string) {
+    const addr = Address.parse(address);
+    const cell = beginCell().storeAddress(addr).endCell();
+    return cell;
+  }
+  try {
+    const tempCell = await encodeAddressToCell(address);
+    const resp: any = await client?.runMethod(NFT, 'get_leader_info', [
+      { type: 'slice', cell: tempCell },
+    ]);
+
+    const temp = resp.stack.items.filter((item: any, inx: number) => inx === 1);
+    const nftAddrInx = new TupleReader(temp);
+
+    const addr = nftAddrInx.readNumber();
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
