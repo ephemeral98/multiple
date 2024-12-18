@@ -9,6 +9,7 @@ import { flexPos } from '@/styled/mixin';
 import { $borderRadius, $fontSize, $height, $width, phoneSize } from '@/styled/mediaSize';
 import { useEffect } from 'react';
 import { Message } from '@arco-design/web-react';
+import DanceButton from '@/components/Buttons/DanceButton';
 
 const BannerWrap = styled.div`
   width: 100%;
@@ -102,19 +103,19 @@ const BannerWrap = styled.div`
 
 const Banner = () => {
   const appStore = useAppStore();
-  // const { targetRef: targetRef1, videoRef: videoRef1 } = useVideoPlay();
+  const { targetRef: targetRef1, videoRef: videoRef1 } = useVideoPlay();
 
   return (
     <BannerWrap>
       <LaxScale>
-        {/* <VideoBox className="one" src="/video/video-1.mp4" ref={videoRef1}></VideoBox> */}
-        <div className="w-full h-screen">
+        <VideoBox className="one" src="/video/video-2.mp4" ref={videoRef1}></VideoBox>
+        {/* <div className="w-full h-screen">
           <Image
             src={require('@img/home/banner.png')}
             alt=""
             className="w-full h-full object-cover"
           />
-        </div>
+        </div> */}
       </LaxScale>
 
       <main className="banner-content">
@@ -132,9 +133,16 @@ const Banner = () => {
           </div> */}
         </div>
 
-        <button className="access-btn" onClick={() => window.open('https://www.app.multiple.cc')}>
+        {/* <button className="access-btn" onClick={() => window.open('https://www.app.multiple.cc')}>
           Get Started
-        </button>
+        </button> */}
+
+        <DanceButton
+          className="access-btn"
+          onClick={() => window.open('https://www.app.multiple.cc')}
+        >
+          Get Started
+        </DanceButton>
       </main>
 
       <Marquee

@@ -2,10 +2,11 @@ import { styled } from 'styled-components';
 import BlogItem from '@cps/BlogComp/BlogItem';
 import { flexPos } from '@/styled/mixin';
 import TitleWrap from '@cps/Title';
-import { $width, phoneSize } from '@/styled/mediaSize';
+import { $fontSize, $width, phoneSize } from '@/styled/mediaSize';
 import { useRouter } from 'next/navigation';
 import { useGetArticleList } from '@/service/useArticle';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 const BlogWrap = styled.div`
   margin-top: 296rem;
@@ -30,6 +31,27 @@ const BlogWrap = styled.div`
       }
     }
   }
+
+  .see-more {
+    /* text-32 md:text-24 flex-center */
+    ${$fontSize('32rem', '24rem', '24rem')}
+    ${flexPos('center')}
+
+
+    .icon-see-more {
+      opacity: 0;
+      width: 24rem;
+      transition: all 0.5s;
+    }
+
+    &:hover {
+      .icon-see-more {
+        opacity: 1;
+        display: block;
+        margin-left: 43rem;
+      }
+    }
+  }
 `;
 
 const Blog = () => {
@@ -39,7 +61,7 @@ const Blog = () => {
     getArticle();
   }, []);
   return (
-    <BlogWrap className='rise-target animate__animated'>
+    <BlogWrap className="rise-target animate__animated">
       <TitleWrap className="mb-80">Explore our blog</TitleWrap>
 
       <main className="blog-content">
@@ -63,12 +85,13 @@ const Blog = () => {
 
       <div className="flex-center mt-72">
         <button
-          className="text-32 md:text-24"
+          className="see-more"
           onClick={() => {
             router.push('/blog');
           }}
         >
-          See more
+          <div>See more</div>
+          <Image src={require('@img/home/icon-more-arrow.png')} alt="" className="icon-see-more" />
         </button>
       </div>
     </BlogWrap>

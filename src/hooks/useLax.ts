@@ -29,7 +29,7 @@ export const useLax = () => {
       scrollY: {
         scale: [
           ['elInY', 'elCenterY', 'elOutY'],
-          [0.8, 0.8, 1],
+          [0.45, 0.45, 1],
         ],
       },
     });
