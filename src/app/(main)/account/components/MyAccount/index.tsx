@@ -42,7 +42,8 @@ const MyAccount: React.FC = () => {
   const curNft = useRef('');
 
   const doTransfer = async (nftWalletAddr: string, recipientAddr: string) => {
-    await handleTransferNft(nftWalletAddr, recipientAddr);
+    const res = await handleTransferNft(nftWalletAddr, recipientAddr);
+
     getMyNft(tonAddress);
   };
 

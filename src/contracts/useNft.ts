@@ -45,7 +45,7 @@ export const useNftContract = () => {
    * 购买nft
    * @param recipientAddr 接收者地址
    */
-  const handleBuyNft = async (recipientAddr?: string) => {
+  const handleBuyNft = async (recipientAddr?: string): Promise<boolean> => {
     let _recipientAddr = NFTAddress;
     let fee = 1.2;
     // 有优惠码
@@ -90,25 +90,34 @@ export const useNftContract = () => {
       ],
     };
 
-    const res = await tonConnectUI.sendTransaction(transaction).catch(() => {
+    const res: any = await tonConnectUI.sendTransaction(transaction).catch(() => {
       Message.error('error');
       setLoadBuyNft(false);
+      return false;
     });
+
+    if (!res) {
+      return false;
+    }
 
     if (res?.boc) {
       await wait(res.boc);
     }
-    setLoadBuyNft(false);
+    // setLoadBuyNft(false);
     if (res) {
-      Message.success('success');
+      // Message.success('success');
     }
+    return true;
     console.log('转成了...', res);
   };
 
   /**
    * 转nft
    */
-  const handleTransferNft = async (nftWalletAddr: string, recipientAddr: string) => {
+  const handleTransferNft = async (
+    nftWalletAddr: string,
+    recipientAddr: string
+  ): Promise<boolean> => {
     setLoadTransfer(true);
     const receiptAddr = Address.parse(recipientAddr);
     // const nftAddrs = Address.parse(nftContractAddress); // NFT 合约地址
@@ -138,18 +147,24 @@ export const useNftContract = () => {
       ],
     };
 
-    const res = await tonConnectUI.sendTransaction(transaction).catch(() => {
+    const res: any = await tonConnectUI.sendTransaction(transaction).catch(() => {
       Message.error('error');
       setLoadTransfer(false);
+      return false;
     });
+
+    if (!res) {
+      return false;
+    }
 
     if (res?.boc) {
       await wait(res.boc);
     }
-    setLoadTransfer(false);
+    // setLoadTransfer(false);
     if (res) {
-      Message.success('success');
+      // Message.success('success');
     }
+    return true;
 
     console.log('转成了...', res);
   };
