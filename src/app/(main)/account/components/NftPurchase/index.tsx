@@ -144,8 +144,8 @@ const NftPurchase: React.FC = () => {
           <button
             className="buy-btn"
             onClick={() => {
-              showSuccess();
-              return;
+              // showSuccess();
+              // return;
               if (!walletAddress) {
                 connectWallet();
                 return;

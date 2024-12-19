@@ -75,6 +75,7 @@ const waitForTransaction = async (
 
       console.log('waiting transaction...');
       const state = await client.getContractState(walletAddress);
+      console.log('state...', state);
       if (!state || !state.lastTransaction) {
         clearInterval(interval);
         resolve(null);
@@ -84,6 +85,7 @@ const waitForTransaction = async (
       const lastHash = state.lastTransaction.hash;
       const lastTx = await client.getTransaction(walletAddress, lastLt, lastHash);
 
+      console.log('lastTx...', lastTx);
       if (lastTx && lastTx.inMessage) {
         const msgCell = beginCell().store(storeMessage(lastTx.inMessage)).endCell();
 
