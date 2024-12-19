@@ -99,6 +99,24 @@ const BannerWrap = styled.div`
       }
     }
   }
+
+  @keyframes blink {
+    0% {
+      text-shadow: none;
+    }
+
+    100% {
+      text-shadow: 0 0 10px #2865ffcc, 0 0 20px #2865ff9c, 0 0 30px #2865ff57;
+    }
+  }
+
+  .hollow-text {
+    color: #2865ff; /* 字体颜色透明，创建镂空效果 */
+    -webkit-background-clip: text;
+    text-shadow: 0 0 10px #2865ffcc, 0 0 20px #2865ff9c, 0 0 30px #2865ff57;
+
+    animation: blink 1s infinite ease-in-out alternate;
+  }
 `;
 
 const Banner = () => {
@@ -123,7 +141,7 @@ const Banner = () => {
           <div className="text-46 md:text-64">
             <div>Web3 Privacy Acceleration </div>
             <div>
-              Solution for <span className="text-#2865FF">AI</span>
+              Solution for <span className="text-#2865FF hollow-text">AI</span>
             </div>
           </div>
           {/* <div className="content px-30 md:px-0 mt-33 text-23 md:text-20 leading-[1.4]">
