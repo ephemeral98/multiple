@@ -58,7 +58,8 @@ const BannerWrap = styled.div`
       ${$fontSize('27rem', '20rem', '20rem')}
       ${$height('106rem', '64rem', '64rem')}
       ${$borderRadius('19rem', '10rem', '10rem')}
-      ${$width('483rem', 'auto', 'auto')}
+      /* ${$width('483rem', 'auto', 'auto')} */
+      width: auto;
     }
 
     .banner-face {
