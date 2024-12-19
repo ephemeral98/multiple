@@ -36,7 +36,7 @@ export const useTopBar = () => {
     {
       text: 'Docs',
       path: '',
-      link: 'https://multiple-network.gitbook.io/multiple-network-gitbook/',
+      link: 'https://multiple-network.gitbook.io/multiple-network',
       active: false,
     },
   ]);
