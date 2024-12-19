@@ -3,17 +3,11 @@ import Image from 'next/image';
 import { INav, useTopBar } from '../useTopBar';
 import { flexPos } from '@/styled/mixin';
 import Community, { GetStartBtn } from '@/components/Community';
-import ConnectWallet from './ConnectBtn';
 
 interface IProps {
   onClose: () => void;
   pickTab: (tab: INav) => void;
   toHome: () => void;
-  onConnect: () => void;
-  onClickAddr: () => void;
-  disconnectWallet: () => void;
-  walletAddress: string;
-  connected: boolean;
 }
 
 const MenuWrap = styled.div`
@@ -25,7 +19,7 @@ const MenuWrap = styled.div`
   /* height: calc(100vh - 115rem); */
   height: 100vh;
   background-color: #000;
-  padding-top: 237rem;
+  padding-top: 300rem;
 
   ${flexPos('center', 'flex-start')}
   text-align: center;
@@ -52,7 +46,7 @@ const Menu = (props: IProps) => {
   return (
     <MenuWrap>
       <div>
-        {/* <div
+        <div
           onClick={() => {
             props.toHome();
             props.onClose();
@@ -60,7 +54,7 @@ const Menu = (props: IProps) => {
           className={`nav-item`}
         >
           Home
-        </div> */}
+        </div>
         {navList.map((item) => (
           <div
             key={item.text}
@@ -75,20 +69,6 @@ const Menu = (props: IProps) => {
         ))}
 
         <GetStartBtn />
-        <ConnectWallet
-          className="mt-48"
-          connected={props.connected}
-          disconnectWallet={() => props.disconnectWallet()}
-          walletAddress={props.walletAddress}
-          onClickAddr={() => {
-            props.onClickAddr();
-            props.onClose();
-          }}
-          onClick={() => {
-            props.onClose();
-            props.onConnect();
-          }}
-        />
 
         <Community className="mt-62" size={75} gap={24} />
       </div>

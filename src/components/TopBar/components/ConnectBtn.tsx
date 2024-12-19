@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { useTonConnectModal, useTonConnectUI, useTonAddress } from '@tonconnect/ui-react';
 import Button from '@cps/Buttons/index';
 import Image from 'next/image';
 import { plusStar } from '@/utils';
@@ -22,11 +21,6 @@ export const AddrWrap = styled.div`
 `;
 
 const ConnectWallet: FC<IConnectBtn> = (props) => {
-  // const walletAddress = useTonAddress();
-  // const router = useRouter();
-  // const [tonConnectUI] = useTonConnectUI(); // 获取 TonConnect 实例
-  // const { open, close, state } = useTonConnectModal();
-
   if (props.connected) {
     return (
       <Button
