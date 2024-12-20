@@ -35,6 +35,17 @@ const MenuWrap = styled.div`
     &:not(:first-child) {
       margin-top: 62rem;
     }
+
+    &.christmas-btn {
+      height: 150rem;
+      background-image: url('/static/christmas-btn.png');
+      background-size: auto 100%;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      ${flexPos('center')}
+      padding-top: 76rem;
+      margin-top: -8rem;
+    }
   }
 
   .icon-close {
@@ -61,18 +72,34 @@ const Menu = (props: IProps) => {
         >
           Home
         </div> */}
-        {navList.map((item) => (
-          <div
-            key={item.text}
-            onClick={() => {
-              props.pickTab(item);
-              props.onClose();
-            }}
-            className={`nav-item ${item.active ? 'active' : ''}`}
-          >
-            {item.text}
-          </div>
-        ))}
+        {navList.map((item) => {
+          if (item.path === '/airdrop') {
+            return (
+              <div
+                key={item.text}
+                onClick={() => {
+                  window.open(item.link);
+                }}
+                className={`nav-item christmas-btn`}
+              >
+                {item.text}
+              </div>
+            );
+          }
+
+          return (
+            <div
+              key={item.text}
+              onClick={() => {
+                props.pickTab(item);
+                props.onClose();
+              }}
+              className={`nav-item ${item.active ? 'active' : ''}`}
+            >
+              {item.text}
+            </div>
+          );
+        })}
 
         <GetStartBtn />
         <ConnectWallet
