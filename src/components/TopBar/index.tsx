@@ -63,6 +63,15 @@ const TopBarWrap = styled.header`
           background-color: #fff;
         }
       }
+
+      &.christmas-btn {
+        width: 142rem;
+        background-image: url('/static/christmas-btn.png');
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        ${flexPos('center')}
+        padding-top: 29rem;
+      }
     }
   }
 `;
@@ -85,21 +94,37 @@ const TopBar = () => {
           />
 
           <div className="nav-list flex-center">
-            {navList.map((item) => (
-              <div
-                key={item.text}
-                onClick={() => {
-                  if (item.link) {
-                    window.open(item.link);
-                    return;
-                  }
-                  router.push(item.path);
-                }}
-                className={`nav-item ${item.active ? 'active' : ''}`}
-              >
-                {item.text}
-              </div>
-            ))}
+            {navList.map((item) => {
+              if (item.path === '/airdrop') {
+                return (
+                  <div
+                    key={item.text}
+                    onClick={() => {
+                      window.open(item.link);
+                    }}
+                    className={`nav-item christmas-btn`}
+                  >
+                    {item.text}
+                  </div>
+                );
+              }
+
+              return (
+                <div
+                  key={item.text}
+                  onClick={() => {
+                    if (item.link) {
+                      window.open(item.link);
+                      return;
+                    }
+                    router.push(item.path);
+                  }}
+                  className={`nav-item ${item.active ? 'active' : ''}`}
+                >
+                  {item.text}
+                </div>
+              );
+            })}
           </div>
         </div>
 

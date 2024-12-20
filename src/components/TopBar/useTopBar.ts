@@ -28,7 +28,7 @@ export const useTopBar = () => {
       active: false,
     },
     {
-      text: 'Airdrop',
+      text: 'Airdrop 2049',
       path: '/airdrop',
       active: false,
       link: 'https://multiple.airdrop2049.com',
