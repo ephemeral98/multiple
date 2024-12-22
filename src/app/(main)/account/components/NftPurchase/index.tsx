@@ -21,6 +21,10 @@ import { useTonAddress, useTonConnectModal } from '@tonconnect/ui-react';
 import Pending from '@/components/TransactionStatus/Pending';
 import Fail from '@/components/TransactionStatus/Fail';
 import Success from '@/components/TransactionStatus/Success';
+import { useCountDown, useUpdateEffect } from 'ahooks';
+import { useNft } from '@/service/useNft';
+import useNFTStore from '@/store/nftStore';
+import { Message } from '@arco-design/web-react';
 
 const NftPurchaseWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -72,16 +76,46 @@ const NftPurchaseWrap = styled.div`
 const NftPurchase: React.FC = () => {
   const walletAddress = useTonAddress();
   const { open: connectWallet, close, state } = useTonConnectModal();
-
-  const { handleBuyNft, loadBuyNft, coupon, client } = useNftContract();
-
+  const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
+  const tonAddress = useTonAddress();
+  const { handleBuyNft, loadBuyNft, coupon, client, setLoadBuyNft } = useNftContract();
+  const nftStore = useNFTStore();
+  const [targetDate, setTargetDate] = useState<number>();
   const appStore = useAppStore();
+  const [countdown] = useCountDown({
+    targetDate,
+    onEnd: () => {
+      // 确定成功转账
+      Message.success('success');
+    },
+  });
+
+  useUpdateEffect(() => {
+    getMyNft(tonAddress).then((resp) => {
+      const prevNfts = nftStore.getMyNft();
+      if (prevNfts.length < resp.length) {
+        setTargetDate(undefined);
+        showSuccess({ show: true });
+        nftStore.setMyNft(resp);
+      }
+    });
+  }, [countdown]);
 
   const handleBuy = async (recipientAddr: string) => {
-    await handleBuyNft(recipientAddr);
+    showBuyNftPop({ show: false });
+    showPending({ show: true });
+    const res = await handleBuyNft(recipientAddr);
+    showPending({ show: false });
+    setLoadBuyNft(false);
+
+    if (res) {
+      setTargetDate(Date.now() + 20000);
+    } else {
+      showFail({ show: true });
+    }
   };
 
-  const { open } = useModal(BuyNftPop, {
+  const { toggle: showBuyNftPop } = useModal(BuyNftPop, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
@@ -93,21 +127,21 @@ const NftPurchase: React.FC = () => {
     },
   });
 
-  const { open: showPending } = useModal(Pending, {
+  const { toggle: showPending } = useModal(Pending, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
     },
   });
 
-  const { open: showSuccess } = useModal(Success, {
+  const { toggle: showSuccess } = useModal(Success, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
     },
   });
 
-  const { open: showFail } = useModal(Fail, {
+  const { toggle: showFail } = useModal(Fail, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
@@ -150,7 +184,7 @@ const NftPurchase: React.FC = () => {
                 connectWallet();
                 return;
               }
-              open();
+              showBuyNftPop({ show: true });
             }}
           >
             BUY NOW

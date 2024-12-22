@@ -1,7 +1,7 @@
 'use client';
 import { styled } from 'styled-components';
 import { flexPos } from '@/styled/mixin';
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import AccountInfo from './AccountInfo';
 import NftItem from '@/components/NFT/NftItem';
 import { $paddingX, $width, phoneSize } from '@/styled/mediaSize';
@@ -13,6 +13,9 @@ import TransferPop from './TransferPop';
 import Pending from '@/components/TransactionStatus/Pending';
 import Fail from '@/components/TransactionStatus/Fail';
 import Success from '@/components/TransactionStatus/Success';
+import { useCountDown, useUpdateEffect } from 'ahooks';
+import useNFTStore from '@/store/nftStore';
+import { Message } from '@arco-design/web-react';
 
 const MyAccountWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -38,16 +41,53 @@ const MyAccount: React.FC = () => {
   const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
   const walletAddress = useTonAddress();
   const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
+  const nftStore = useNFTStore();
 
   const curNft = useRef('');
 
-  const doTransfer = async (nftWalletAddr: string, recipientAddr: string) => {
-    const res = await handleTransferNft(nftWalletAddr, recipientAddr);
+  const [targetDate, setTargetDate] = useState<number>();
+  const [countdown] = useCountDown({
+    targetDate,
+    onEnd: () => {
+      // 确定成功转账
+      Message.success('success');
+    },
+  });
 
-    getMyNft(tonAddress);
+  useEffect(() => {
+    if (!tonAddress) {
+      return;
+    }
+    getMyNft(tonAddress).then((metadata) => {
+      nftStore.setMyNft(metadata);
+    });
+  }, [tonAddress]);
+
+  useUpdateEffect(() => {
+    getMyNft(tonAddress).then((resp) => {
+      const prevNfts = nftStore.getMyNft();
+      if (prevNfts.length >= resp.length) {
+        setTargetDate(undefined);
+        nftStore.setMyNft(resp);
+      }
+    });
+  }, [countdown]);
+
+  const doTransfer = async (nftWalletAddr: string, recipientAddr: string) => {
+    showTransferPop({ show: false });
+    showPending({ show: true });
+    const res = await handleTransferNft(nftWalletAddr, recipientAddr);
+    showPending({ show: false });
+
+    if (res) {
+      setTargetDate(Date.now() + 20000);
+      showSuccess({ show: true });
+    } else {
+      showFail({ show: false });
+    }
   };
 
-  const { open } = useModal(TransferPop, {
+  const { toggle: showTransferPop } = useModal(TransferPop, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
@@ -59,21 +99,21 @@ const MyAccount: React.FC = () => {
     },
   });
 
-  const { open: showPending } = useModal(Pending, {
+  const { toggle: showPending } = useModal(Pending, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
     },
   });
 
-  const { open: showSuccess } = useModal(Success, {
+  const { toggle: showSuccess } = useModal(Success, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
     },
   });
 
-  const { open: showFail } = useModal(Fail, {
+  const { toggle: showFail } = useModal(Fail, {
     animate: {
       enterActive: 'animate__animated animate__fadeIn',
       exitActive: 'animate__animated animate__fadeOut',
@@ -106,7 +146,7 @@ const MyAccount: React.FC = () => {
                 metadata={item}
                 onTransfer={(nftAddr) => {
                   curNft.current = nftAddr;
-                  open();
+                  showTransferPop({ show: true });
                 }}
               />
             ))}

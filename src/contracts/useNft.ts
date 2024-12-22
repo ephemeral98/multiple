@@ -91,7 +91,7 @@ export const useNftContract = () => {
     };
 
     const res: any = await tonConnectUI.sendTransaction(transaction).catch(() => {
-      Message.error('error');
+      Message.error('Cancel');
       setLoadBuyNft(false);
       return false;
     });
@@ -148,7 +148,7 @@ export const useNftContract = () => {
     };
 
     const res: any = await tonConnectUI.sendTransaction(transaction).catch(() => {
-      Message.error('error');
+      Message.error('Cancel');
       setLoadTransfer(false);
       return false;
     });
@@ -199,6 +199,7 @@ export const useNftContract = () => {
     handleTransferNft,
     coupon,
     loadBuyNft,
+    setLoadBuyNft,
     client,
   };
 };

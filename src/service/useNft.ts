@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { $GET } from './request';
 import { useTonAddress } from '@tonconnect/ui-react';
 import { NFTAddress } from '@/contracts/useNft';
+import useNFTStore from '@/store/nftStore';
 
 export interface IMetadata {
   attributes: string[];
@@ -12,7 +13,8 @@ export interface IMetadata {
 }
 
 export const useNft = () => {
-  const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
+  // const nftStore = useNFTStore();
+  // const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
 
   const [myNftMetadata, setMyNftMetadata] = useState<IMetadata[]>([]);
 
@@ -36,18 +38,12 @@ export const useNft = () => {
       return item;
     });
     setMyNftMetadata(metadata);
+    return metadata;
   };
 
   const accountBalanceMTP = useMemo(() => {
     return myNftMetadata?.length * 10000;
   }, [myNftMetadata]);
-
-  useEffect(() => {
-    if (!tonAddress) {
-      return;
-    }
-    getMyNft(tonAddress);
-  }, [tonAddress]);
 
   return {
     getMyNft,
