@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { $GET } from './request';
-import { useTonAddress } from '@tonconnect/ui-react';
 import { NFTAddress } from '@/contracts/useNft';
 import useNFTStore from '@/store/nftStore';
+import { Address } from '@ton/core';
 
 export interface IMetadata {
   attributes: string[];
@@ -15,6 +15,8 @@ export interface IMetadata {
 export const useNft = () => {
   // const nftStore = useNFTStore();
   // const tonAddress = useTonAddress(); // 获取当前连接的钱包地址
+  const [balance, setBalance] = useState('0');
+  const [loadGetBalance, setLoadGetBalance] = useState(false);
 
   const [myNftMetadata, setMyNftMetadata] = useState<IMetadata[]>([]);
 
@@ -41,6 +43,21 @@ export const useNft = () => {
     return metadata;
   };
 
+  /**
+   * 获取代币余额
+   */
+  const getTokenBalance = async (account: string, token: Address) => {
+    setLoadGetBalance(true);
+    const resp = await $GET(`https://tonapi.io/v2/accounts/${account}/jettons/${token}`).finally(
+      () => {
+        setLoadGetBalance(false);
+      }
+    );
+
+    console.log('余额...', resp);
+    setBalance(resp?.balance);
+  };
+
   const accountBalanceMTP = useMemo(() => {
     return myNftMetadata?.length * 10000;
   }, [myNftMetadata]);
@@ -50,5 +67,8 @@ export const useNft = () => {
     myNftMetadata,
     accountBalanceMTP,
     setMyNftMetadata,
+    getTokenBalance,
+    balance,
+    loadGetBalance,
   };
 };

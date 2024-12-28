@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import { useWait } from './tools';
 import { Message } from '@arco-design/web-react';
 
-const TBNBAddress = 'EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA';
+export const TBNBAddress = 'EQD2WmkfOeDqwUyYOFBqgAYel7eFZH0QPPLw7zEtFIDSDlTA';
 // const NFTAddress = 'EQBd0pK29OJXpNSF7-tFy3xzyW_oV256eFpYPj0zwFP9zkf5';
 // const NFTAddress = 'EQACI7Hr1vkbYFZHE--n92SfcOXJXPwVDTeqcwEienp4CD09';
 export const NFTAddress = 'EQAQbKfrIMoRgU6zi0CEY_3nvI1ga1eKVgREDUULKp_38PHa';

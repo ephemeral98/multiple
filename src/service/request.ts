@@ -28,12 +28,19 @@ axios.interceptors.request.use(
 // 响应拦截器
 axios.interceptors.response.use(
   (resp) => {
-    if (resp.data.code !== 200) {
+    let isSuccess = false;
+    if (resp?.data?.code === undefined) {
+      isSuccess = true;
+    } else {
+      isSuccess = resp.data.code === 200;
+    }
+
+    if (!isSuccess) {
       resp.data.msg ? Message.error(resp.data.msg) : Message.error('error');
     }
     return {
       ...resp.data,
-      success: resp.data.code === 200,
+      success: isSuccess,
     };
   },
   (err) => {
@@ -62,7 +69,7 @@ export const $GET = <T>(url: string, payload?: object): Promise<IAxiosResp<T>> =
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
-        params: payload
+        params: payload,
       })
       .then((res: any) => {
         resolve(res);

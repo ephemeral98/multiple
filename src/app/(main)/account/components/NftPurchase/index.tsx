@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Rules from './Rules';
 import { useModal } from '@/hooks/useModal';
 import BuyNftPop from './BuyNftPop';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   $borderRadius,
   $fontSize,
@@ -16,7 +16,7 @@ import {
   phoneSize,
 } from '@/styled/mediaSize';
 import useAppStore from '@/store/appStore';
-import { useNftContract } from '@/contracts/useNft';
+import { useNftContract, TBNBAddress } from '@/contracts/useNft';
 import { useTonAddress, useTonConnectModal } from '@tonconnect/ui-react';
 import Pending from '@/components/TransactionStatus/Pending';
 import Fail from '@/components/TransactionStatus/Fail';
@@ -25,6 +25,7 @@ import { useCountDown, useUpdateEffect } from 'ahooks';
 import { useNft } from '@/service/useNft';
 import useNFTStore from '@/store/nftStore';
 import { Message } from '@arco-design/web-react';
+import { Address } from '@ton/core';
 
 const NftPurchaseWrap = styled.div`
   ${$width('100%', '1100rem', '1100rem')}
@@ -76,7 +77,8 @@ const NftPurchaseWrap = styled.div`
 const NftPurchase: React.FC = () => {
   const walletAddress = useTonAddress();
   const { open: connectWallet, close, state } = useTonConnectModal();
-  const { getMyNft, myNftMetadata, accountBalanceMTP } = useNft();
+  const { getMyNft, myNftMetadata, accountBalanceMTP, getTokenBalance, balance, loadGetBalance } =
+    useNft();
   const tonAddress = useTonAddress();
   const { handleBuyNft, loadBuyNft, coupon, client, setLoadBuyNft } = useNftContract();
   const nftStore = useNFTStore();
@@ -90,6 +92,12 @@ const NftPurchase: React.FC = () => {
     },
   });
 
+  // 获取代币余额
+  useEffect(() => {
+    const TBNB = Address.parse(TBNBAddress);
+    getTokenBalance(tonAddress, TBNB);
+  }, []);
+
   useUpdateEffect(() => {
     getMyNft(tonAddress).then((resp) => {
       const prevNfts = nftStore.getMyNft();
@@ -102,6 +110,7 @@ const NftPurchase: React.FC = () => {
   }, [countdown]);
 
   const handleBuy = async (recipientAddr: string) => {
+    // if(loadGetBalance || balance < 1)
     showBuyNftPop({ show: false });
     showPending({ show: true });
     const res = await handleBuyNft(recipientAddr);
