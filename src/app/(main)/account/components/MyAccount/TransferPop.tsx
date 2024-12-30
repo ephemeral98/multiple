@@ -65,7 +65,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
 
   return (
     <BuyNftPopWrap>
-      <Image
+      {/* <Image
         className="absolute w-20 top-36 right-36 cursor-pointer"
         priority
         src={require('@img/common/icon-pop-close.png')}
@@ -73,7 +73,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
         onClick={() => {
           props.onClose();
         }}
-      />
+      /> */}
 
       <div className="flex-center pt-32 text-28 md:text-20">Transfer NFT</div>
 
@@ -95,6 +95,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             }
             // 如果rules规则不通过 或者 isRequired不通过，则不会触发这个callback
             props.onConfirm(props.curNft, addrInp?.trim?.());
+            setAddrInp('');
           }}
         >
           <Form.Inp
@@ -121,9 +122,16 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             <Form.Btn className="form-btn submit-btn">Confirm</Form.Btn>
           </Waiting>
 
-          {/* <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
+          <button
+            onClick={() => {
+              setAddrInp('');
+              props.onClose();
+            }}
+            type="button"
+            className="form-btn cancel-btn"
+          >
             Cancel
-          </button> */}
+          </button>
         </Form.Wrap>
       </section>
     </BuyNftPopWrap>

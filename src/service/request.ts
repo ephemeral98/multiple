@@ -44,6 +44,12 @@ axios.interceptors.response.use(
     };
   },
   (err) => {
+    if (err.status === 404) {
+      return {
+        data: '',
+        success: false,
+      };
+    }
     const msg = err.response?.data?.msg;
     msg ? Message.error(msg) : Message.error('error');
     return Promise.reject(err);

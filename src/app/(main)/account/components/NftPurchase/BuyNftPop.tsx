@@ -1,7 +1,7 @@
 'use client';
 
 import { styled } from 'styled-components';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Form from '@/components/Form';
 import { $fontSize, $height, $width } from '@/styled/mediaSize';
@@ -93,6 +93,7 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             }
             // 如果rules规则不通过 或者 isRequired不通过，则不会触发这个callback
             props.onBuy(addrInp?.trim?.());
+            setAddrInp('');
           }}
         >
           <Form.Inp
@@ -128,7 +129,14 @@ const BuyNftPop: FC<IBuyNftPop> = (props) => {
             <Form.Btn className="form-btn submit-btn">BUY NOW</Form.Btn>
           </Waiting>
 
-          <button onClick={() => props.onClose()} type="button" className="form-btn cancel-btn">
+          <button
+            onClick={() => {
+              setAddrInp('');
+              props.onClose();
+            }}
+            type="button"
+            className="form-btn cancel-btn"
+          >
             Cancel
           </button>
         </Form.Wrap>

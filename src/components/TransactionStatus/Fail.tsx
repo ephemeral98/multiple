@@ -11,14 +11,14 @@ interface IBuyNftPop {
 
 const Fail: FC<IBuyNftPop> = (props) => {
   return (
-    <StatusPop onClose={() => props.onClose()}>
+    <StatusPop
+      onClose={() => {
+        console.log('clouse...');
+        props.onClose();
+      }}
+    >
       <RingStyle>
-        <Image
-          priority
-          className="w-87"
-          src={require('@img/common/icon-status-fail.png')}
-          alt=""
-        />
+        <Image priority className="w-87" src={require('@img/common/icon-status-fail.png')} alt="" />
       </RingStyle>
 
       <div className="mt-30 text-18">Transaction Failed</div>

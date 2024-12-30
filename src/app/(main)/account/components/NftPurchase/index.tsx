@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Rules from './Rules';
 import { useModal } from '@/hooks/useModal';
 import BuyNftPop from './BuyNftPop';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   $borderRadius,
   $fontSize,
@@ -84,42 +84,74 @@ const NftPurchase: React.FC = () => {
   const nftStore = useNFTStore();
   const [targetDate, setTargetDate] = useState<number>();
   const appStore = useAppStore();
+  const isBuySuccessRef = useRef(false);
   const [countdown] = useCountDown({
     targetDate,
+    interval: 2500,
     onEnd: () => {
       // 确定成功转账
-      Message.success('success');
+      if (isBuySuccessRef.current) {
+        Message.success('success');
+      } else {
+        Message.error('fail');
+        showFail({ show: true });
+      }
+      showPending({ show: false });
+      setLoadBuyNft(false);
     },
   });
 
   // 获取代币余额
+  // useEffect(() => {
+  //   if (!tonAddress) {
+  //     return;
+  //   }
+  //   const TBNB = Address.parse(TBNBAddress);
+  //   getTokenBalance(tonAddress, TBNB);
+  // }, [tonAddress]);
+
   useEffect(() => {
-    const TBNB = Address.parse(TBNBAddress);
-    getTokenBalance(tonAddress, TBNB);
+    return () => setTargetDate(undefined);
   }, []);
 
   useUpdateEffect(() => {
     getMyNft(tonAddress).then((resp) => {
       const prevNfts = nftStore.getMyNft();
       if (prevNfts.length < resp.length) {
+        isBuySuccessRef.current = true;
         setTargetDate(undefined);
         showSuccess({ show: true });
         nftStore.setMyNft(resp);
+        showPending({ show: false });
+        setLoadBuyNft(false);
       }
     });
   }, [countdown]);
 
   const handleBuy = async (recipientAddr: string) => {
-    // if(loadGetBalance || balance < 1)
+    const TBNB = Address.parse(TBNBAddress);
+    const _balance = await getTokenBalance(tonAddress, TBNB);
+
+    const fee = recipientAddr ? 12 * 10 ** 9 : 10 * 10 ** 9;
+    isBuySuccessRef.current = false;
+
+    if (loadGetBalance || +_balance < fee) {
+      Message.error('The balance is not enough.');
+      return;
+    }
     showBuyNftPop({ show: false });
     showPending({ show: true });
     const res = await handleBuyNft(recipientAddr);
-    showPending({ show: false });
-    setLoadBuyNft(false);
+    console.log('初步打包...', res);
+
+    // showPending({ show: false });
+    // setLoadBuyNft(false);
 
     if (res) {
-      setTargetDate(Date.now() + 20000);
+      setTargetDate(Date.now() + 120000); // 2分钟内还查不出来就算失败
     } else {
+      showPending({ show: false });
+      setLoadBuyNft(false);
       showFail({ show: true });
     }
   };

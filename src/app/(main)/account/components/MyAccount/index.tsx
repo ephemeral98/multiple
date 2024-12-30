@@ -44,13 +44,20 @@ const MyAccount: React.FC = () => {
   const nftStore = useNFTStore();
 
   const curNft = useRef('');
+  const isBuySuccessRef = useRef(false);
 
   const [targetDate, setTargetDate] = useState<number>();
   const [countdown] = useCountDown({
     targetDate,
     onEnd: () => {
       // 确定成功转账
-      Message.success('success');
+      if (isBuySuccessRef.current) {
+        Message.success('success');
+      } else {
+        Message.error('fail');
+        showFail({ show: true });
+      }
+      showPending({ show: false });
     },
   });
 
@@ -63,27 +70,35 @@ const MyAccount: React.FC = () => {
     });
   }, [tonAddress]);
 
+  useEffect(() => {
+    return () => setTargetDate(undefined);
+  }, []);
+
   useUpdateEffect(() => {
     getMyNft(tonAddress).then((resp) => {
       const prevNfts = nftStore.getMyNft();
-      if (prevNfts.length >= resp.length) {
+      if (prevNfts.length > resp.length) {
+        isBuySuccessRef.current = true;
         setTargetDate(undefined);
+        showSuccess({ show: true });
         nftStore.setMyNft(resp);
+        showPending({ show: false });
       }
     });
   }, [countdown]);
 
   const doTransfer = async (nftWalletAddr: string, recipientAddr: string) => {
+    isBuySuccessRef.current = false;
     showTransferPop({ show: false });
     showPending({ show: true });
     const res = await handleTransferNft(nftWalletAddr, recipientAddr);
-    showPending({ show: false });
+    console.log('初步打包...', res);
 
     if (res) {
-      setTargetDate(Date.now() + 20000);
-      showSuccess({ show: true });
+      setTargetDate(Date.now() + 60000);
     } else {
-      showFail({ show: false });
+      showPending({ show: false });
+      showFail({ show: true });
     }
   };
 

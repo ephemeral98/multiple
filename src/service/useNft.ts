@@ -54,8 +54,13 @@ export const useNft = () => {
       }
     );
 
-    console.log('余额...', resp);
+    if (!resp.success) {
+      setBalance('0');
+      return 0;
+    }
+
     setBalance(resp?.balance);
+    return resp?.balance;
   };
 
   const accountBalanceMTP = useMemo(() => {
