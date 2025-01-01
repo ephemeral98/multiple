@@ -1,19 +1,34 @@
 # 使用 Ubuntu 作为基础镜像
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # 更新软件包列表并安装依赖
 RUN apt-get update && \
     apt-get install -y curl gnupg2
 
-RUN apt-get update && apt-get install -y --reinstall ca-certificates curl build-essential \
-    && curl -s https://nodejs.org/dist/v22.11.0/node-v22.11.0-linux-x64.tar.xz \
-    -o node-v22.11.0-linux-x64.tar.xz && tar xf node-v22.11.0-linux-x64.tar.xz \
-    && cd node-v22.11.0-linux-x64 && cp -r bin include lib share /usr/local \
-    && rm -rf /node-v22.11.0-linux-x64.tar.xz /node-v22.11.0-linux-x64
+# 设置时区为默认时区，避免安装过程中的时区提示
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y tzdata
 
+# 安装一些必要的依赖
+RUN apt-get install -y \
+    curl \
+    gnupg \
+    lsb-release \
+    ca-certificates \
+    software-properties-common
 
-# 设置 npm 使用淘宝镜像
-RUN npm config set registry https://registry.npmmirror.com
+# 添加 NodeSource APT 仓库并安装 Node.js 22.x
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
+
+# 安装 Yarn（通过官方仓库安装）
+# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | tee /etc/apt/trusted.gpg.d/yarn.asc && \
+#     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+#     apt-get update && \
+#     apt-get install -y yarn
+
+# 使用 npm 安装 Yarn
+RUN npm install -g yarn
 
 # 设置工作目录
 WORKDIR /app
@@ -22,7 +37,7 @@ WORKDIR /app
 COPY package.json ./
 
 # 安装依赖，这里不使用yarn install --production是因为还需要安装dev的依赖
-RUN npm i yarn -g
+RUN yarn
 
 # 复制 .next 和 public 文件夹到工作目录
 COPY .next .next
@@ -34,12 +49,7 @@ COPY ecosystem.config.js ./
 COPY next.config.js ./
 
 # 安装 PM2 全局依赖
-# RUN yarn global add pm2
-# RUN yarn add pm2 -g
-RUN npm i pm2 -g
-
-RUN yarn
-
+RUN yarn global add pm2
 
 # 暴露端口
 EXPOSE 3000
