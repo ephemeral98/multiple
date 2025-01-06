@@ -12,7 +12,7 @@ import Step from './components/StepComp';
 import StepMob from './components/StepComp/StepMob';
 import { useState } from 'react';
 import { Message } from '@arco-design/web-react';
-import { $width } from '@/styled/mediaSize';
+import { $width, phoneSize } from '@/styled/mediaSize';
 
 const ProductWrap = styled.div<{ $end: boolean }>`
   line-height: 1;
@@ -57,13 +57,17 @@ const ProductWrap = styled.div<{ $end: boolean }>`
       transform: translate(-50%, 50%);
       left: 50%;
       bottom: 0;
+
+      @media (max-width: ${phoneSize}) {
+        flex-direction: column;
+      }
     }
 
     .download-btn {
       border-radius: 10rem;
       border: solid 1px #fff;
       /* padding: 27rem 0; */
-      ${$width('280rem', '319rem', '319rem')}
+      ${$width('319rem', '319rem', '319rem')}
       height: 87rem;
       font-size: 20rem;
       position: relative;
@@ -165,7 +169,7 @@ const Product = () => {
             onClick={() => {
               window.open('https://cdn.app.multiple.cc/client/MultipleSetup.exe');
             }}
-            className="download-btn text-27 md:text-14 flex-center"
+            className="download-btn text-27 md:text-14 flex-center order-1"
           >
             <Image
               priority
@@ -177,7 +181,7 @@ const Product = () => {
             <div>Download for Windows</div>
           </button>
 
-          <button className="download-btn p-0! ml-25 text-27 md:text-14  cursor-auto!">
+          <button className="download-btn p-0! mt-25 md:mt-0 md:ml-25 text-27 md:text-14  cursor-auto! order-3 md:order-2">
             <div className="download-linux flex-center cursor-pointer">
               <Image
                 priority
@@ -212,10 +216,26 @@ const Product = () => {
               </li>
             </div>
           </button>
+
+          <button
+            onClick={() => {
+              window.open('https://chromewebstore.google.com/detail/multiple-lite-node/ciljbjmmdhnhgbihlcohoadafmhikgib');
+            }}
+            className="download-btn text-27 md:text-14 flex-center mt-25 md:mt-0 md:ml-25 order-2 md:order-3"
+          >
+            <Image
+              priority
+              className="w-24 mr-8"
+              src={require('@img/product/icon-chrome-ext.png')}
+              alt=""
+            />
+
+            <div>Install Chrome Extension</div>
+          </button>
         </div>
       </section>
 
-      <main className="mt-216 pb-192 md:pb-224">
+      <main className="mt-260 md:mt-216 pb-192 md:pb-224">
         <ProductHeader>How to use Multiple</ProductHeader>
 
         {appStore.curDevice === 'phone' ? <StepMob /> : <Step />}
