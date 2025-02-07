@@ -193,7 +193,7 @@ const Product = () => {
           >
             <Image
               priority
-              className="w-24 mr-8"
+              className="w-36 mr-8"
               src={require('@img/product/icon-linux.png')}
               alt=""
             />
