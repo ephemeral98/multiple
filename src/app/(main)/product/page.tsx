@@ -167,7 +167,9 @@ const Product = () => {
         <div className="btns-wrap flex-center">
           <button
             onClick={() => {
-              window.open('https://cdn.app.multiple.cc/client/MultipleSetup.exe');
+              window.open(
+                'https://mdeck-download.s3.us-east-1.amazonaws.com/client/win/MultipleSetup.exe '
+              );
             }}
             className="download-btn text-27 md:text-14 flex-center order-1"
           >
@@ -181,45 +183,28 @@ const Product = () => {
             <div>Download for Windows</div>
           </button>
 
-          <button className="download-btn p-0! mt-25 md:mt-0 md:ml-25 text-27 md:text-14  cursor-auto! order-3 md:order-2">
-            <div className="download-linux flex-center cursor-pointer">
-              <Image
-                priority
-                className="w-36 mr-8"
-                src={require('@img/product/icon-linux.png')}
-                alt=""
-              />
-
-              <div>Download for Linux</div>
-            </div>
-
-            <div className={'download-panel'}>
-              <li
-                className="panel-item"
-                onClick={() => {
-                  window.open('https://cdn.app.multiple.cc/client/linux/x64/multipleforlinux.tar');
-                }}
-              >
-                <div>Download for Linux</div>
-                <div>x64</div>
-              </li>
-              <li
-                className="panel-item mt-22"
-                onClick={() => {
-                  window.open(
-                    'https://cdn.app.multiple.cc/client/linux/arm64/multipleforlinux.tar'
-                  );
-                }}
-              >
-                <div>Download for Linux</div>
-                <div>arm64</div>
-              </li>
-            </div>
-          </button>
-
           <button
             onClick={() => {
-              window.open('https://chromewebstore.google.com/detail/multiple-lite-node/ciljbjmmdhnhgbihlcohoadafmhikgib');
+              window.open(
+                'https://mdeck-download.s3.us-east-1.amazonaws.com/client/linux/MultipleForLinux.tar '
+              );
+            }}
+            className="download-btn ml-25 text-27 md:text-14 flex-center order-1"
+          >
+            <Image
+              priority
+              className="w-24 mr-8"
+              src={require('@img/product/icon-linux.png')}
+              alt=""
+            />
+
+            <div>Download for Linux</div>
+          </button>
+          <button
+            onClick={() => {
+              window.open(
+                'https://chromewebstore.google.com/detail/multiple-lite-node/ciljbjmmdhnhgbihlcohoadafmhikgib'
+              );
             }}
             className="download-btn text-27 md:text-14 flex-center mt-25 md:mt-0 md:ml-25 order-2 md:order-3"
           >
