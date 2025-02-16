@@ -39,6 +39,15 @@ const FooterMob = () => {
               );
             })}
 
+            <div
+              className={`cursor-pointer text-27 mt-62`}
+              onClick={() => {
+                router.push('/ambassador');
+              }}
+            >
+              Ambassador
+            </div>
+
             <GetStartBtn className={'px-24! py-16! rounded-[4rem]!'} />
           </div>
 
