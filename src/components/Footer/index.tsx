@@ -14,7 +14,7 @@ const FooterWrap = styled.footer`
 
   .footer-main {
     ${flexPos('space-between')}
-    width: 1400rem;
+    width: 1300rem;
     height: 139rem;
     border: solid 1px #fff;
     margin: 0 auto;
@@ -58,15 +58,6 @@ const Footer = () => {
                   </a>
                 );
               })}
-
-              <a
-                className={`cursor-pointer text-#fff ml-48 `}
-                onClick={() => {
-                  router.push('/ambassador');
-                }}
-              >
-                Ambassador
-              </a>
             </div>
             <Community size={51} gap={24} />
           </div>

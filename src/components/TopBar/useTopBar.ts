@@ -28,11 +28,16 @@ export const useTopBar = () => {
       active: false,
     },
     {
-      text: 'Airdrop 2049',
-      path: '/airdrop',
+      text: 'Ambassador',
+      path: '/ambassador',
       active: false,
-      link: 'https://multiple.airdrop2049.com',
     },
+    // {
+    //   text: 'Airdrop 2049',
+    //   path: '/airdrop',
+    //   active: false,
+    //   link: 'https://multiple.airdrop2049.com',
+    // },
     {
       text: 'Docs',
       path: '',

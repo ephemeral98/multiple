@@ -129,16 +129,14 @@ const Ambassador = () => {
           <div className="role-title mt-32">2. Social Media Influence</div>
           <div className="role-item">
             <li className="role-item">
-              Lead and manage the community for your country's language on Multiple Network's
-              official Telegram and Discord channels.
+              Translate the content of Multiple Network's X (Twitter) posts to your country's
+              language and repost on the Telegram and Discord community.
             </li>
             <li className="role-item">
-              Provide feedback from the Telegram and Discord members to Multiple Network's core team
-              for discussion/solutions.
+              Like & Retweet Multiple Network's X (Twitter) posts on your personal X (Twitter)
             </li>
             <li className="role-item">
-              Actively join local blockchain/web3/depin/ai related TG/Discord/local social groups to
-              spread the word
+              Invite more new node users from your country with your ambassador's referral link.
             </li>
           </div>
 
@@ -221,13 +219,13 @@ const Ambassador = () => {
           </div>
         </section>
 
-        <div className="bg-#2865FF px-36 py-18 rounded-16 flex justify-between items-center cursor-pointer mt-41">
-          <div
-            className="text-22 md:text-16 font-bold"
-            onClick={() => {
-              window.open('https://forms.gle/eYR9K1UjuugJ3Jtb9');
-            }}
-          >
+        <div
+          onClick={() => {
+            window.open('https://forms.gle/eYR9K1UjuugJ3Jtb9');
+          }}
+          className="bg-#2865FF px-36 py-18 rounded-16 flex justify-between items-center cursor-pointer mt-41"
+        >
+          <div className="text-22 md:text-16 font-bold">
             You can apply for the Multiple Network Ambassador Program here.
           </div>
           <Image
