@@ -89,7 +89,7 @@ const Ambassador = () => {
 
       <main className="ambassador-main">
         <section>
-          <div className="ambassador-title">What is the Multiple Network A mbassador Program?</div>
+          <div className="ambassador-title">What is the Multiple Network Ambassador Program?</div>
           <div className="ambassador-text">
             We're looking for passionate and proactive individuals to join the Multiple Network
             (MTP) Ambassador Program. As an MTP ambassador, you'll play a key role in growing and
@@ -100,7 +100,7 @@ const Ambassador = () => {
         </section>
 
         <section className="section-one-last">
-          <div className="ambassador-title">How does the Ambassador program work?</div>
+          <div className="ambassador-title">How does the Ambassador Program work?</div>
           <div className="ambassador-text">
             The Multiple Network Ambassador Program is structured with multiple tiers to recognize
             and reward contributions. Currently, it consists of two levels: Ambassadors and Senior
@@ -223,14 +223,14 @@ const Ambassador = () => {
           onClick={() => {
             window.open('https://forms.gle/eYR9K1UjuugJ3Jtb9');
           }}
-          className="bg-#2865FF px-36 py-18 rounded-16 flex justify-between items-center cursor-pointer mt-41"
+          className="bg-#2865FF px-36 py-18 rounded-16 flex justify-center items-center cursor-pointer mt-41"
         >
-          <div className="text-22 md:text-16 font-bold">
-            You can apply for the Multiple Network Ambassador Program here.
+          <div className="text-22 md:text-16 font-bold text-center">
+            Apply Now
           </div>
           <Image
             priority
-            className="w-30 h-30 md:w-20 md:h-20"
+            className="w-30 h-30 md:w-20 md:h-20 ml-20"
             src={require('@img/common/icon-apply.svg')}
             alt=""
           />

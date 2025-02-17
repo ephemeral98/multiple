@@ -59,7 +59,7 @@ const Banner = () => {
 
       <BannerSlogan>
         <div>MTP Global</div>
-        <div>Banner Program</div>
+        <div>Ambassador Program</div>
       </BannerSlogan>
 
       <ApplyNowBtn
