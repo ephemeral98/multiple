@@ -29,9 +29,12 @@ const AmbassadorWrap = styled.div`
 
   .section-one-last {
     /* margin-bottom: 157rem; */
-    border-bottom: 1px solid #545454;
     padding-bottom: 56rem;
     margin-top: 48rem;
+
+    &.line {
+      border-bottom: 1px solid #545454;
+    }
   }
 
   .application-cycles {
@@ -112,7 +115,7 @@ const Ambassador = () => {
 
         <Image
           priority
-          className="w-full mt-56"
+          className="w-full"
           src={require('@img/common/face-ambassador.jpg')}
           alt=""
         />
@@ -214,7 +217,7 @@ const Ambassador = () => {
           </div>
         </section>
 
-        <section className="section-one-last">
+        <section className="section-one-last line">
           <div className="ambassador-title">Merit-Based Ambassador Growth</div>
           <div className="ambassador-text">
             Advancement in the Multiple Network Ambassador Program is earned through dedication and
