@@ -110,6 +110,13 @@ const Ambassador = () => {
           </div>
         </section>
 
+        <Image
+          priority
+          className="w-full mt-56"
+          src={require('@img/common/face-ambassador.jpg')}
+          alt=""
+        />
+
         <div className="text-30 md:text-24 font-bold mt-56">Roles and Responsibilities</div>
 
         <Roles>
@@ -225,9 +232,7 @@ const Ambassador = () => {
           }}
           className="bg-#2865FF px-36 py-18 rounded-16 flex justify-center items-center cursor-pointer mt-41"
         >
-          <div className="text-22 md:text-16 font-bold text-center">
-            Apply Now
-          </div>
+          <div className="text-22 md:text-16 font-bold text-center">Apply Now</div>
           <Image
             priority
             className="w-30 h-30 md:w-20 md:h-20 ml-20"
