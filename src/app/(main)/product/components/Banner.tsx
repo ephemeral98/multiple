@@ -75,7 +75,7 @@ const BannerWrap = styled.div`
 
   .icon-partner {
     display: grid;
-    grid-template-columns: repeat(8, auto);
+    grid-template-columns: repeat(6, auto);
     place-content: center;
     place-items: center;
     grid-gap: 85rem;
@@ -170,7 +170,7 @@ const Banner = () => {
         infinity={appStore.curDevice === 'phone'}
       >
         <div className="icon-partner">
-          <Image src={require('@img/common/icon-okx.png')} alt="" className="w-full" />
+          {/* <Image src={require('@img/common/icon-okx.png')} alt="" className="w-full" /> */}
           <Image src={require('@img/common/icon-ngc.png')} alt="" className="w-full" />
           <Image src={require('@img/common/icon-stratifiec.png')} alt="" className="w-full" />
           <Image src={require('@img/common/icon-puzzle.png')} alt="" className="w-full" />
