@@ -200,23 +200,7 @@ const Product = () => {
 
             <div>Download for Linux</div>
           </button>
-          <button
-            onClick={() => {
-              window.open(
-                'https://chromewebstore.google.com/detail/multiple-lite-node/ciljbjmmdhnhgbihlcohoadafmhikgib'
-              );
-            }}
-            className="download-btn text-27 md:text-14 flex-center mt-25 md:mt-0 md:ml-25 order-2 md:order-3"
-          >
-            <Image
-              priority
-              className="w-24 mr-8"
-              src={require('@img/product/icon-chrome-ext.png')}
-              alt=""
-            />
-
-            <div>Install Chrome Extension</div>
-          </button>
+     
         </div>
       </section>
 
